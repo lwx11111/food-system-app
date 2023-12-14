@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<uni-card @click="toMenuPublish()">
-			<view>菜谱发布</view>
+			<view><h2>菜谱发布</h2></view>
 			<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
 		</uni-card>
 	</view>

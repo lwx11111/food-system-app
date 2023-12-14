@@ -58,7 +58,7 @@ public class MenuVO {
 
 //        this.userId = menu.getUserId();
         this.image = menu.getImage();
-
+        this.type = menu.getType();
     }
 
     public MenuVO(){

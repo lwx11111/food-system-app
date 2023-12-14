@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "菜谱信息表服务")
 @RequestMapping("/menu")
+// 跨域配置 不知道为什么config里的不生效
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class MenuController {
     @Autowired
     private IMenuService service;

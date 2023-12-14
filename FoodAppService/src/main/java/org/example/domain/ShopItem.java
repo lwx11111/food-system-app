@@ -68,6 +68,11 @@ public class ShopItem extends Model<ShopItem> {
     @TableField("category_id")
     private Integer categoryId;
 
+    @Schema(description = "物品价格")
+    @Excel(name = "物品价格")
+    @TableField("price")
+    private Double price;
+
     @TableField(exist = false)
     private Map<String,String> params;
 

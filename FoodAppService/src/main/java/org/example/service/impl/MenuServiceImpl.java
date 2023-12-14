@@ -184,7 +184,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
                 query.eq("id",entry.getValue());
             }
             if("name".equals(entry.getKey())){
-                query.eq("name",entry.getValue());
+                query.like("name",entry.getValue());
             }
             if("description".equals(entry.getKey())){
                 query.eq("description",entry.getValue());

@@ -1,11 +1,9 @@
 <template>
   <view>
-  	<uni-search-bar style="border: 1px red solid;">
-  
-  	</uni-search-bar>
+  	<uni-search-bar  v-model="params.name" @confirm="search"></uni-search-bar>
 	<!-- 素菜 -->
 	<view><h2>素菜</h2></view>
-  	<view style="border: 1px red solid;">
+  	<view>
   		<uni-card v-for="(item,index) in vegetableMenu"
   				  @click="toMenuDetail(index)">
   			<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
@@ -16,7 +14,7 @@
   	</view>
 	<!-- 肉菜 -->
 	<view><h2>肉菜</h2></view>
-	<view style="border: 1px red solid;">
+	<view>
 		<uni-card v-for="(item,index) in meatMenu"
 				  @click="toMenuDetail(index,1)">
 			<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
@@ -57,16 +55,27 @@
 			],
 			// 查询参数
 			params: {
+				name:'',
 				type: '',
 				pageSize: '10'
 			}
 		  }
 		},
-		onLoad: function() {
+		onLoad: function(option) {
+			// if(option.name !== null){
+			// 	this.params.name = option.name;
+			// }
 			this.getMeatMenu();
 			this.getVegetableMenu();
 		},
 		methods: {
+			search() {
+				this.getMeatMenu();
+				this.getVegetableMenu();
+				// uni.switchTab({
+				// 	url: '/pages/menu/index?name' + this.name
+				// });
+			},
 			getMeatMenu() {
 				let that = this;
 				this.params.type = 1;

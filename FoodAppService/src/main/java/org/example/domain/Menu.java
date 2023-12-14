@@ -47,6 +47,7 @@ public class Menu extends Model<Menu> {
         JSONArray jsonArray1 = new JSONArray(menuVO.getSteps());
         System.out.println(jsonArray);
         this.steps = jsonArray1.toString();
+        this.type = menuVO.getType();
     }
 
     public Menu(){

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "店铺物品表（只有官方一家店）服务")
 @RequestMapping("/shopitem")
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class ShopItemController {
     @Autowired
     private IShopItemService service;
@@ -123,6 +124,7 @@ public class ShopItemController {
             IPage<ShopItem> page = service.selectPage(params);
             response.setData(page);
         } catch (Exception e) {
+            e.printStackTrace();
             response.setCode(500);
             response.setMessage(e.getMessage());
         }

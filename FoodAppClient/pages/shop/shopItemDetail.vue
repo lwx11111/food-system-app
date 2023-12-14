@@ -6,13 +6,15 @@
 			<view>
 				<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
 			</view>
+			<u-divider></u-divider>
+			<view>{{shopItem.price}}¥</view>
 		</uni-card>
 		<!-- 收藏 -->
-		<uni-section title="收藏" type="line">
+		<!-- <uni-section title="收藏" type="line">
 			<view class="example-body">
 				<uni-fav :checked="check" class="favBtn" @click="favClick(0)" />
 			</view>
-		</uni-section>
+		</uni-section> -->
 		<!-- 描述 -->
 		<uni-card>
 			<h2>描述</h2>
@@ -50,7 +52,8 @@
 					id:'1',
 					name:'1',
 					picture:'1',
-					description:'1'
+					description:'1',
+					price:1.1
 				},
 				user: {
 					userId:''
@@ -65,14 +68,12 @@
 					{
 						icon: 'shop',
 						text: '店铺',
-						info: 2,
 						infoBackgroundColor: '#007aff',
 						infoColor: "#f5f5f5"
 					}, 
 					{
 						icon: 'cart',
 						text: '购物车',
-						info: 2
 					},
 				],
 				// 商品导航-右侧
@@ -131,7 +132,6 @@
 			},
 			// 商品导航-左侧点击事件
 			onClick(e) {
-				console.log(e)
 				if(e.index === 0){
 					// 客服
 					this.toCustomerService();
@@ -142,10 +142,6 @@
 					// 购物车
 					this.toShoppingCart();
 				}
-				uni.showToast({
-					title: `点击${e.content.text}`,
-					icon: 'none'
-				})
 			},
 			// 商品导航-右侧点击事件
 			buttonClick(e) {

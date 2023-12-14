@@ -3,7 +3,9 @@
 		<uni-card>
 			<uni-forms ref="form" :modelValue="formData" :rules="formRules">
 				<uni-section title="菜谱名" type="line" padding>
-					<uni-easyinput v-model="formData.name" placeholder="请输入菜谱名"></uni-easyinput>
+					<uni-forms-item label="菜谱名" name="name" required>
+						<uni-easyinput v-model="formData.name" placeholder="请输入菜谱名"></uni-easyinput>
+					</uni-forms-item>
 				</uni-section>
 				<uni-section title="菜谱描述" type="line" padding>
 					<uni-easyinput type="textarea" autoHeight v-model="formData.description" placeholder="请输入菜谱描述"></uni-easyinput>
@@ -89,7 +91,7 @@
 					rules: [
 						{
 							required: true,
-							errorMessage: '请输入姓名',
+							errorMessage: '请输入菜谱名',
 						},
 					]
 				}
@@ -105,9 +107,9 @@
 		},
 		methods: {
 			 bindPickerChange: function(e) {
-			            console.log('picker发送选择改变，携带值为', e.detail.value)
-			            this.index = e.detail.value
-			        },
+				console.log('picker发送选择改变，携带值为', e.detail.value)
+				this.index = e.detail.value
+			},
 			addIngredients() {
 				const item = {
 					name: '',
@@ -138,11 +140,26 @@
 			// 通过 input 事件设置表单指定 name 的值
 			//   this.$refs.form.setValue(name, value)
 			// },
+			myValidate(){
+				for(var key in this.formData){
+					console.log(key);
+					if(this.formData[key] === undefined || this.formData[key] === null || this.formData[key] === ''){
+						uni.showToast({
+							title: key + ' is null',
+							duration: 2000,
+							icon: "error"
+						});
+						return false;
+					}
+				}
+				return true;
+			},
 			// 触发提交表单
 			submit() {
-				
-				console.log(this.formData)
-				this.$refs.form.validate().then(res=>{
+				this.$refs.form.validate().then(res =>{
+					if(!this.myValidate()){
+						return 
+					}
 					console.log('表单数据信息：', res);
 					// 封装参数
 					this.formData.ingredients = this.ingredients;
@@ -157,7 +174,7 @@
 								success() {
 									setTimeout( () => {
 										uni.switchTab({
-											url: '/pages/index'
+											url: '/pages/home'
 										});
 									}, 2000)
 								}

@@ -151,7 +151,7 @@ public class ShopItemServiceImpl extends ServiceImpl<ShopItemMapper, ShopItem> i
                 query.eq("id",entry.getValue());
             }
             if("name".equals(entry.getKey())){
-                query.eq("name",entry.getValue());
+                query.like("name",entry.getValue());
             }
             if("picture".equals(entry.getKey())){
                 query.eq("picture",entry.getValue());

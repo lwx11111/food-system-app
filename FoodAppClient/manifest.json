@@ -58,7 +58,8 @@
         "template" : "static/index.html",
         "devServer" : {
             "port" : 9090,
-            "https" : false
+            "https" : false,
+			"disableHostCheck": true
         },
         "title" : "RuoYi-App",
         "router" : {

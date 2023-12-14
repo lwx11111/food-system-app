@@ -1,10 +1,8 @@
 <template>
 	<view>
-		<uni-search-bar style="border: 1px red solid;">
-
-		</uni-search-bar>
+		<uni-search-bar v-model="params.name" @confirm="search"></uni-search-bar>
 		<!-- 菜谱列表 -->
-		<view style="border: 1px red solid;">
+		<view>
 			<uni-card v-for="(item,index) in menu"
 					  @click="toMenuDetail(index)">
 				<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
@@ -13,10 +11,10 @@
 				</view>
 			</uni-card>
 		</view>
-		<view style="border: 1px red solid;">
+		<view>
 			<h1>每日推荐</h1>
 		</view>
-		<view style="border: 1px red solid;">
+		<view>
 			<uni-card v-for="(item,index) in dailyMenu">
 				<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
 				<view>
@@ -47,8 +45,11 @@
 					 steps:"11" ,
 					}
 				],
-				//
+				// 搜索
+				name:'',
+				// 查询参数
 				params: {
+					name:'',
 					pageSize: '10'
 				}
 			
@@ -59,6 +60,12 @@
 			this.getDailyRecommendation();
 		},
 		methods: {
+			search() {
+				this.getMenuList();
+				// uni.switchTab({
+				// 	url: '/pages/menu/index?name' + this.name
+				// });
+			},
 			getMenuList() {
 				let that = this;
 				ApiMenu.selpage4menu(this.params).then(res => {
