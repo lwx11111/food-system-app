@@ -1,6 +1,23 @@
 <template>
 	<view>
 		<uni-search-bar v-model="params.name" @confirm="search"></uni-search-bar>
+		<!-- 应用列表 -->
+		<view>
+			<uni-card> 
+				<u-row gutter="16">
+					<u-col @click="toCommunity()" span="4" style="border: 1px red solid;">
+						<image style="width: 50px; height: 50px;" 
+							 src="http://127.0.0.1:9000/appsys/community.png"></image>
+						<view>社区</view>
+					</u-col>
+					<u-col span="4">
+						<image style="width: 50px; height: 50px;" 
+								src="http://127.0.0.1:9000/appsys/health.png"></image>
+						<view>卡路里计算</view>
+					</u-col>
+				</u-row>
+			</uni-card>
+		</view>
 		<!-- 菜谱列表 -->
 		<view>
 			<uni-card v-for="(item,index) in menu"
@@ -99,7 +116,12 @@
 				    res.eventChannel.emit('acceptDataFromOpenerPage', { data: 'data from starter page' })
 				  }
 				})
-			}
+			},
+			toCommunity(){
+				uni.navigateTo({
+				  url: '/pages/community/index',
+				})
+			},
 		}
 	}
 </script>

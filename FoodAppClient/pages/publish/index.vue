@@ -1,8 +1,18 @@
 <template>
 	<view>
-		<uni-card @click="toMenuPublish()">
-			<view><h2>菜谱发布</h2></view>
-			<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+		<uni-card>
+			<u-row gutter="16">
+				<u-col  @click="toMenuPublish()" span="4" style="border: 1px red solid;">
+					<image style="width: 50px; height: 50px;" 
+						 src="http://127.0.0.1:9000/appsys/community.png"></image>
+					<view>菜谱发布</view>
+				</u-col>
+				<u-col @click="toCommunityPublish()" span="4">
+					<image style="width: 50px; height: 50px;" 
+							src="http://127.0.0.1:9000/appsys/health.png"></image>
+					<view>社区帖子发布</view>
+				</u-col>
+			</u-row>
 		</uni-card>
 	</view>
 </template>
@@ -26,6 +36,11 @@
 				  events: {
 				  },
 				  success: function(res) {}
+				})
+			},
+			toCommunityPublish(){
+				uni.navigateTo({
+				  url: '/pages/community/communityPublish',
 				})
 			}
 		}

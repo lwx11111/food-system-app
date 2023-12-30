@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "社区帖子表服务")
 @RequestMapping("/community")
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class CommunityController {
     @Autowired
     private ICommunityService service;
@@ -39,6 +40,7 @@ public class CommunityController {
         try {
             service.saveByParam(obj,obj.getParams());
         } catch (Exception e) {
+            e.printStackTrace();
             response.setCode(500);
             response.setMessage(e.getMessage());
         }
@@ -123,6 +125,7 @@ public class CommunityController {
             IPage<Community> page = service.selectPage(params);
             response.setData(page);
         } catch (Exception e) {
+            e.printStackTrace();
             response.setCode(500);
             response.setMessage(e.getMessage());
         }

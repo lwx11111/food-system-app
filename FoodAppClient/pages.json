@@ -25,6 +25,25 @@
       "navigationBarTitleText": "工作台"
     }
   },
+  // 社区
+  {
+    "path": "pages/community/index",
+    "style": {
+      "navigationBarTitleText": "社区"
+    }
+  }, 
+  {
+    "path": "pages/community/communityDetail",
+    "style": {
+      "navigationBarTitleText": "社区详情"
+    }
+  }, 
+  {
+    "path": "pages/community/communityPublish",
+    "style": {
+      "navigationBarTitleText": "社区发布"
+    }
+  }, 
   // 菜谱
   {
     "path": "pages/menu/index",
@@ -126,30 +145,30 @@
     "list": [{
         "pagePath": "pages/home",
         "iconPath": "static/images/tabbar/home.png",
-        "selectedIconPath": "static/images/tabbar/home_.png",
+        "selectedIconPath": "static/images/tabbar/home-s.png",
         "text": "首页"
       }, {
         "pagePath": "pages/menu/index",
-        "iconPath": "static/images/tabbar/work.png",
-        "selectedIconPath": "static/images/tabbar/work_.png",
+        "iconPath": "static/images/tabbar/hanbao.png",
+        "selectedIconPath": "static/images/tabbar/hanbao-s.png",
         "text": "菜谱"
       },
 	  {
         "pagePath": "pages/publish/index",
-        "iconPath": "static/images/tabbar/mine.png",
-        "selectedIconPath": "static/images/tabbar/mine_.png",
-        "text": "社区加号"
+        "iconPath": "static/images/tabbar/jiahao.png",
+        "selectedIconPath": "static/images/tabbar/jiahao-s.png",
+        "text": "发布页"
       },
 	  {
         "pagePath": "pages/shop/index",
-        "iconPath": "static/images/tabbar/mine.png",
-        "selectedIconPath": "static/images/tabbar/mine_.png",
+        "iconPath": "static/images/tabbar/gouwuche.png",
+        "selectedIconPath": "static/images/tabbar/gouwuche-s.png",
         "text": "商城"
       },
 	  {
         "pagePath": "pages/mine/index",
-        "iconPath": "static/images/tabbar/mine.png",
-        "selectedIconPath": "static/images/tabbar/mine_.png",
+        "iconPath": "static/images/tabbar/wode.png",
+        "selectedIconPath": "static/images/tabbar/wode-s.png",
         "text": "我的"
       }
     ]

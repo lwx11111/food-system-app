@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.example.utils.PageUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -38,11 +39,11 @@ import java.util.Map;
 @Service
 public class CommunityServiceImpl extends ServiceImpl<CommunityMapper, Community> implements ICommunityService {
 
-    //@Autowired
-    //private JdbcTemplate jdbcTemplate;
-
     @Override
     public void saveByParam(Community obj,Map<String, String> params){
+        if (obj.getReleaseTime() == null) {
+            obj.setReleaseTime(LocalDateTime.now());
+        }
         this.save(obj);
     }
 
@@ -164,6 +165,9 @@ public class CommunityServiceImpl extends ServiceImpl<CommunityMapper, Community
             }
             if("likes".equals(entry.getKey())){
                 query.eq("likes",entry.getValue());
+            }
+            if("title".equals(entry.getKey())){
+                query.like("title",entry.getValue());
             }
         }
         return  query;

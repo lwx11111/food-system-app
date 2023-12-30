@@ -43,11 +43,11 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.32</version>
     </dependency>
-    <!--druid-->
+    <!--druid localdatetime类型错误 1.1.22以上-->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
-      <version>1.1.8</version>
+      <version>1.1.22</version>
     </dependency>
     <!--mybatisPlus
           springBoot3 使用spring6 删除 NestedIOException

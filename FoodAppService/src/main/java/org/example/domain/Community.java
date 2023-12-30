@@ -42,6 +42,14 @@ public class Community extends Model<Community> {
     private Integer userId;
 
     /**
+     * 标题
+     */
+    @Schema(description = "标题")
+    @Excel(name = "标题")
+    @TableField("title")
+    private String title;
+
+    /**
     * 内容
     */
     @Schema(description = "内容")
