@@ -1,10 +1,11 @@
 package org.example.service;
 
-import org.example.domain.MenuLike;
+import org.example.domain.MenuCollection;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.domain.MenuLike;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -16,17 +17,17 @@ import java.util.Map;
  * </p>
  *
  * @author lwx20
- * @since 2023-10-27
+ * @since 2024-01-08
  */
-public interface IMenuLikeService extends IService<MenuLike> {
-    void deleteMenuLikeByParams(MenuLike obj);
+public interface IMenuCollectionService extends IService<MenuCollection> {
+    void deleteMenuCollectionByParams(MenuCollection obj);
     /**
      * 根据参数保存
      * @param obj
      * @param params
      * @return: void
      */
-    void saveByParam(MenuLike obj,Map<String, String> params);
+    void saveByParam(MenuCollection obj,Map<String, String> params);
 
     /**
      * 根据参数更新
@@ -34,7 +35,7 @@ public interface IMenuLikeService extends IService<MenuLike> {
      * @param params
      * @return: void
      */
-    void updateByParam(MenuLike obj,Map<String, String> params);
+    void updateByParam(MenuCollection obj,Map<String, String> params);
     /**
      * 根据条件删除
      *
@@ -47,33 +48,33 @@ public interface IMenuLikeService extends IService<MenuLike> {
      * 根据条件查询
      *
      * @param params
-     * @return: List<MenuLike>
+     * @return: List<MenuCollection>
      */
-     List<MenuLike> selectBy(Map<String, String> params);
+     List<MenuCollection> selectBy(Map<String, String> params);
 
     /**
      * 分页查询
      *
      * @param params
-     * @return: IPage<MenuLike>
+     * @return: IPage<MenuCollection>
     */
-    IPage<MenuLike> selectPage(Map<String, String> params);
+    IPage<MenuCollection> selectPage(Map<String, String> params);
 
     /**
      * 分页查询-自定义sql-Wrapper
      *
      * @param params
-     * @return: IPage<MenuLike>
+     * @return: IPage<MenuCollection>
     */
-    IPage<MenuLike> selpageCustomSqlByWrapper(Map<String, String> params);
+    IPage<MenuCollection> selpageCustomSqlByWrapper(Map<String, String> params);
 
     /**
      * 分页查询-自定义sql-Map
      *
      * @param params
-     * @return: IPage<MenuLike>
+     * @return: IPage<MenuCollection>
     */
-    IPage<MenuLike> selpageCustomSqlByMap(Map<String, String> params);
+    IPage<MenuCollection> selpageCustomSqlByMap(Map<String, String> params);
 
     /**
      * 下载excel模板

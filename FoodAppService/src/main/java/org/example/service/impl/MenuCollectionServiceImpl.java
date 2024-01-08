@@ -1,8 +1,9 @@
 package org.example.service.impl;
 
+import org.example.domain.MenuCollection;
+import org.example.dao.MenuCollectionMapper;
 import org.example.domain.MenuLike;
-import org.example.dao.MenuLikeMapper;
-import org.example.service.IMenuLikeService;
+import org.example.service.IMenuCollectionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -34,63 +35,61 @@ import java.util.Map;
  * </p>
  *
  * @author lwx20
- * @since 2023-10-27
+ * @since 2024-01-08
  */
 @Service
-public class MenuLikeServiceImpl extends ServiceImpl<MenuLikeMapper, MenuLike> implements IMenuLikeService {
-
+public class MenuCollectionServiceImpl extends ServiceImpl<MenuCollectionMapper, MenuCollection> implements IMenuCollectionService {
     @Override
-    public void deleteMenuLikeByParams(MenuLike obj) {
+    public void deleteMenuCollectionByParams(MenuCollection obj) {
         Map<String, String> params = new HashMap<>();
         params.put("userId", obj.getUserId().toString());
         params.put("menuId", obj.getMenuId().toString());
         this.deleteBy(params);
     }
-
     @Override
-    public void saveByParam(MenuLike obj,Map<String, String> params){
+    public void saveByParam(MenuCollection obj,Map<String, String> params){
         this.save(obj);
     }
 
     @Override
-    public void updateByParam(MenuLike obj,Map<String, String> params){
+    public void updateByParam(MenuCollection obj,Map<String, String> params){
         this.updateById(obj);
     }
 
     @Override
     public void deleteBy(Map<String, String> params) {
-        QueryWrapper<MenuLike> query = new QueryWrapper<>();
+        QueryWrapper<MenuCollection> query = new QueryWrapper<>();
         if(!query.isEmptyOfWhere()) {
             remove(query);
         }
     }
 
     @Override
-    public List<MenuLike> selectBy(Map<String, String> params) {
-        QueryWrapper<MenuLike> query = new QueryWrapper<>();
+    public List<MenuCollection> selectBy(Map<String, String> params) {
+        QueryWrapper<MenuCollection> query = new QueryWrapper<>();
         return list(query);
     }
 
     @Override
-    public IPage<MenuLike> selectPage(Map<String, String> params) {
-        Page<MenuLike> page = PageUtils.pageHandler(params);
-        QueryWrapper<MenuLike> query = getQuery(params);
-        IPage<MenuLike> result = this.page(page, query);
+    public IPage<MenuCollection> selectPage(Map<String, String> params) {
+        Page<MenuCollection> page = PageUtils.pageHandler(params);
+        QueryWrapper<MenuCollection> query = getQuery(params);
+        IPage<MenuCollection> result = this.page(page, query);
         return result;
     }
 
     @Override
-    public IPage<MenuLike> selpageCustomSqlByWrapper(Map<String, String> params) {
-        Page<MenuLike> page = PageUtils.pageHandler(params);
-        QueryWrapper<MenuLike> query = getQuery(params);
-        IPage<MenuLike> result = this.baseMapper.selpageCustomSqlByWrapper(page, query);
+    public IPage<MenuCollection> selpageCustomSqlByWrapper(Map<String, String> params) {
+        Page<MenuCollection> page = PageUtils.pageHandler(params);
+        QueryWrapper<MenuCollection> query = getQuery(params);
+        IPage<MenuCollection> result = this.baseMapper.selpageCustomSqlByWrapper(page, query);
         return result;
     }
 
     @Override
-    public IPage<MenuLike> selpageCustomSqlByMap(Map<String, String> params) {
-        Page<MenuLike> page = PageUtils.pageHandler(params);
-        IPage<MenuLike> result = this.baseMapper.selpageCustomSqlByMap(page, params);
+    public IPage<MenuCollection> selpageCustomSqlByMap(Map<String, String> params) {
+        Page<MenuCollection> page = PageUtils.pageHandler(params);
+        IPage<MenuCollection> result = this.baseMapper.selpageCustomSqlByMap(page, params);
         return result;
     }
 
@@ -103,9 +102,9 @@ public class MenuLikeServiceImpl extends ServiceImpl<MenuLikeMapper, MenuLike> i
     */
     @Override
     public void downloadExcelTemplate(HttpServletResponse response, HttpServletRequest request) throws Exception{
-        List<MenuLike> data = Lists.newArrayList();
-        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, "MenuLike"), MenuLike.class, data);
-        String fileName = String.format("MenuLike_%d.xls", System.currentTimeMillis());
+        List<MenuCollection> data = Lists.newArrayList();
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, "MenuCollection"), MenuCollection.class, data);
+        String fileName = String.format("MenuCollection_%d.xls", System.currentTimeMillis());
         response.setHeader("Content-Disposition", "attachment;Filename="+ fileName);
         response.setContentType("application/vnd.ms-excel;charset=UTF-8");
         response.flushBuffer();
@@ -122,7 +121,7 @@ public class MenuLikeServiceImpl extends ServiceImpl<MenuLikeMapper, MenuLike> i
         InputStream inputStream = file.getInputStream();
         ImportParams params = new ImportParams();
         // bean 导入
-        List<MenuLike> dataList = new ExcelImportService().importExcelByIs(inputStream, MenuLike.class, params, false).getList();
+        List<MenuCollection> dataList = new ExcelImportService().importExcelByIs(inputStream, MenuCollection.class, params, false).getList();
         this.saveBatch(dataList);
         // map 导入
         // List<Map<String, Object>> maps = ExcelImportUtil.importExcel(inputStream, Map.class, params);
@@ -131,11 +130,11 @@ public class MenuLikeServiceImpl extends ServiceImpl<MenuLikeMapper, MenuLike> i
 
     @Override
     public void excel(HttpServletResponse response, HttpServletRequest request, Map<String, String> params) throws Exception{
-        QueryWrapper<MenuLike> query = new QueryWrapper<>();
-        List<MenuLike> data = list(query);
-        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, "MenuLike"),
-        MenuLike.class, data);
-        String fileName = String.format("MenuLike_%d.xls", System.currentTimeMillis());
+        QueryWrapper<MenuCollection> query = new QueryWrapper<>();
+        List<MenuCollection> data = list(query);
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, "MenuCollection"),
+        MenuCollection.class, data);
+        String fileName = String.format("MenuCollection_%d.xls", System.currentTimeMillis());
         response.setHeader("Content-Disposition", "attachment;Filename="+ fileName);
         response.setContentType("application/vnd.ms-excel;charset=UTF-8");
         response.flushBuffer();
@@ -147,8 +146,8 @@ public class MenuLikeServiceImpl extends ServiceImpl<MenuLikeMapper, MenuLike> i
      * @param params
      * @return
      */
-    private  QueryWrapper<MenuLike> getQuery(Map<String, String> params){
-        QueryWrapper<MenuLike> query  = new QueryWrapper<>();
+    private  QueryWrapper<MenuCollection> getQuery(Map<String, String> params){
+        QueryWrapper<MenuCollection> query  = new QueryWrapper<>();
         if(params==null||params.size()<1) {
             return  query;
         }

@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.example.domain.MenuLike;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 import org.example.web.SimpleResponse;
@@ -8,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.domain.MenuLike;
+import org.example.domain.MenuCollection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.service.IMenuLikeService;
+import org.example.service.IMenuCollectionService;
 
 
 import org.springframework.web.bind.annotation.RestController;
@@ -22,25 +23,22 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author lwx20
- * @since 2023-10-27
+ * @since 2024-01-08
  */
 @RestController
 @Tag(name = "用户点赞表服务")
-@RequestMapping("/menulike")
+@RequestMapping("/menucollection")
 @CrossOrigin(origins = "*",maxAge = 3600)
-public class MenuLikeController {
+public class MenuCollectionController {
     @Autowired
-    private IMenuLikeService service;
+    private IMenuCollectionService service;
 
-
-
-    @PostMapping("/deleteMenuLikeByParams")
+    @PostMapping("/deleteMenuCollectionByParams")
     @ResponseBody
-    @Operation(description = "创建用户点赞表")
-    public SimpleResponse deleteMenuLikeByParams(@RequestBody MenuLike obj){
+    public SimpleResponse deleteMenuCollectionByParams(@RequestBody MenuCollection obj){
         SimpleResponse response = new SimpleResponse();
         try {
-            service.deleteMenuLikeByParams(obj);
+            service.deleteMenuCollectionByParams(obj);
         } catch (Exception e) {
             e.printStackTrace();
             response.setCode(500);
@@ -48,16 +46,18 @@ public class MenuLikeController {
         }
         return response;
     }
+
     @PostMapping
     @ResponseBody
     @Operation(description = "创建用户点赞表")
-    public SimpleResponse save(@RequestBody MenuLike obj){
+    public SimpleResponse save(@RequestBody MenuCollection obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.saveByParam(obj,obj.getParams());
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
@@ -65,13 +65,14 @@ public class MenuLikeController {
     @PutMapping("/{id}")
     @ResponseBody
     @Operation(description = "更新用户点赞表")
-    public SimpleResponse update(@PathVariable(name = "id") String id,@RequestBody MenuLike obj){
+    public SimpleResponse update(@PathVariable(name = "id") String id,@RequestBody MenuCollection obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.updateByParam(obj,obj.getParams());
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
@@ -80,12 +81,13 @@ public class MenuLikeController {
     @ResponseBody
     @Operation(description = "按ID删除用户点赞表")
     public SimpleResponse remove(@PathVariable(name = "id") String id){
-            SimpleResponse response = new SimpleResponse();
+        SimpleResponse response = new SimpleResponse();
         try {
         service.removeById(id);
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
@@ -100,6 +102,7 @@ public class MenuLikeController {
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
@@ -114,6 +117,7 @@ public class MenuLikeController {
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
@@ -127,7 +131,7 @@ public class MenuLikeController {
 
     @PostMapping("/selby")
     @ResponseBody
-    public List<MenuLike> selectBy(@RequestBody(required = false) Map<String, String> params) {
+    public List<MenuCollection> selectBy(@RequestBody(required = false) Map<String, String> params) {
         return  service.selectBy(params);
     }
 
@@ -137,25 +141,26 @@ public class MenuLikeController {
     public SimpleResponse selectPage(@RequestBody Map<String, String> params) {
         SimpleResponse response = new SimpleResponse();
         try {
-            IPage<MenuLike> page = service.selectPage(params);
+            IPage<MenuCollection> page = service.selectPage(params);
             response.setData(page);
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @PostMapping("/selpageCustomSqlByWrapper")
     @ResponseBody
-    public IPage<MenuLike> selpageCustomSqlByWrapper(@RequestBody Map<String, String> params) {
+    public IPage<MenuCollection> selpageCustomSqlByWrapper(@RequestBody Map<String, String> params) {
         return service.selpageCustomSqlByWrapper(params);
     }
 
     @PostMapping("/selpageCustomSqlByMap")
     @Operation(description = "分页查询-自定义sql-Map用户点赞表")
     @ResponseBody
-    public IPage<MenuLike> selpageCustomSqlByMap(@RequestBody Map<String, String> params) {
+    public IPage<MenuCollection> selpageCustomSqlByMap(@RequestBody Map<String, String> params) {
         return service.selpageCustomSqlByMap(params);
     }
 
@@ -184,8 +189,7 @@ public class MenuLikeController {
 
     @PostMapping("/excel")
     @ResponseBody
-    public void excel(HttpServletResponse response, HttpServletRequest request,
-            @RequestBody Map<String, String> params) throws Exception {
+    public void excel(HttpServletResponse response, HttpServletRequest request, @RequestBody Map<String, String> params) throws Exception {
         service.excel(response, request, params);
     }
 }

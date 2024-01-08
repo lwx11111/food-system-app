@@ -21,14 +21,14 @@ import java.util.Map;
  * </p>
  *
  * @author lwx20
- * @since 2023-10-27
+ * @since 2024-01-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("menu_like")
-@Schema(name="用户点赞表_MenuLike对象", description="用户点赞表")
-public class MenuLike extends Model<MenuLike> {
+@TableName("menu_collection")
+@Schema(name="用户点赞表_MenuCollection对象", description="用户点赞表")
+public class MenuCollection extends Model<MenuCollection> {
 
     private static final long serialVersionUID=1L;
 
