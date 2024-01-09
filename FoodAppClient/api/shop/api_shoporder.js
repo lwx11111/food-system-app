@@ -1,0 +1,97 @@
+import request from '@/utils/request'
+const serverName = '/shop'
+
+
+export default {
+
+	listShopOrderByUserId(data) {
+		return request({
+		  url: '/shoporder/listShopOrderByUserId',
+		  method: 'post',
+		  data: data
+		})
+	},
+  // 分页查询
+  selpage4shoporder(data) {
+    return request({
+      url: serverName + '//shoporder/selpage',
+      method: 'post',
+      data: data
+    })
+  },
+
+  // 添加
+  add4shoporder(obj) {
+    return request({
+      url: '/shoporder',
+      method: 'post',
+      data: obj
+    })
+  },
+
+  // 修改
+  update4shoporder(id, obj) {
+    return request({
+      url: serverName + '//shoporder/' + id,
+      method: 'put',
+      data: obj
+    })
+  },
+
+  // 删除单条
+  del4shoporder(id) {
+    return request({
+      url: serverName + '//shoporder/' + id,
+      method: 'delete',
+    })
+  },
+
+
+  // 删除多条
+  dels4shoporder(ids) {
+    return request({
+      url: serverName + '//shoporder/dels',
+      method: 'post',
+      data: ids
+    })
+  },
+
+  // 查询单条
+  sel4shoporder(id) {
+    return request({
+      url: serverName + '//shoporder/' + id,
+      method: 'get',
+    })
+
+  },
+
+  // 下载Excel模板
+  downloadExcelTemplate(params) {
+    return request({
+      url: serverName + '//shoporder/downloadExcelTemplate',
+      method: 'post',
+      data: params,
+      responseType: 'arraybuffer'
+    })
+  },
+
+  // 导入Excel接口URL
+  uploadExcelUrl() {
+    return request({
+      url: serverName + '//shoporder/uploadExcel',
+      type: 'form',
+      method: 'post',
+    })
+
+  },
+  // 导出Excel
+  excelData4shoporder(params) {
+    return request({
+      url: serverName + '//shoporder/excel',
+      method: 'post',
+      data: params,
+      responseType: 'arraybuffer'
+    })
+  }
+
+}

@@ -92,6 +92,10 @@
 		toCollection() {
 			this.$tab.navigateTo('/pages/mine/collection')
 		},
+		toOrders(){
+			console.log("lwx");
+			this.$tab.navigateTo('/pages/mine/shopOrder')
+		},
       handleToInfo() {
         this.$tab.navigateTo('/pages/mine/info/index')
       },

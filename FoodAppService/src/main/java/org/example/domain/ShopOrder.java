@@ -17,18 +17,18 @@ import lombok.experimental.Accessors;
 import java.util.Map;
 /**
  * <p>
- * 店铺物品表（只有官方一家店）
+ * 
  * </p>
  *
  * @author lwx20
- * @since 2023-11-12
+ * @since 2024-01-09
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("shop_item")
-@Schema(name="店铺物品表（只有官方一家店）_ShopItem对象", description="店铺物品表（只有官方一家店）")
-public class ShopItem extends Model<ShopItem> {
+@TableName("shop_order")
+@Schema(name="_ShopOrder对象", description="")
+public class ShopOrder extends Model<ShopOrder> {
 
     private static final long serialVersionUID=1L;
 
@@ -36,42 +36,21 @@ public class ShopItem extends Model<ShopItem> {
         @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
-    /**
-    * 物品名
-    */
-    @Schema(description = "物品名")
-    @Excel(name = "物品名")
-    @TableField("name")
-    private String name;
+    @Excel(name = "userId")
+    @TableField("user_id")
+    private String userId;
+
+    @Excel(name = "shopItemId")
+    @TableField("shop_item_id")
+    private String shopItemId;
 
     /**
-    * 物品图片
+    * 数量
     */
-    @Schema(description = "物品图片")
-    @Excel(name = "物品图片")
-    @TableField("picture")
-    private String picture;
-
-    /**
-    * 物品介绍
-    */
-    @Schema(description = "物品介绍")
-    @Excel(name = "物品介绍")
-    @TableField("description")
-    private String description;
-
-    /**
-    * 物品分类
-    */
-    @Schema(description = "物品分类")
-    @Excel(name = "物品分类")
-    @TableField("category_id")
-    private String categoryId;
-
-    @Schema(description = "物品价格")
-    @Excel(name = "物品价格")
-    @TableField("price")
-    private Double price;
+    @Schema(description = "数量")
+    @Excel(name = "数量")
+    @TableField("amount")
+    private Integer amount;
 
     @TableField(exist = false)
     private Map<String,String> params;

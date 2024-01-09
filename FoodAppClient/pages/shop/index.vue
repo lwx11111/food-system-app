@@ -77,7 +77,13 @@
 				//由于 JavaScript 的限制，Vue 不能检测数组和对象的变化。
 				this.$forceUpdate();
 				// 获取数据
-				this.params.categoryId = this.categoryData[index].id;
+				console.log(index);
+				if(index === 0){
+					this.params.categoryId = '';
+				} else {
+					this.params.categoryId = this.categoryData[index].id;
+				}
+				
 				this.getShopItem();
 			},
 			// 分类信息

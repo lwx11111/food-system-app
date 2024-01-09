@@ -8,61 +8,78 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.domain.ShopItem;
+import org.example.domain.Cart;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.service.IShopItemService;
+import org.example.service.ICartService;
 
 
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 店铺物品表（只有官方一家店） 前端控制器
+ *  前端控制器
  * </p>
  *
  * @author lwx20
- * @since 2023-11-12
+ * @since 2024-01-09
  */
 @RestController
-@Tag(name = "店铺物品表（只有官方一家店）服务")
-@RequestMapping("/shopitem")
+@Tag(name = "服务")
+@RequestMapping("/cart")
 @CrossOrigin(origins = "*",maxAge = 3600)
-public class ShopItemController {
+public class CartController {
     @Autowired
-    private IShopItemService service;
+    private ICartService service;
+
+    @PostMapping("/listCartByUserId")
+    @ResponseBody
+    @Operation(description = "创建")
+    public SimpleResponse listCartByUserId(@RequestBody Map<String, String> params){
+        SimpleResponse response = new SimpleResponse();
+        try {
+            response.setData(service.listCartByUserId(params));
+        } catch (Exception e) {
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        return response;
+    }
 
     @PostMapping
     @ResponseBody
-    @Operation(description = "创建店铺物品表（只有官方一家店）")
-    public SimpleResponse save(@RequestBody ShopItem obj){
+    @Operation(description = "创建")
+    public SimpleResponse save(@RequestBody Cart obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.saveByParam(obj,obj.getParams());
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @PutMapping("/{id}")
     @ResponseBody
-    @Operation(description = "更新店铺物品表（只有官方一家店）")
-    public SimpleResponse update(@PathVariable(name = "id") String id,@RequestBody ShopItem obj){
+    @Operation(description = "更新")
+    public SimpleResponse update(@PathVariable(name = "id") String id,@RequestBody Cart obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.updateByParam(obj,obj.getParams());
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @DeleteMapping("/{id}")
     @ResponseBody
-    @Operation(description = "按ID删除店铺物品表（只有官方一家店）")
+    @Operation(description = "按ID删除")
     public SimpleResponse remove(@PathVariable(name = "id") String id){
         SimpleResponse response = new SimpleResponse();
         try {
@@ -70,12 +87,13 @@ public class ShopItemController {
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @GetMapping("/{id}")
-    @Operation(description = "按ID查询店铺物品表（只有官方一家店）")
+    @Operation(description = "按ID查询")
     @ResponseBody
     public SimpleResponse select(@PathVariable(name = "id") String id) {
         SimpleResponse response = new SimpleResponse();
@@ -84,13 +102,14 @@ public class ShopItemController {
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @PostMapping("/dels")
     @ResponseBody
-    @Operation(description = "按ID删除多个店铺物品表（只有官方一家店）")
+    @Operation(description = "按ID删除多个")
     public SimpleResponse removes(@RequestBody List<String> ids){
         SimpleResponse response = new SimpleResponse();
         try {
@@ -98,49 +117,50 @@ public class ShopItemController {
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
 
     @PostMapping("/delby")
-    @Operation(description = "条件删除店铺物品表（只有官方一家店）")
+    @Operation(description = "条件删除")
     public void deleteBy(@RequestBody(required = false) Map<String, String> params) {
         service.deleteBy(params);
     }
 
     @PostMapping("/selby")
     @ResponseBody
-    public List<ShopItem> selectBy(@RequestBody(required = false) Map<String, String> params) {
+    public List<Cart> selectBy(@RequestBody(required = false) Map<String, String> params) {
         return  service.selectBy(params);
     }
 
     @PostMapping("/selpage")
-    @Operation(description = "分页查询店铺物品表（只有官方一家店）")
+    @Operation(description = "分页查询")
     @ResponseBody
     public SimpleResponse selectPage(@RequestBody Map<String, String> params) {
         SimpleResponse response = new SimpleResponse();
         try {
-            IPage<ShopItem> page = service.selectPage(params);
+            IPage<Cart> page = service.selectPage(params);
             response.setData(page);
         } catch (Exception e) {
-            e.printStackTrace();
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @PostMapping("/selpageCustomSqlByWrapper")
     @ResponseBody
-    public IPage<ShopItem> selpageCustomSqlByWrapper(@RequestBody Map<String, String> params) {
+    public IPage<Cart> selpageCustomSqlByWrapper(@RequestBody Map<String, String> params) {
         return service.selpageCustomSqlByWrapper(params);
     }
 
     @PostMapping("/selpageCustomSqlByMap")
-    @Operation(description = "分页查询-自定义sql-Map店铺物品表（只有官方一家店）")
+    @Operation(description = "分页查询-自定义sql-Map")
     @ResponseBody
-    public IPage<ShopItem> selpageCustomSqlByMap(@RequestBody Map<String, String> params) {
+    public IPage<Cart> selpageCustomSqlByMap(@RequestBody Map<String, String> params) {
         return service.selpageCustomSqlByMap(params);
     }
 

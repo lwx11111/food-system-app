@@ -16,7 +16,6 @@
 <script>
 	import ApiShopItem from '@/api/shop/api_shopitem.js';
 	import ApiShopCategory from '@/api/shop/api_shopitemcategory.js'
-	import ApiCart from '@/api/shop/api_cart.js';
 	import ApiShopOrder from '@/api/shop/api_shoporder.js';
 	
 	export default {
@@ -54,7 +53,7 @@
 			// 物品信息
 			getShopItem() {
 				let that = this;
-				ApiCart.listCartByUserId(this.params).then(res => {
+				ApiShopOrder.listShopOrderByUserId(this.params).then(res => {
 					console.log(res)
 					if(res.code === 200){
 						that.carts = res.data;

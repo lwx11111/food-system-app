@@ -9,12 +9,6 @@
 			<u-divider></u-divider>
 			<view>{{shopItem.price}}¥</view>
 		</uni-card>
-		<!-- 收藏 -->
-		<!-- <uni-section title="收藏" type="line">
-			<view class="example-body">
-				<uni-fav :checked="check" class="favBtn" @click="favClick(0)" />
-			</view>
-		</uni-section> -->
 		<!-- 描述 -->
 		<uni-card>
 			<h2>描述</h2>
@@ -22,16 +16,30 @@
 		</uni-card>
 		<!-- 购物导航 -->
 		<view class="goods-carts">
-			<uni-goods-nav :fill="true" :options="options" :button-group="customButtonGroup" 
+			<uni-goods-nav :fill="true" :options="options" 
+							:button-group="customButtonGroup" 
 							@click="onClick"
 							@buttonClick="buttonClick">
 			</uni-goods-nav>
 		</view>
-		<!-- 购物车/购买面板 -->
+		<!-- 购物车 -->
 		<uni-popup ref="popup" type="dialog">
 			<uni-popup-dialog mode="input":before-close="true" 
 							  @close="close" 
 							  @confirm="confirm">
+				<uni-section title="数量" type="line" padding>
+					<uni-number-box v-model="amount"></uni-number-box>
+				</uni-section>
+			</uni-popup-dialog>
+		</uni-popup>
+		
+		<!-- /购买面板 -->
+		<uni-popup ref="shopOrder" type="dialog">
+			<uni-popup-dialog mode="input":before-close="true" 
+							  @close="closeShopOrder" 
+							  @confirm="confirmShopOrder">
+							  
+				
 				<uni-section title="数量" type="line" padding>
 					<uni-number-box v-model="amount"></uni-number-box>
 				</uni-section>
@@ -42,6 +50,8 @@
 
 <script>
 	import ApiShopItem from '@/api/shop/api_shopitem.js';
+	import ApiCart from '@/api/shop/api_cart.js';
+	import ApiShopOrder from '@/api/shop/api_shoporder.js';
 	
 	export default {
 		data() {
@@ -98,11 +108,49 @@
 				this.$refs.popup.close()
 			},
 			confirm() {
-				// todo 加入购物车
-				uni.showToast({
-					title: `加入购物车成功`,
-					icon: 'success'
+				const obj = {
+					userId: '1',
+					shopItemId: this.shopItem.id,
+					amount: this.amount,
+				}
+				console.log(obj)
+				ApiCart.add4cart(obj).then(res => {
+					console.log(res)
+					if(res.code === 200){
+						uni.showToast({
+							title: `加入购物车成功`,
+							icon: 'success'
+						})
+					}
 				})
+				
+				this.$refs.popup.close()
+			},
+			
+			closeShopOrder() {
+				// before-close 为true的情况下，手动执行 close 才会关闭对话框
+				this.$refs.shopOrder.close()
+			},
+			confirmShopOrder() {
+				const obj = {
+					userId: '1',
+					shopItemId: this.shopItem.id,
+					amount: this.amount,
+				}
+				console.log(obj)
+				ApiShopOrder.add4shoporder(obj).then(res => {
+					console.log(res)
+					if(res.code === 200){
+						uni.showToast({
+							title: `下单成功`,
+							icon: 'success'
+						})
+						uni.navigateTo({
+						  url: '/pages/mine/shopOrder'
+						})
+					}
+				})
+				
 				this.$refs.popup.close()
 			},
 			getShopItem(id){
@@ -127,7 +175,7 @@
 			},
 			toShoppingCart(){
 				uni.navigateTo({
-				  url: '/pages/shop/shoppingCart?id=' + this.user.userId,
+				  url: '/pages/mine/shoppingCart'
 				})
 			},
 			// 商品导航-左侧点击事件
@@ -147,13 +195,12 @@
 			buttonClick(e) {
 				console.log(e)
 				if(e.index === 0){
-					// 购物车
+					// 购物车, 打开面板
 					this.$refs.popup.open()
 				} else {
 					// 购买
-					this.$refs[e].open()
+					this.$refs.shopOrder.open()
 				}
-				this.options[2].info++
 			}
 			
 		}
