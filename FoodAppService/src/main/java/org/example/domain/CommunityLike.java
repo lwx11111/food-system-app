@@ -34,15 +34,15 @@ public class CommunityLike extends Model<CommunityLike> {
 
     @Excel(name = "id")
         @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private Integer id;
+    private String id;
 
     @Excel(name = "communityId")
     @TableField("community_id")
-    private Integer communityId;
+    private String communityId;
 
     @Excel(name = "userId")
     @TableField("user_id")
-    private Integer userId;
+    private String userId;
 
     @TableField(exist = false)
     private Map<String,String> params;

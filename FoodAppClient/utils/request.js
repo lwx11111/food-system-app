@@ -26,7 +26,7 @@ const request = config => {
 	return new Promise((resolve, reject) => {
 		let url = baseUrl + config.url;
 		// 判断是否是权限系统路径
-		if(config.url.includes("/auth-")){
+		if(config.url.includes("manager")){
 			url = authUrl + config.url;
 		}
 		// form请求

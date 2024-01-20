@@ -4,7 +4,7 @@ import request from '@/utils/request'
 export default {
     loginWithCode(data) {
         return request({
-            url: '/auth-manager-microservice-lwx/' + 'v1/account/anon/loginwithcode',
+            url: '/manager/' + 'v1/account/anon/loginwithcode',
             method: 'post',
 			type: 'form',
             data: data
@@ -12,12 +12,12 @@ export default {
     },
 
     register(data) {
-        return request({
-            url: '/auth-manager-microservice-lwx/' + 'v1/account/anon/save',
-            method: 'post',
+		return request({
+			url: '/manager/' + 'v1/account/anon/save',
+			method: 'post',
 			type: 'form',
-            data: data
-        })
-    }
+			data: data
+		})
+	},
 }
 

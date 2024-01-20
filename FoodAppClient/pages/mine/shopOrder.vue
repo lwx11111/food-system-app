@@ -7,8 +7,9 @@
 			<image style="width: 200px; height: 200px;" 
 					src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
 		</view>
-		<view>{{item.shopItem.price}}¥</view>
+		<!-- <view>{{item.shopItem.price}}¥</view> -->
 		<view>{{item.amount}}</view>
+		<view>总价：{{item.price}} ¥</view>
 	</uni-card>
   </view>
 </template>
@@ -25,7 +26,7 @@
 			carts: [
 				{
 					id:'',
-					userId:'',
+					userId:localStorage.getItem('userId'),
 					amount:'',
 					shopItem: {
 						id:'1',

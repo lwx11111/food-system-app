@@ -2,7 +2,7 @@
 	<view>
 		<uni-card>
 			<u-row gutter="16">
-				<u-col  @click="toMenuPublish()" span="4" style="border: 1px red solid;">
+				<u-col  @click="toMenuPublish()" span="4">
 					<image style="width: 50px; height: 50px;" 
 						 src="http://127.0.0.1:9000/appsys/community.png"></image>
 					<view>菜谱发布</view>

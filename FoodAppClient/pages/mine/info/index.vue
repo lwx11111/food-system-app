@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import { getUserProfile } from "@/api/system/user"
+  // import { getUserProfile } from "@/api/system/user"
 
   export default {
     data() {

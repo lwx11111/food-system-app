@@ -1,6 +1,6 @@
 <template>
     <div>
-        <logo></logo>
+<!--        <logo></logo>-->
         <el-scrollbar wrap-class="scrollbar-wrapper">
             <el-menu
                 default-active="1"
@@ -10,9 +10,33 @@
                 :collapse-transition="false"
                 mode="vertical"
                 active-text-color="#ffd04b"
-                background-color="#BCD2EE"
-                text-color="#111111"
+                background-color="#545c64"
+                text-color="#fff"
             >
+                <el-menu-item index="/cart">
+                    <el-icon><User /></el-icon>
+                    <span>用户管理</span>
+                </el-menu-item>
+<!--                <el-menu-item index="2">-->
+<!--                    <el-icon><KnifeFork /></el-icon>-->
+<!--                    <span>菜谱管理</span>-->
+<!--                </el-menu-item>-->
+<!--                <el-menu-item index="3">-->
+<!--                    <el-icon><Dish /></el-icon>-->
+<!--                    <span>菜品管理</span>-->
+<!--                </el-menu-item>-->
+<!--                <el-menu-item index="4">-->
+<!--                    <el-icon><SoldOut /></el-icon>-->
+<!--                    <span>商城管理</span>-->
+<!--                </el-menu-item>-->
+<!--                <el-menu-item index="5">-->
+<!--                    <el-icon><ChatLineRound /></el-icon>-->
+<!--                    <span>社区管理</span>-->
+<!--                </el-menu-item>-->
+<!--                <el-menu-item index="6">-->
+<!--                    <el-icon><Help /></el-icon>-->
+<!--                    <span>健康管理</span>-->
+<!--                </el-menu-item>-->
             <sidebar-item v-for="route in data.indexDate" :key="route.funId.toString()" :item="route" :base-path="route.url"/>
             <sidebar-item v-for="route in data.menuData"
                           :key="route.funId.toString()"
@@ -48,10 +72,32 @@
                 'url': '/homePage',
             },
             {
-                'funId': '1',
-                'funName': '购物车',
+                'funId': '2',
+                'funName': '菜谱管理',
                 'url': '/cart',
-            }
+                'icon':'KnifeFork'
+            },
+            {
+                'funId': '3',
+                'funName': '菜品管理',
+                'url': '/cart',
+            },
+            {
+                'funId': '4',
+                'funName': '商城管理',
+                'url': '/cart',
+            },
+            {
+                'funId': '5',
+                'funName': '社区管理',
+                'url': '/cart',
+            },
+            {
+                'funId': '6',
+                'funName': '健康管理',
+                'url': '/cart',
+            },
+
 
         ]
     })
@@ -81,5 +127,12 @@
     margin-left: 20%;
     width: 50%;
     height: 50%;
+}
+.el-menu{
+    height: 100vh;
+    background-color: #545c64;
+}
+.el-col-12 {
+    max-width: 100%;
 }
 </style>

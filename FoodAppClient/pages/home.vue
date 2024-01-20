@@ -5,7 +5,7 @@
 		<view>
 			<uni-card> 
 				<u-row gutter="16">
-					<u-col @click="toCommunity()" span="4" style="border: 1px red solid;">
+					<u-col @click="toCommunity()" span="4">
 						<image style="width: 50px; height: 50px;" 
 							 src="http://127.0.0.1:9000/appsys/community.png"></image>
 						<view>社区</view>
@@ -28,7 +28,7 @@
 				</view>
 			</uni-card>
 		</view>
-		<view>
+		<!-- <view>
 			<h1>每日推荐</h1>
 		</view>
 		<view>
@@ -38,7 +38,7 @@
 					<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
 				</view>
 			</uni-card>
-		</view>
+		</view> -->
 	</view>
 </template>
 

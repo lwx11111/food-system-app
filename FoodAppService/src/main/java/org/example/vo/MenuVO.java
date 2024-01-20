@@ -65,7 +65,7 @@ public class MenuVO {
 
     }
 
-    private Integer id;
+    private String id;
 
     /**
      * 菜谱名

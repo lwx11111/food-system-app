@@ -56,7 +56,7 @@ public class Menu extends Model<Menu> {
 
     @Excel(name = "id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private Integer id;
+    private String id;
 
     /**
     * 菜谱名

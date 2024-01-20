@@ -50,7 +50,7 @@ public class CommunityController {
     @PutMapping("/{id}")
     @ResponseBody
     @Operation(description = "更新社区帖子表")
-    public SimpleResponse update(@PathVariable(name = "id") Integer id,@RequestBody Community obj){
+    public SimpleResponse update(@PathVariable(name = "id") String id,@RequestBody Community obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.updateByParam(obj,obj.getParams());
@@ -64,7 +64,7 @@ public class CommunityController {
     @DeleteMapping("/{id}")
     @ResponseBody
     @Operation(description = "按ID删除社区帖子表")
-    public SimpleResponse remove(@PathVariable(name = "id") Integer id){
+    public SimpleResponse remove(@PathVariable(name = "id") String id){
             SimpleResponse response = new SimpleResponse();
         try {
         service.removeById(id);
@@ -78,7 +78,7 @@ public class CommunityController {
     @GetMapping("/{id}")
     @Operation(description = "按ID查询社区帖子表")
     @ResponseBody
-    public SimpleResponse select(@PathVariable(name = "id") Integer id) {
+    public SimpleResponse select(@PathVariable(name = "id") String id) {
         SimpleResponse response = new SimpleResponse();
         try {
             response.setData(service.getById(id));
@@ -92,7 +92,7 @@ public class CommunityController {
     @PostMapping("/dels")
     @ResponseBody
     @Operation(description = "按ID删除多个社区帖子表")
-    public SimpleResponse removes(@RequestBody List<Integer> ids){
+    public SimpleResponse removes(@RequestBody List<String> ids){
         SimpleResponse response = new SimpleResponse();
         try {
             service.removeByIds(ids);

@@ -23,4 +23,6 @@ public class ShopOrderVO extends Model<ShopOrderVO> {
 
     private Integer amount;
 
+    private Double price;
+
 }

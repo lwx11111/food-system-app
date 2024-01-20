@@ -34,16 +34,16 @@ public class CommunityComment extends Model<CommunityComment> {
     private static final long serialVersionUID=1L;
 
     @Excel(name = "id")
-        @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private Integer id;
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    private String id;
 
     @Excel(name = "communityId")
     @TableField("community_id")
-    private Integer communityId;
+    private String communityId;
 
     @Excel(name = "userId")
     @TableField("user_id")
-    private Integer userId;
+    private String userId;
 
     /**
     * 内容
@@ -67,9 +67,5 @@ public class CommunityComment extends Model<CommunityComment> {
     private Map<String,String> params;
 
 
-//    @Override
-//    protected Serializable pkVal(){
-//            return this.id;
-//        }
 
 }

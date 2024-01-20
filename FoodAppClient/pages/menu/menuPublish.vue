@@ -61,8 +61,8 @@
 				description: "",
 				ingredients:[],
 				steps:[],
-				image: '',
-				userId: '',
+				// image: '',
+				userId: localStorage.getItem('userId'),
 				type:''
 			},
 			// 菜谱类型 todo 配置字典

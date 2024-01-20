@@ -39,11 +39,11 @@ public class MenuComment extends Model<MenuComment> {
 
     @Excel(name = "userId")
     @TableField("user_id")
-    private Integer userId;
+    private String userId;
 
     @Excel(name = "menuId")
     @TableField("menu_id")
-    private Integer menuId;
+    private String menuId;
 
     /**
     * 内容

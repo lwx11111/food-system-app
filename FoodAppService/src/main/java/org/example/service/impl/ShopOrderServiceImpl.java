@@ -56,6 +56,7 @@ public class ShopOrderServiceImpl extends ServiceImpl<ShopOrderMapper, ShopOrder
             ShopOrderVO vo = new ShopOrderVO();
             vo.setId(shopOrder.getId());
             vo.setUserId(shopOrder.getUserId());
+            vo.setPrice(shopOrder.getPrice());
             // shopItem
             vo.setShopItem(shopItemService.getById(shopOrder.getShopItemId()));
             vo.setAmount(shopOrder.getAmount());

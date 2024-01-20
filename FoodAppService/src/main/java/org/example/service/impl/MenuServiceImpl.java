@@ -61,7 +61,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
 
     @Override
-    public MenuVO getMenuVOById(Integer id) {
+    public MenuVO getMenuVOById(String id) {
         Menu menu = baseMapper.selectById(id);
         System.out.println(menu);
         return new MenuVO(menu);

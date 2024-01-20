@@ -48,7 +48,7 @@ public class CommunityLikeController {
     @PutMapping("/{id}")
     @ResponseBody
     @Operation(description = "更新社区帖子点赞表")
-    public SimpleResponse update(@PathVariable(name = "id") Integer id,@RequestBody CommunityLike obj){
+    public SimpleResponse update(@PathVariable(name = "id") String id,@RequestBody CommunityLike obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.updateByParam(obj,obj.getParams());
@@ -62,7 +62,7 @@ public class CommunityLikeController {
     @DeleteMapping("/{id}")
     @ResponseBody
     @Operation(description = "按ID删除社区帖子点赞表")
-    public SimpleResponse remove(@PathVariable(name = "id") Integer id){
+    public SimpleResponse remove(@PathVariable(name = "id") String id){
             SimpleResponse response = new SimpleResponse();
         try {
         service.removeById(id);
@@ -76,7 +76,7 @@ public class CommunityLikeController {
     @GetMapping("/{id}")
     @Operation(description = "按ID查询社区帖子点赞表")
     @ResponseBody
-    public SimpleResponse select(@PathVariable(name = "id") Integer id) {
+    public SimpleResponse select(@PathVariable(name = "id") String id) {
         SimpleResponse response = new SimpleResponse();
         try {
             response.setData(service.getById(id));
@@ -90,7 +90,7 @@ public class CommunityLikeController {
     @PostMapping("/dels")
     @ResponseBody
     @Operation(description = "按ID删除多个社区帖子点赞表")
-    public SimpleResponse removes(@RequestBody List<Integer> ids){
+    public SimpleResponse removes(@RequestBody List<String> ids){
         SimpleResponse response = new SimpleResponse();
         try {
             service.removeByIds(ids);

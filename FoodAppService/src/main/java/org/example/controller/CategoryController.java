@@ -8,137 +8,144 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.domain.Order;
+import org.example.domain.Category;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.service.IOrderService;
+import org.example.service.ICategoryService;
 
 
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 点单表 前端控制器
+ *  前端控制器
  * </p>
  *
  * @author lwx20
- * @since 2023-10-27
+ * @since 2024-01-20
  */
 @RestController
-@Tag(name = "点单表服务")
-@RequestMapping("/order")
-public class OrderController {
+@Tag(name = "服务")
+@RequestMapping("/category")
+@CrossOrigin(origins = "*",maxAge = 3600)
+public class CategoryController {
     @Autowired
-    private IOrderService service;
+    private ICategoryService service;
 
     @PostMapping
     @ResponseBody
-    @Operation(description = "创建点单表")
-    public SimpleResponse save(@RequestBody Order obj){
+    @Operation(description = "创建")
+    public SimpleResponse save(@RequestBody Category obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.saveByParam(obj,obj.getParams());
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @PutMapping("/{id}")
     @ResponseBody
-    @Operation(description = "更新点单表")
-    public SimpleResponse update(@PathVariable(name = "id") Integer id,@RequestBody Order obj){
+    @Operation(description = "更新")
+    public SimpleResponse update(@PathVariable(name = "id") String id,@RequestBody Category obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.updateByParam(obj,obj.getParams());
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @DeleteMapping("/{id}")
     @ResponseBody
-    @Operation(description = "按ID删除点单表")
-    public SimpleResponse remove(@PathVariable(name = "id") Integer id){
-            SimpleResponse response = new SimpleResponse();
+    @Operation(description = "按ID删除")
+    public SimpleResponse remove(@PathVariable(name = "id") String id){
+        SimpleResponse response = new SimpleResponse();
         try {
         service.removeById(id);
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @GetMapping("/{id}")
-    @Operation(description = "按ID查询点单表")
+    @Operation(description = "按ID查询")
     @ResponseBody
-    public SimpleResponse select(@PathVariable(name = "id") Integer id) {
+    public SimpleResponse select(@PathVariable(name = "id") String id) {
         SimpleResponse response = new SimpleResponse();
         try {
             response.setData(service.getById(id));
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @PostMapping("/dels")
     @ResponseBody
-    @Operation(description = "按ID删除多个点单表")
-    public SimpleResponse removes(@RequestBody List<Integer> ids){
+    @Operation(description = "按ID删除多个")
+    public SimpleResponse removes(@RequestBody List<String> ids){
         SimpleResponse response = new SimpleResponse();
         try {
             service.removeByIds(ids);
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
 
     @PostMapping("/delby")
-    @Operation(description = "条件删除点单表")
+    @Operation(description = "条件删除")
     public void deleteBy(@RequestBody(required = false) Map<String, String> params) {
         service.deleteBy(params);
     }
 
     @PostMapping("/selby")
     @ResponseBody
-    public List<Order> selectBy(@RequestBody(required = false) Map<String, String> params) {
+    public List<Category> selectBy(@RequestBody(required = false) Map<String, String> params) {
         return  service.selectBy(params);
     }
 
     @PostMapping("/selpage")
-    @Operation(description = "分页查询点单表")
+    @Operation(description = "分页查询")
     @ResponseBody
     public SimpleResponse selectPage(@RequestBody Map<String, String> params) {
         SimpleResponse response = new SimpleResponse();
         try {
-            IPage<Order> page = service.selectPage(params);
+            IPage<Category> page = service.selectPage(params);
             response.setData(page);
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @PostMapping("/selpageCustomSqlByWrapper")
     @ResponseBody
-    public IPage<Order> selpageCustomSqlByWrapper(@RequestBody Map<String, String> params) {
+    public IPage<Category> selpageCustomSqlByWrapper(@RequestBody Map<String, String> params) {
         return service.selpageCustomSqlByWrapper(params);
     }
 
     @PostMapping("/selpageCustomSqlByMap")
-    @Operation(description = "分页查询-自定义sql-Map点单表")
+    @Operation(description = "分页查询-自定义sql-Map")
     @ResponseBody
-    public IPage<Order> selpageCustomSqlByMap(@RequestBody Map<String, String> params) {
+    public IPage<Category> selpageCustomSqlByMap(@RequestBody Map<String, String> params) {
         return service.selpageCustomSqlByMap(params);
     }
 
@@ -167,8 +174,7 @@ public class OrderController {
 
     @PostMapping("/excel")
     @ResponseBody
-    public void excel(HttpServletResponse response, HttpServletRequest request,
-            @RequestBody Map<String, String> params) throws Exception {
+    public void excel(HttpServletResponse response, HttpServletRequest request, @RequestBody Map<String, String> params) throws Exception {
         service.excel(response, request, params);
     }
 }

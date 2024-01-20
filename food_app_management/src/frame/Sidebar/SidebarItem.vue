@@ -28,7 +28,8 @@
                     :index="item.funId.toString()">
             <el-menu-item :index="item.funId.toString()">
                 <template #title>
-                    <el-icon><HelpFilled /></el-icon>
+                    <component :is="item.icon" style="width: 16px;height: 16px;"></component>
+<!--                    <el-icon><HelpFilled /></el-icon>-->
                     <span>{{item.funName}}</span>
                 </template>
             </el-menu-item>

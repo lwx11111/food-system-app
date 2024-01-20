@@ -1,8 +1,8 @@
 package org.example.service.impl;
 
-import org.example.domain.Order;
-import org.example.dao.OrderMapper;
-import org.example.service.IOrderService;
+import org.example.domain.Category;
+import org.example.dao.CategoryMapper;
+import org.example.service.ICategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -29,62 +29,59 @@ import java.util.Map;
 
 /**
  * <p>
- * 点单表 服务实现类
+ *  服务实现类
  * </p>
  *
  * @author lwx20
- * @since 2023-10-27
+ * @since 2024-01-20
  */
 @Service
-public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
-
-    //@Autowired
-    //private JdbcTemplate jdbcTemplate;
+public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements ICategoryService {
 
     @Override
-    public void saveByParam(Order obj,Map<String, String> params){
+    public void saveByParam(Category obj,Map<String, String> params){
         this.save(obj);
     }
 
     @Override
-    public void updateByParam(Order obj,Map<String, String> params){
+    public void updateByParam(Category obj,Map<String, String> params){
         this.updateById(obj);
     }
 
     @Override
     public void deleteBy(Map<String, String> params) {
-        QueryWrapper<Order> query = new QueryWrapper<>();
+        QueryWrapper<Category> query = new QueryWrapper<>();
         if(!query.isEmptyOfWhere()) {
             remove(query);
         }
     }
 
     @Override
-    public List<Order> selectBy(Map<String, String> params) {
-        QueryWrapper<Order> query = new QueryWrapper<>();
+    public List<Category> selectBy(Map<String, String> params) {
+        QueryWrapper<Category> query = new QueryWrapper<>();
         return list(query);
     }
 
     @Override
-    public IPage<Order> selectPage(Map<String, String> params) {
-        Page<Order> page = PageUtils.pageHandler(params);
-        QueryWrapper<Order> query = getQuery(params);
-        IPage<Order> result = this.page(page, query);
+    public IPage<Category> selectPage(Map<String, String> params) {
+        Page<Category> page = PageUtils.pageHandler(params);
+        QueryWrapper<Category> query = getQuery(params);
+        IPage<Category> result = this.page(page, query);
         return result;
     }
 
     @Override
-    public IPage<Order> selpageCustomSqlByWrapper(Map<String, String> params) {
-        Page<Order> page = PageUtils.pageHandler(params);
-        QueryWrapper<Order> query = getQuery(params);
-        IPage<Order> result = this.baseMapper.selpageCustomSqlByWrapper(page, query);
+    public IPage<Category> selpageCustomSqlByWrapper(Map<String, String> params) {
+        Page<Category> page = PageUtils.pageHandler(params);
+        QueryWrapper<Category> query = getQuery(params);
+        IPage<Category> result = this.baseMapper.selpageCustomSqlByWrapper(page, query);
         return result;
     }
 
     @Override
-    public IPage<Order> selpageCustomSqlByMap(Map<String, String> params) {
-        Page<Order> page = PageUtils.pageHandler(params);
-        IPage<Order> result = this.baseMapper.selpageCustomSqlByMap(page, params);
+    public IPage<Category> selpageCustomSqlByMap(Map<String, String> params) {
+        Page<Category> page = PageUtils.pageHandler(params);
+        IPage<Category> result = this.baseMapper.selpageCustomSqlByMap(page, params);
         return result;
     }
 
@@ -97,9 +94,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     */
     @Override
     public void downloadExcelTemplate(HttpServletResponse response, HttpServletRequest request) throws Exception{
-        List<Order> data = Lists.newArrayList();
-        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, "Order"), Order.class, data);
-        String fileName = String.format("Order_%d.xls", System.currentTimeMillis());
+        List<Category> data = Lists.newArrayList();
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, "Category"), Category.class, data);
+        String fileName = String.format("Category_%d.xls", System.currentTimeMillis());
         response.setHeader("Content-Disposition", "attachment;Filename="+ fileName);
         response.setContentType("application/vnd.ms-excel;charset=UTF-8");
         response.flushBuffer();
@@ -116,7 +113,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         InputStream inputStream = file.getInputStream();
         ImportParams params = new ImportParams();
         // bean 导入
-        List<Order> dataList = new ExcelImportService().importExcelByIs(inputStream, Order.class, params, false).getList();
+        List<Category> dataList = new ExcelImportService().importExcelByIs(inputStream, Category.class, params, false).getList();
         this.saveBatch(dataList);
         // map 导入
         // List<Map<String, Object>> maps = ExcelImportUtil.importExcel(inputStream, Map.class, params);
@@ -125,11 +122,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public void excel(HttpServletResponse response, HttpServletRequest request, Map<String, String> params) throws Exception{
-        QueryWrapper<Order> query = new QueryWrapper<>();
-        List<Order> data = list(query);
-        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, "Order"),
-        Order.class, data);
-        String fileName = String.format("Order_%d.xls", System.currentTimeMillis());
+        QueryWrapper<Category> query = new QueryWrapper<>();
+        List<Category> data = list(query);
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, "Category"),
+        Category.class, data);
+        String fileName = String.format("Category_%d.xls", System.currentTimeMillis());
         response.setHeader("Content-Disposition", "attachment;Filename="+ fileName);
         response.setContentType("application/vnd.ms-excel;charset=UTF-8");
         response.flushBuffer();
@@ -141,8 +138,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
      * @param params
      * @return
      */
-    private  QueryWrapper<Order> getQuery(Map<String, String> params){
-        QueryWrapper<Order> query  = new QueryWrapper<>();
+    private  QueryWrapper<Category> getQuery(Map<String, String> params){
+        QueryWrapper<Category> query  = new QueryWrapper<>();
         if(params==null||params.size()<1) {
             return  query;
         }
@@ -153,23 +150,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             if("id".equals(entry.getKey())){
                 query.eq("id",entry.getValue());
             }
-            if("shopId".equals(entry.getKey())){
-                query.eq("shop_id",entry.getValue());
-            }
-            if("userId".equals(entry.getKey())){
-                query.eq("user_id",entry.getValue());
-            }
-            if("shopItem".equals(entry.getKey())){
-                query.eq("shop_item",entry.getValue());
-            }
-            if("createTime".equals(entry.getKey())){
-                query.eq("create_time",entry.getValue());
-            }
-            if("status".equals(entry.getKey())){
-                query.eq("status",entry.getValue());
-            }
-            if("price".equals(entry.getKey())){
-                query.eq("price",entry.getValue());
+            if("name".equals(entry.getKey())){
+                query.eq("name",entry.getValue());
             }
         }
         return  query;

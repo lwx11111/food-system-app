@@ -3,63 +3,56 @@ const serverName = '/shop'
 
 
 export default {
-	// 登录
-	login(data) {
-		return request({
-		  url: '/user/login',
-		  method: 'post',
-		  data: data
-		})
-	},
+
   // 分页查询
-  selpage4user(data) {
+  selpage4menucomment(data) {
     return request({
-      url: serverName + '//user/selpage',
+      url: '/menucomment/selpage',
       method: 'post',
       data: data
     })
   },
 
   // 添加
-  add4user(obj) {
+  add4menucomment(obj) {
     return request({
-      url: serverName + '//user',
+      url: '/menucomment',
       method: 'post',
       data: obj
     })
   },
 
   // 修改
-  update4user(id, obj) {
+  update4menucomment(id, obj) {
     return request({
-      url: serverName + '//user/' + id,
+      url: serverName + '//menucomment/' + id,
       method: 'put',
       data: obj
     })
   },
 
   // 删除单条
-  del4user(id) {
+  del4menucomment(id) {
     return request({
-      url: serverName + '//user/' + id,
+      url: serverName + '//menucomment/' + id,
       method: 'delete',
     })
   },
 
 
   // 删除多条
-  dels4user(ids) {
+  dels4menucomment(ids) {
     return request({
-      url: serverName + '//user/dels',
+      url: serverName + '//menucomment/dels',
       method: 'post',
       data: ids
     })
   },
 
   // 查询单条
-  sel4user(id) {
+  sel4menucomment(id) {
     return request({
-      url: serverName + '//user/' + id,
+      url: serverName + '//menucomment/' + id,
       method: 'get',
     })
 
@@ -68,7 +61,7 @@ export default {
   // 下载Excel模板
   downloadExcelTemplate(params) {
     return request({
-      url: serverName + '//user/downloadExcelTemplate',
+      url: serverName + '//menucomment/downloadExcelTemplate',
       method: 'post',
       data: params,
       responseType: 'arraybuffer'
@@ -78,16 +71,16 @@ export default {
   // 导入Excel接口URL
   uploadExcelUrl() {
     return request({
-      url: serverName + '//user/uploadExcel',
+      url: serverName + '//menucomment/uploadExcel',
       type: 'form',
       method: 'post',
     })
 
   },
   // 导出Excel
-  excelData4user(params) {
+  excelData4menucomment(params) {
     return request({
-      url: serverName + '//user/excel',
+      url: serverName + '//menucomment/excel',
       method: 'post',
       data: params,
       responseType: 'arraybuffer'

@@ -41,10 +41,10 @@ import java.util.Map;
 public class MenuCollectionServiceImpl extends ServiceImpl<MenuCollectionMapper, MenuCollection> implements IMenuCollectionService {
     @Override
     public void deleteMenuCollectionByParams(MenuCollection obj) {
-        Map<String, String> params = new HashMap<>();
-        params.put("userId", obj.getUserId().toString());
-        params.put("menuId", obj.getMenuId().toString());
-        this.deleteBy(params);
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_id", obj.getUserId().toString());
+        params.put("menu_id", obj.getMenuId().toString());
+        this.removeByMap(params);
     }
     @Override
     public void saveByParam(MenuCollection obj,Map<String, String> params){

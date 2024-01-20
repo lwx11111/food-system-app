@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.domain.Order;
+import org.example.domain.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,20 +12,20 @@ import java.util.Map;
 
 /**
  * <p>
- * 点单表 服务类
+ *  服务类
  * </p>
  *
  * @author lwx20
- * @since 2023-10-27
+ * @since 2024-01-20
  */
-public interface IOrderService extends IService<Order> {
+public interface ICategoryService extends IService<Category> {
     /**
      * 根据参数保存
      * @param obj
      * @param params
      * @return: void
      */
-    void saveByParam(Order obj,Map<String, String> params);
+    void saveByParam(Category obj,Map<String, String> params);
 
     /**
      * 根据参数更新
@@ -33,7 +33,7 @@ public interface IOrderService extends IService<Order> {
      * @param params
      * @return: void
      */
-    void updateByParam(Order obj,Map<String, String> params);
+    void updateByParam(Category obj,Map<String, String> params);
     /**
      * 根据条件删除
      *
@@ -46,33 +46,33 @@ public interface IOrderService extends IService<Order> {
      * 根据条件查询
      *
      * @param params
-     * @return: List<Order>
+     * @return: List<Category>
      */
-     List<Order> selectBy(Map<String, String> params);
+     List<Category> selectBy(Map<String, String> params);
 
     /**
      * 分页查询
      *
      * @param params
-     * @return: IPage<Order>
+     * @return: IPage<Category>
     */
-    IPage<Order> selectPage(Map<String, String> params);
+    IPage<Category> selectPage(Map<String, String> params);
 
     /**
      * 分页查询-自定义sql-Wrapper
      *
      * @param params
-     * @return: IPage<Order>
+     * @return: IPage<Category>
     */
-    IPage<Order> selpageCustomSqlByWrapper(Map<String, String> params);
+    IPage<Category> selpageCustomSqlByWrapper(Map<String, String> params);
 
     /**
      * 分页查询-自定义sql-Map
      *
      * @param params
-     * @return: IPage<Order>
+     * @return: IPage<Category>
     */
-    IPage<Order> selpageCustomSqlByMap(Map<String, String> params);
+    IPage<Category> selpageCustomSqlByMap(Map<String, String> params);
 
     /**
      * 下载excel模板

@@ -1,12 +1,12 @@
 import request from '@/utils/request'
-const serverName = '/shop'
+
 
 
 export default {
 	// 参数删除
 	deleteMenuCollectionByParams(obj) {
 	  return request({
-	    url: '/menucollection',
+	    url: '/menucollection/deleteMenuCollectionByParams',
 	    method: 'post',
 		data: obj
 	  })
@@ -23,7 +23,7 @@ export default {
   // 添加
   add4menucollection(obj) {
     return request({
-      url: serverName + '//menucollection',
+      url: '/menucollection',
       method: 'post',
       data: obj
     })
@@ -50,7 +50,7 @@ export default {
   // 删除多条
   dels4menucollection(ids) {
     return request({
-      url: serverName + '//menucollection/dels',
+      url: serverName + '/menucollection/dels',
       method: 'post',
       data: ids
     })

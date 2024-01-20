@@ -17,18 +17,18 @@ import lombok.experimental.Accessors;
 import java.util.Map;
 /**
  * <p>
- *
+ * 
  * </p>
  *
  * @author lwx20
- * @since 2024-01-09
+ * @since 2024-01-20
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("shop_order")
-@Schema(name="_ShopOrder对象", description="")
-public class ShopOrder extends Model<ShopOrder> {
+@TableName("category")
+@Schema(name="_Category对象", description="")
+public class Category extends Model<Category> {
 
     private static final long serialVersionUID=1L;
 
@@ -36,23 +36,9 @@ public class ShopOrder extends Model<ShopOrder> {
         @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
-    @Excel(name = "userId")
-    @TableField("user_id")
-    private String userId;
-
-    @Excel(name = "shopItemId")
-    @TableField("shop_item_id")
-    private String shopItemId;
-
-    /**
-    * 数量
-    */
-    @Schema(description = "数量")
-    @Excel(name = "数量")
-    @TableField("amount")
-    private Integer amount;
-
-    private double price;
+    @Excel(name = "name")
+    @TableField("name")
+    private String name;
 
     @TableField(exist = false)
     private Map<String,String> params;

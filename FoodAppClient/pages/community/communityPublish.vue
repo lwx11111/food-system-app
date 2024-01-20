@@ -23,7 +23,7 @@
 			form: {
 				title: '',
 				content: '',
-				userId:''
+				userId:localStorage.getItem('userId')
 			},
 			// 表单校验规则
 			rules: {

@@ -21,8 +21,8 @@
 </template>
 
 <script>
-  import { getUserProfile } from "@/api/system/user"
-  import { updateUserProfile } from "@/api/system/user"
+  // import { getUserProfile } from "@/api/system/user"
+  // import { updateUserProfile } from "@/api/system/user"
 
   export default {
     data() {

@@ -1,66 +1,57 @@
 import request from '@/utils/request'
 
 
-
 export default {
-	// 参数删除
-	deleteMenuLikeByParams(obj) {
-	  return request({
-	    url: '/menulike/deleteMenuLikeByParams',
-	    method: 'post',
-		data: obj
-	  })
-	},
-	
+
   // 分页查询
-  selpage4menulike(data) {
+  selpage4category(data) {
     return request({
-      url: '/menulike/selpage',
+      url: '/category/selpage',
       method: 'post',
       data: data
     })
   },
 
   // 添加
-  add4menulike(obj) {
+  add4category(obj) {
     return request({
-      url: '/menulike',
+      url: serverName + '//category',
       method: 'post',
       data: obj
     })
   },
 
   // 修改
-  update4menulike(id, obj) {
+  update4category(id, obj) {
     return request({
-      url: serverName + '//menulike/' + id,
+      url: serverName + '//category/' + id,
       method: 'put',
       data: obj
     })
   },
 
   // 删除单条
-  del4menulike(id) {
+  del4category(id) {
     return request({
-      url: '/menulike/' + id,
+      url: serverName + '//category/' + id,
       method: 'delete',
     })
   },
 
 
   // 删除多条
-  dels4menulike(ids) {
+  dels4category(ids) {
     return request({
-      url: serverName + '//menulike/dels',
+      url: serverName + '//category/dels',
       method: 'post',
       data: ids
     })
   },
 
   // 查询单条
-  sel4menulike(id) {
+  sel4category(id) {
     return request({
-      url: serverName + '//menulike/' + id,
+      url: serverName + '//category/' + id,
       method: 'get',
     })
 
@@ -69,7 +60,7 @@ export default {
   // 下载Excel模板
   downloadExcelTemplate(params) {
     return request({
-      url: serverName + '//menulike/downloadExcelTemplate',
+      url: serverName + '//category/downloadExcelTemplate',
       method: 'post',
       data: params,
       responseType: 'arraybuffer'
@@ -79,16 +70,16 @@ export default {
   // 导入Excel接口URL
   uploadExcelUrl() {
     return request({
-      url: serverName + '//menulike/uploadExcel',
+      url: serverName + '//category/uploadExcel',
       type: 'form',
       method: 'post',
     })
 
   },
   // 导出Excel
-  excelData4menulike(params) {
+  excelData4category(params) {
     return request({
-      url: serverName + '//menulike/excel',
+      url: serverName + '//category/excel',
       method: 'post',
       data: params,
       responseType: 'arraybuffer'

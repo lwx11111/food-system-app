@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.example.utils.PageUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -38,11 +39,10 @@ import java.util.Map;
 @Service
 public class MenuCommentServiceImpl extends ServiceImpl<MenuCommentMapper, MenuComment> implements IMenuCommentService {
 
-    //@Autowired
-    //private JdbcTemplate jdbcTemplate;
 
     @Override
     public void saveByParam(MenuComment obj,Map<String, String> params){
+        obj.setReleaseTime(LocalDateTime.now());
         this.save(obj);
     }
 

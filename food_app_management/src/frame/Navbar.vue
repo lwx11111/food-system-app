@@ -1,39 +1,58 @@
 <template>
     <div class="navbar">
-        <div>
-            <div class="right-menu">
-                <el-dropdown class="avatar-container right-menu-item hover-effect"
-                             trigger="click">
-                    <div class="avatar-wrapper">
-                        <img src="@/assets/profile.png" class="user-avatar">
-                        <span class="user-name">{{ data.name }}</span>
-                        <i class="el-icon-caret-bottom"/>
-                    </div>
-                    <template #dropdown>
-                        <el-dropdown-menu>
-<!--                            <el-dropdown-item>-->
-<!--                                <span style="display:block;"-->
-<!--                                      @click="handlePersonal()">-->
-<!--                                    修改个人信息-->
-<!--                                </span>-->
-<!--                            </el-dropdown-item>-->
-                            <el-dropdown-item>
+        <el-row>
+            <el-col :span="14">
+                <div class="l-content">
+                    <el-breadcrumb separator="/">
+                        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                        <el-breadcrumb-item><a href="/">用户管理</a></el-breadcrumb-item>
+                        <el-breadcrumb-item>菜谱管理</el-breadcrumb-item>
+                        <el-breadcrumb-item>菜品管理</el-breadcrumb-item>
+                        <el-breadcrumb-item>商城管理</el-breadcrumb-item>
+                        <el-breadcrumb-item>社区管理</el-breadcrumb-item>
+                        <el-breadcrumb-item>健康管理</el-breadcrumb-item>
+                    </el-breadcrumb>
+                </div>
+            </el-col>
+            <el-col :span="10">
+                <div>
+                    <div class="right-menu">
+                        <el-dropdown class="avatar-container right-menu-item hover-effect"
+                                     trigger="click">
+                            <div class="avatar-wrapper">
+                                <img class="user-avatar" src="../assets/images/login.jpg" alt="">
+                                <!--                        <img src="@/assets/profile.png" class="user-avatar">-->
+                                <span class="user-name">{{ data.name }}</span>
+                                <i class="el-icon-caret-bottom"/>
+                            </div>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <!--                            <el-dropdown-item>-->
+                                    <!--                                <span style="display:block;"-->
+                                    <!--                                      @click="handlePersonal()">-->
+                                    <!--                                    修改个人信息-->
+                                    <!--                                </span>-->
+                                    <!--                            </el-dropdown-item>-->
+                                    <el-dropdown-item>
                                 <span style="display:block;"
                                       @click="handleModifyPass()">
                                     修改密码
                                 </span>
-                            </el-dropdown-item>
-                            <el-dropdown-item divided>
+                                    </el-dropdown-item>
+                                    <el-dropdown-item divided>
                                 <span style="display:block;"
                                       @click="logout()">
                                     退出系统
                                 </span>
-                            </el-dropdown-item>
-                        </el-dropdown-menu>
-                    </template>
-                </el-dropdown>
-            </div>
-        </div>
+                                    </el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                    </div>
+                </div>
+            </el-col>
+        </el-row>
+
         <el-dialog title="修改密码"
                    :modal="true"
                    :append-to-body="false"
@@ -179,9 +198,13 @@ const handlePersonal = () =>{
 </script>
 
 <style lang="scss" scoped>
+.l-content{
+    text-align: center;
+    margin-top: 15px;
+}
 .navbar {
   width: 100%;
-  height: 50px;
+  height: 60px;
   overflow: hidden;
   position: relative;
   background: #fafafa;

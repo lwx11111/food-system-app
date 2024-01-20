@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "菜谱评论表服务")
 @RequestMapping("/menucomment")
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class MenuCommentController {
     @Autowired
     private IMenuCommentService service;

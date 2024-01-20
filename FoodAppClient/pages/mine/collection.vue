@@ -30,7 +30,7 @@
 			],
 			// 查询参数
 			params: {
-				userId: '',
+				userId: localStorage.getItem('userId'),
 				name:'',
 				categoryId: '',
 				pageSize: '10'

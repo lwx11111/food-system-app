@@ -43,7 +43,7 @@ public interface IMenuService extends IService<Menu> {
     void deleteBy(Map<String, String> params);
 
 
-    MenuVO getMenuVOById(Integer id);
+    MenuVO getMenuVOById(String id);
 
     /**
      * 根据条件查询

@@ -35,11 +35,11 @@ public class Community extends Model<Community> {
 
     @Excel(name = "id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private Integer id;
+    private String id;
 
     @Excel(name = "userId")
     @TableField("user_id")
-    private Integer userId;
+    private String userId;
 
     /**
      * 标题
@@ -74,6 +74,8 @@ public class Community extends Model<Community> {
     @Excel(name = "点赞数")
     @TableField("likes")
     private String likes;
+
+    private String categoryId;
 
     @TableField(exist = false)
     private Map<String,String> params;

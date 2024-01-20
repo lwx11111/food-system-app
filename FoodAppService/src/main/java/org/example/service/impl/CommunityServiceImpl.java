@@ -169,6 +169,9 @@ public class CommunityServiceImpl extends ServiceImpl<CommunityMapper, Community
             if("title".equals(entry.getKey())){
                 query.like("title",entry.getValue());
             }
+            if("categoryId".equals(entry.getKey())){
+                query.eq("category_id",entry.getValue());
+            }
         }
         return  query;
     }

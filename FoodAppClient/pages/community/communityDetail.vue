@@ -6,8 +6,9 @@
 	  	</view>
 		<u-line />
 		<view style="margin-bottom: 10px;"><h2>{{community.title}}</h2></view>
-		<u-line />
-		<view style="margin-bottom: 10px;">{{community.content}}</view>
+	  </uni-card>
+	  <uni-card>
+		  <view style="margin-bottom: 10px;">{{community.content}}</view>
 	  </uni-card>
   </view>
 </template>
@@ -23,7 +24,7 @@
 				likes: '',
 				params: '',
 				releaseTime:'', 
-				userId: ''
+				userId: localStorage.getItem('userId')
 			},
 			// 查询参数
 			params: {
