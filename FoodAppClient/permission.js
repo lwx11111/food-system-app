@@ -20,9 +20,9 @@ let list = ["navigateTo", "redirectTo", "reLaunch", "switchTab"]
 list.forEach(item => {
   uni.addInterceptor(item, {
     invoke(to) {
-		console.log(localStorage.getItem('userId'));
 		
-      if (localStorage.getItem('userId')) {
+		
+      if (localStorage.getItem('userId') || localStorage.getItem("isTourist")) {
         if (to.url === loginPage) {
           uni.reLaunch({ url: "/" })
         }

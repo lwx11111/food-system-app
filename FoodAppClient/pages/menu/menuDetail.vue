@@ -8,7 +8,7 @@
 			</view>
 		</uni-card>
 		<!-- 收藏点赞评论 -->
-		<uni-card>
+		<uni-card v-if="!this.isTourist">
 			<u-row gutter="16">
 				<u-col span="4">
 					<u-icon v-if="!this.isMenuLike" 
@@ -68,7 +68,7 @@
 		</uni-card>
 		
 		<!-- 评论 -->
-		<uni-card>
+		<uni-card v-if="!this.isTourist">
 			<h2>评论信息</h2>
 			<view v-for="(item,key) in comments">
 				<!-- <view>{{item.user.username}}</view> -->
@@ -88,6 +88,8 @@
 	export default {
 		data() {
 			return {
+				// 游客模式不展示
+				isTourist: localStorage.getItem("isTourist"),
 				show: false,
 				content: '',
 				// 菜谱信息
@@ -127,6 +129,12 @@
 		onLoad(option) {
 			this.getMenu(option.id)
 			this.listComments(option.id)
+			if(this.isTourist){
+				uni.showToast({
+					title: `您是游客，部分功能不展示`,
+					icon: 'none'
+				})
+			}
 		},
 		methods: {
 			close(){

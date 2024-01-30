@@ -1,7 +1,11 @@
 package org.example.controller;
 
+import org.example.dao.DicMapper;
+import org.example.domain.Dic;
 import org.example.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -14,23 +18,31 @@ public class TestController {
     @Autowired
     private IMenuService menuService;
 
+    @Autowired
+    private DicMapper dicMapper;
+
     @PostMapping("/test")
-    public void test(@RequestBody String jsonString){
-        TestController testController = new TestController();
+    @Transactional
+    public void test(){
         try {
-            testController.fun();
-            System.out.println("234");
+            Dic dic = new Dic();
+            dic.setKeyy("123");
+            dicMapper.insert(dic);
+            this.fun();
+            int i = 1/0;
         } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             e.printStackTrace();
-            System.out.println("456");
         }
     }
 
 
-    public void fun() throws Exception {
+    public void fun() {
 
-        System.out.println(123);
-        throw new Exception("111");
+        Dic dic = new Dic();
+        dic.setKeyy("456");
+        dicMapper.insert(dic);
+        int i = 1/0;
 
     }
 }

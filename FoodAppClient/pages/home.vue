@@ -10,7 +10,7 @@
 							 src="http://127.0.0.1:9000/appsys/community.png"></image>
 						<view>社区</view>
 					</u-col>
-					<u-col span="4">
+					<u-col @click="toHealth()" span="4">
 						<image style="width: 50px; height: 50px;" 
 								src="http://127.0.0.1:9000/appsys/health.png"></image>
 						<view>卡路里计算</view>
@@ -48,6 +48,8 @@
 	export default {
 		data() {
 		  return {
+			  // 游客模式不展示
+			  isTourist: localStorage.getItem("isTourist"),
 				// 每日推荐
 				dailyMenu : [],
 				// 菜谱列表
@@ -77,6 +79,11 @@
 			this.getDailyRecommendation();
 		},
 		methods: {
+			toHealth(){
+				uni.navigateTo({
+				  url: '/pages/health/index',
+				})
+			},
 			search() {
 				this.getMenuList();
 				// uni.switchTab({
@@ -118,6 +125,13 @@
 				})
 			},
 			toCommunity(){
+				if(this.isTourist){
+					uni.showToast({
+						title: `您是游客，该功能不开放`,
+						icon: 'none'
+					})
+					return;
+				}
 				uni.navigateTo({
 				  url: '/pages/community/index',
 				})

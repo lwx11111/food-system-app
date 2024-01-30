@@ -14,8 +14,9 @@
 			<h2>描述</h2>
 			<view>{{shopItem.description}}</view>
 		</uni-card>
+		
 		<!-- 购物导航 -->
-		<view class="goods-carts">
+		<view class="goods-carts" v-if="!this.isTourist">
 			<uni-goods-nav :fill="true" :options="options" 
 							:button-group="customButtonGroup" 
 							@click="onClick"
@@ -23,7 +24,7 @@
 			</uni-goods-nav>
 		</view>
 		<!-- 购物车 -->
-		<uni-popup ref="popup" type="dialog">
+		<uni-popup ref="popup" type="dialog" v-if="!this.isTourist">
 			<uni-popup-dialog mode="input":before-close="true" 
 							  @close="close" 
 							  @confirm="confirm">
@@ -34,7 +35,7 @@
 		</uni-popup>
 		
 		<!-- /购买面板 -->
-		<uni-popup ref="shopOrder" type="dialog">
+		<uni-popup ref="shopOrder" type="dialog" v-if="!this.isTourist">
 			<uni-popup-dialog mode="input":before-close="true" 
 							  @close="closeShopOrder" 
 							  @confirm="confirmShopOrder">
@@ -56,6 +57,8 @@
 	export default {
 		data() {
 			return {
+				// 游客模式不展示
+				isTourist: localStorage.getItem("isTourist"),
 				check: false,
 				// 物品信息
 				shopItem: {
@@ -101,6 +104,12 @@
 		},
 		onLoad(option) {
 			this.getShopItem(option.id)
+			if(this.isTourist){
+				uni.showToast({
+					title: `您是游客，部分功能不展示`,
+					icon: 'none'
+				})
+			}
 		},
 		methods: {
 			close() {

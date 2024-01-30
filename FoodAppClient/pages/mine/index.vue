@@ -73,6 +73,8 @@
   export default {
     data() {
       return {
+		  // 游客模式不展示
+		  isTourist: localStorage.getItem("isTourist"),
         name: this.$store.state.user.name,
         version: getApp().globalData.config.appInfo.version
       }
@@ -86,6 +88,15 @@
       }
     },
     methods: {
+		/**
+		 * 导航栏点击事件
+		 */
+		onTabItemTap() {
+			if(this.isTourist){
+				localStorage.removeItem('isTourist');
+				this.$tab.reLaunch('/pages/login')
+			}
+		},
 		toShoppingCart() {
 			this.$tab.navigateTo('/pages/mine/shoppingCart')
 		},
@@ -93,7 +104,6 @@
 			this.$tab.navigateTo('/pages/mine/collection')
 		},
 		toOrders(){
-			console.log("lwx");
 			this.$tab.navigateTo('/pages/mine/shopOrder')
 		},
       handleToInfo() {

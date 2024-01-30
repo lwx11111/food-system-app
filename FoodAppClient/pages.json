@@ -84,6 +84,12 @@
     }
   }, 
   {
+    "path": "pages/health/index",
+    "style": {
+      "navigationBarTitleText": "卡路里"
+    }
+  },
+  {
     "path": "pages/mine/shopOrder",
     "style": {
       "navigationBarTitleText": "我的订单"

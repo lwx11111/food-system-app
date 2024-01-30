@@ -23,6 +23,8 @@
 	export default {
 		data() {
 		  return {
+			  // 游客模式不展示
+			  isTourist: localStorage.getItem("isTourist"),
 				
 		  }
 		},
@@ -31,6 +33,13 @@
 		},
 		methods: {
 			toMenuPublish() {
+				if(this.isTourist){
+					uni.showToast({
+						title: `您是游客，该功能不开放`,
+						icon: 'none'
+					})
+					return;
+				}
 				uni.navigateTo({
 				  url: '/pages/menu/menuPublish',
 				  events: {
@@ -39,6 +48,13 @@
 				})
 			},
 			toCommunityPublish(){
+				if(this.isTourist){
+					uni.showToast({
+						title: `您是游客，该功能不开放`,
+						icon: 'none'
+					})
+					return;
+				}
 				uni.navigateTo({
 				  url: '/pages/community/communityPublish',
 				})

@@ -30,6 +30,10 @@
 				<text class="text-grey1">没有账号？</text>
 				<text @click="handleUserRegister()" class="text-blue">立即注册</text>
 			</view>
+			<view class="reg text-center">
+				<text class="text-grey1">不想登录？</text>
+				<text @click="touristMode()" class="text-blue">游客浏览</text>
+			</view>
 		</view>
 	</view>
 </template>
@@ -75,6 +79,13 @@
 			this.form.verifyCode = ''
 		},
 		
+		/**
+		 * 游客模式
+		 */
+		touristMode() {
+			 localStorage.setItem('isTourist', true);
+			 this.$tab.reLaunch('/pages/home')
+		},
 		/**
 		 * 登录
 		 */

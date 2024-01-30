@@ -25,7 +25,6 @@ public class RouteConfig {
 
     @Bean
     WebFilter corsFilter() {
-        System.out.println("lwxxxxxxxxxxxx");
         return (serverWebExchange, webFilterChain) -> {
             ServerHttpRequest request = serverWebExchange.getRequest();
             if (CorsUtils.isCorsRequest(request)) {
