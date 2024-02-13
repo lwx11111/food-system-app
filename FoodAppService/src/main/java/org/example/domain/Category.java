@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 import java.util.Map;
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author lwx20
@@ -33,7 +33,7 @@ public class Category extends Model<Category> {
     private static final long serialVersionUID=1L;
 
     @Excel(name = "id")
-        @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     @Excel(name = "name")

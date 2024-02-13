@@ -9,9 +9,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.example.domain.Cart;
-import org.example.vo.CartVO;
 
-import java.util.List;
 import java.util.Map;
 
 /**

@@ -20,6 +20,33 @@
   </properties>
 
   <dependencies>
+    <!--MinIO-->
+    <dependency>
+      <groupId>io.minio</groupId>
+      <artifactId>minio</artifactId>
+      <version>8.5.6</version>
+    </dependency>
+    <!--swagger springdoc-->
+    <!--        springboot3用不了-->
+    <!--        <dependency>-->
+    <!--            <groupId>io.springfox</groupId>-->
+    <!--            <artifactId>springfox-boot-starter</artifactId>-->
+    <!--            <version>3.0.0</version>-->
+    <!--        </dependency>-->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.0.2</version>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.baomidou</groupId>-->
+<!--      <artifactId>dynamic-datasource-spring-boot-starter</artifactId>-->
+<!--    </dependency>-->
+    <!--    aop-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
     <!--引入spring-boot-starter-web,支持web开发-->
     <dependency>
       <groupId>org.springframework.boot</groupId>

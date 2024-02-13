@@ -37,7 +37,7 @@ import { reactive, ref, onMounted, toRefs } from 'vue'
 import { useStore } from "vuex";
 import { useRouter } from 'vue-router'
 import {ElMessage, ElMessageBox} from "element-plus";
-import ApiOss from "@/api/api_sysoss";
+import ApiOss from "@/api/sys/api_sysoss";
 
 const emits = defineEmits(["uploadCallback"]);
 const store = useStore();
@@ -50,7 +50,7 @@ const data = reactive({
         groupId: '',
         groupName:''
     },
-    minioUrl: "http://localhost:6001/sysoss/uploadOSS",
+    minioUrl: "http://localhost:8081/sysoss/uploadOSS",
     minioServerUrl: "http://127.0.0.1:9000/",
     fileList: [],
 })

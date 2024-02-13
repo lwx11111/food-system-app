@@ -8,21 +8,11 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import {onMounted} from "vue";
 import { useStore } from "vuex";
 import { useRouter } from 'vue-router'
 
 const store = useStore();
 const router = useRouter();
-
-// Mounted
-onMounted(() => {
-
-})
-
-const cachedViews = computed(() => {
-    // return store.state.tagsView.cachedViews
-})
 
 const key = computed(() => {
     return router
@@ -31,7 +21,6 @@ const key = computed(() => {
 
 <style lang="scss" scoped>
 .app-main {
-  /* 50= navbar  50  */
   min-height: calc(100vh - 50px);
   width: 100%;
   position: relative;
@@ -44,7 +33,6 @@ const key = computed(() => {
 
 .hasTagsView {
   .app-main {
-    /* 84 = navbar + tags-view = 50 + 34 */
     min-height: calc(100vh - 84px);
   }
 

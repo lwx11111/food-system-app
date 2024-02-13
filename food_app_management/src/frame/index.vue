@@ -24,7 +24,7 @@
 .sidebar-container {
     transition: width 0.28s;
     width: 210px;
-    background-color: #BCD2EE;
+    background-color: #545c64;
     height: 100%;
     position: fixed;
     font-size: 0px;

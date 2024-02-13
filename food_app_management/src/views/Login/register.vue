@@ -60,7 +60,7 @@
 <script lang="ts" setup>
 import commonUtil from '@/utils/common-util.js';
 import {reactive, onMounted, ref, getCurrentInstance} from 'vue';
-import ApiUser from '@/api/User/auth.js';
+import ApiUser from '@/api/auth.js';
 import {getEncryptPassword} from '@/utils/passwordEncrypt.js';
 import { useStore } from "vuex";
 import {useRouter} from "vue-router";

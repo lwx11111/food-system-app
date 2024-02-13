@@ -34,9 +34,9 @@
                                @click="onSubmit()">
                         登录
                     </el-button>
-                    <el-button  @click="toRegister()">
-                        注册
-                    </el-button>
+<!--                    <el-button  @click="toRegister()">-->
+<!--                        注册-->
+<!--                    </el-button>-->
                 </el-form-item>
             </el-form>
         </el-card>
@@ -49,7 +49,7 @@ import commonUtil from '../../utils/common-util.js';
 import {getEncryptPassword} from '../../utils/passwordEncrypt.js';
 import Api from '@/api/auth.js';
 
-import ApiUser from '@/api/User/auth.js';
+import ApiUser from '@/api/auth.js';
 import { setToken } from '@/utils/auth/auth.js'
 import { useStore } from "vuex";
 import { useRouter} from "vue-router";
@@ -130,86 +130,29 @@ const loginWithCode = () => {
         appName: 'dw'
     };
 
-    if (form.username === 'admin' && form.password === 'admin'){
-        console.log("lwx")
-        router.push({
-            path: '/homepage',
-        })
-    } else {
-        Api.loginWithCode(params).then(res => {
-            console.log(res);
-            if (res.code === "20000"){
-                let account = res.data.info.account
-                // store存储
-                store.commit('setAccount',res.data.info.account);
-                store.commit('setUser',res.data.info.user);
-                store.commit('setSuperAdmin',res.data.info.superAdmin);
-                store.commit('setToken',res.data.token);
-                // 本地存储
-                localStorage.setItem('userId', account.accountId)
-                localStorage.setItem('userName', account.loginName)
-                setToken(res.data.token.accessToken);
-                // 跳转
-                routerPushByType(account.customAccountId, account.accountId);
+    Api.loginWithCode(params).then(res => {
+        console.log(res);
+        if (res.code === "20000"){
+            let account = res.data.info.account
+            // store存储
+            store.commit('setAccount',res.data.info.account);
+            store.commit('setUser',res.data.info.user);
+            store.commit('setSuperAdmin',res.data.info.superAdmin);
+            store.commit('setToken',res.data.token);
+            // 本地存储
+            localStorage.setItem('userId', account.accountId)
+            localStorage.setItem('userName', account.loginName)
+            setToken(res.data.token.accessToken);
+            // 跳转
+            router.push({
+                path: '/homepage',
+            })
 
-            } else {
-                ElMessage.error(res.message)
-            }
-        });
-    }
-
-}
-
-/**
- * 根据用户类型跳转
- * @param customAccountId
- * @param accountId
- */
-const routerPushByType = (customAccountId, accountId) => {
-    // 根据类型跳转
-    if (customAccountId === 'consumer'){
-        // 消费者
-        router.push({
-            path: '/Consumer/index',
-        })
-    } else if(customAccountId === 'merchant') {
-        // 是否商铺已注册
-        let param = {
-            userId: accountId,
+        } else {
+            ElMessage.error(res.message)
         }
-        ApiShop.selpage4shop(param).then(res => {
-            console.log(res.data.records);
-            if (res.code === 200){
-                if (res.data.records.length === 0){
-                    router.push({
-                        path: '/Merchant/register',
-                    })
-                } else {
-                    router.push({
-                        path: '/homepage',
-                    })
-                }
-            }
-        })
-    } else if (customAccountId === 'rider') {
-        // 骑手
-        ApiUser.riderRegister(accountId).then(res => {
-            console.log(res);
-            if (res.code === 200){
-                // 页面跳转
-                router.push({
-                    path: '/Rider/Order/index',
-                })
-            } else {
-                ElMessage.error('登录失败');
-            }
-        })
-    } else {
-        // 页面跳转
-        router.push({
-            path: '/homepage',
-        })
-    }
+    });
+
 }
 
 /**
@@ -223,13 +166,27 @@ const toRegister = () => {
 </script>
 
 <style scoped>
+@media screen and (max-width: 1500px){
+    /* 当屏幕小于1500px的时候 id为bg的元素 进行改变 */
+    .back{
+        background-size: contain;
+        margin: 0;
+        padding: 0;
+    }
+}
+
 .back {
     background-image: url('/src/assets/backgroud.jpg');
     background-size: cover;
+    /* 背景图片不重复 */
     background-repeat: no-repeat;
-    background-position: center center; /* 将背景图像置于容器中央 */
-    width: 100%;
-    height: 700px;
+    /* 最小宽度为100% */
+    min-width: 100%;
+    /* 最小高度为100vh    vh: 就等于 视窗的高度  1vh = 视窗的高度的1%*/
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    border: 1px red solid;
 }
 
 .login-form-content {

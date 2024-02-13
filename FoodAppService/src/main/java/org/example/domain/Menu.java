@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,9 +33,9 @@ import java.util.Map;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("menu")
+@TableName(value = "menu", autoResultMap = true)
 @Schema(name="菜谱信息表_Menu对象", description="菜谱信息表")
-public class Menu extends Model<Menu> {
+public class Menu extends Model<Menu> implements Serializable {
 
     private static final long serialVersionUID=1L;
 
@@ -111,11 +113,8 @@ public class Menu extends Model<Menu> {
     @TableField(exist = false)
     private Map<String,String> params;
 
-
-
-//    @Override
-//    protected Serializable pkVal(){
-//            return this.id;
-//        }
+    @Schema(description = "部件ID")
+    @TableField(typeHandler = FastjsonTypeHandler.class)
+    private JSONArray test;
 
 }

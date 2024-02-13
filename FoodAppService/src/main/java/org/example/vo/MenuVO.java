@@ -32,6 +32,7 @@ public class MenuVO {
         this.id = menu.getId();
         this.name = menu.getName();
         this.description = menu.getDescription();
+        this.likes = menu.getLikes();
         if (menu.getIngredients() != null) {
             String jsonArray = menu.getIngredients();
             try {
@@ -92,5 +93,7 @@ public class MenuVO {
     private String image;
 
     private String type;
+
+    private String likes;
 
 }

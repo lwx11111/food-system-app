@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.example.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 import org.example.web.SimpleResponse;
@@ -31,6 +32,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private IUserService service;
+
+    @Autowired
+    UserMapper userMapper;
+
+    @GetMapping("/test")
+    public void test(){
+        userMapper.list1();
+    }
 
 //    @PostMapping("/login")
 //    @ResponseBody

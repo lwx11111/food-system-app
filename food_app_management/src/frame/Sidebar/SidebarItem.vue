@@ -8,19 +8,21 @@
             :index="item.funId.toString()"
             teleported>
             <template #title>
-                <el-icon><HelpFilled /></el-icon>
+                <component :is="item.icon" style="width: 16px;height: 16px;"></component>
                 <span>{{item.funName}}</span>
             </template>
             <!--二级分类-->
             <router-link v-for="(citem,cindex) in item.children"
                          :key="cindex" :to="resolvePath(citem.url)">
                 <el-menu-item :index="citem.url">
-                    <el-icon><Flag /></el-icon>
-                    {{ citem.funName }}
+                    <template #title>
+                        <component :is="citem.icon" style="width: 16px;height: 16px;"></component>
+                        <span>{{citem.funName}}</span>
+                    </template>
                 </el-menu-item>
             </router-link>
         </el-sub-menu>
-<!--        只有一级分类-->
+        <!--只有一级分类-->
         <router-link class="myMenu"
                      v-else-if="item.children == null || item.children.length == 0"
                     :key="item.funId.toString()"
@@ -29,7 +31,6 @@
             <el-menu-item :index="item.funId.toString()">
                 <template #title>
                     <component :is="item.icon" style="width: 16px;height: 16px;"></component>
-<!--                    <el-icon><HelpFilled /></el-icon>-->
                     <span>{{item.funName}}</span>
                 </template>
             </el-menu-item>

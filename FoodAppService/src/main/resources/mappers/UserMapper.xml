@@ -12,4 +12,9 @@
     <select id="selpageCustomSqlByMap" resultType="org.example.domain.User">
         select * from user t where id=#{params.id} and name=#{params.name}
     </select>
+
+    <select id="list1">
+<!--        select * from sys_account-->
+        select * from user
+    </select>
 </mapper>

@@ -75,6 +75,9 @@ public class Community extends Model<Community> {
     @TableField("likes")
     private String likes;
 
+    @Schema(description = "分类id")
+    @Excel(name = "分类id")
+    @TableField("category_id")
     private String categoryId;
 
     @TableField(exist = false)

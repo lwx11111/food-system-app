@@ -10,7 +10,7 @@ import {getToken, removeToken} from '@/utils/auth/auth'
 axios.defaults.timeout = 10000 // 超时时间
 
 // 网关地址
-axios.defaults.baseURL = 'http://localhost:8921'
+axios.defaults.baseURL = 'http://localhost:8081';
 
 // 整理数据
 axios.defaults.transformRequest = function(data) {
@@ -20,6 +20,11 @@ axios.defaults.transformRequest = function(data) {
 // 路由请求拦截
 axios.interceptors.request.use(
     config => {
+        // 权限系统适配网关
+        if (config.url.indexOf('/manager') !== -1) {
+            config.baseURL = 'http://43.138.149.121:8921';
+        }
+
         if (getToken()) {
             config.headers['Authorization'] = getToken()
         }

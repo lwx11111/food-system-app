@@ -11,14 +11,25 @@ import Frame from "@/frame/index.vue";
 import HomePage from "@/views/homePage.vue";
 import Cart from "@/views/cart/index.vue";
 
-const MenuIndex = () => import('../views/menu/Index.vue')
-const MenuCollectionIndex = () => import('../views/menucollection/Index.vue')
-const MenuCommentIndex = () => import('../views/menucomment/Index.vue')
-const MenuLikeIndex = () => import('../views/menulike/Index.vue')
-const ShopItemIndex = () => import('../views/shopitem/Index.vue')
-const ShopItemCategoryIndex = () => import('../views/shopitemcategory/Index.vue')
+// 菜谱
+const MenuIndex = () => import('../views/Menu/Index.vue')
+// 菜谱-收藏
+const MenuCollectionIndex = () => import('@/views/Menu/Menucollection/Index.vue')
+// 菜谱-评论
+const MenuCommentIndex = () => import('@/views/Menu/MenuComment/Index.vue')
+// 菜谱-点赞
+const MenuLikeIndex = () => import('@/views/Menu/MenuLike/Index.vue')
+
+// 菜品
+const ShopItemIndex = () => import('../views/ShopItem/Index.vue')
+// 菜品-物品分类
+const ShopItemCategoryIndex = () => import('@/views/ShopItem/ShopItemCategory/Index.vue')
 const ShopOrderIndex = () => import('../views/shoporder/Index.vue')
-const CommunityIndex = () => import('../views/community/Index.vue')
+
+// 社区
+const CommunityIndex = () => import('../views/Community/Index.vue')
+// 社区-分类管理
+const CategoryIndex = () => import('@/views/Community/Category/Index.vue')
 const CommunityCommentIndex = () => import('../views/communitycomment/Index.vue')
 const CommunityLikeIndex = () => import('../views/communitylike/Index.vue')
 const OrderIndex = () => import('../views/order/Index.vue')
@@ -35,11 +46,11 @@ const routes = [
         component: Login,
         name: 'Login'
     },
-    {
-        path: '/register',
-        component: Register,
-        name: 'Register'
-    },
+    // {
+    //     path: '/register',
+    //     component: Register,
+    //     name: 'Register'
+    // },
     {
         path: '/',
         component: Frame,
@@ -52,54 +63,59 @@ const routes = [
             },
             // 菜谱
             {
-                path: '/name/menu/index',
+                path: '/menu/index',
                 component: MenuIndex,
                 name: 'MenuIndex'
             },
             {
-                path: '/name/menucollection/index',
+                path: '/menucollection/index',
                 component: MenuCollectionIndex,
                 name: 'MenuCollectionIndex'
             },
             {
-                path: '/name/menucomment/index',
+                path: '/menucomment/index',
                 component: MenuCommentIndex,
                 name: 'MenuCommentIndex'
             },
             {
-                path: '/name/menulike/index',
+                path: '/menulike/index',
                 component: MenuLikeIndex,
                 name: 'MenuLikeIndex'
             },
             // 商品
             {
-                path: '/name/shopitem/index',
+                path: '/shopitem/index',
                 component: ShopItemIndex,
                 name: 'ShopItemIndex'
             },
             {
-                path: '/name/shoporder/index',
+                path: '/shoporder/index',
                 component: ShopOrderIndex,
                 name: 'ShopOrderIndex'
             },
             {
-                path: '/name/shopitemcategory/index',
+                path: '/shopitemcategory/index',
                 component: ShopItemCategoryIndex,
                 name: 'ShopItemCategoryIndex'
             },
             // 社区
             {
-                path: '/name/community/index',
+                path: '/category/index',
+                component: CategoryIndex,
+                name: 'CategoryIndex'
+            },
+            {
+                path: '/community/index',
                 component: CommunityIndex,
                 name: 'CommunityIndex'
             },
             {
-                path: '/name/communitycomment/index',
+                path: '/communitycomment/index',
                 component: CommunityCommentIndex,
                 name: 'CommunityCommentIndex'
             },
             {
-                path: '/name/communitylike/index',
+                path: '/communitylike/index',
                 component: CommunityLikeIndex,
                 name: 'CommunityLikeIndex'
             },
@@ -111,7 +127,7 @@ const routes = [
             },
             // 订单
             {
-                path: '/name/order/index',
+                path: '/order/index',
                 component: OrderIndex,
                 name: 'OrderIndex'
             },

@@ -1,6 +1,5 @@
 <template>
     <div>
-<!--        <logo></logo>-->
         <el-scrollbar wrap-class="scrollbar-wrapper">
             <el-menu
                 default-active="1"
@@ -13,49 +12,21 @@
                 background-color="#545c64"
                 text-color="#fff"
             >
-                <el-menu-item index="/cart">
-                    <el-icon><User /></el-icon>
-                    <span>用户管理</span>
-                </el-menu-item>
-<!--                <el-menu-item index="2">-->
-<!--                    <el-icon><KnifeFork /></el-icon>-->
-<!--                    <span>菜谱管理</span>-->
-<!--                </el-menu-item>-->
-<!--                <el-menu-item index="3">-->
-<!--                    <el-icon><Dish /></el-icon>-->
-<!--                    <span>菜品管理</span>-->
-<!--                </el-menu-item>-->
-<!--                <el-menu-item index="4">-->
-<!--                    <el-icon><SoldOut /></el-icon>-->
-<!--                    <span>商城管理</span>-->
-<!--                </el-menu-item>-->
-<!--                <el-menu-item index="5">-->
-<!--                    <el-icon><ChatLineRound /></el-icon>-->
-<!--                    <span>社区管理</span>-->
-<!--                </el-menu-item>-->
-<!--                <el-menu-item index="6">-->
-<!--                    <el-icon><Help /></el-icon>-->
-<!--                    <span>健康管理</span>-->
-<!--                </el-menu-item>-->
             <sidebar-item v-for="route in data.indexDate" :key="route.funId.toString()" :item="route" :base-path="route.url"/>
             <sidebar-item v-for="route in data.menuData"
                           :key="route.funId.toString()"
                           :item="route"
                           :base-path="route.url"/>
             </el-menu>
-            <img alt="name" src="../../assets/tree.png" class="sidebar-foot">
         </el-scrollbar>
-
     </div>
 </template>
 
 <script lang="js" setup>
     import { useStore } from "vuex";
     import { useRouter } from 'vue-router'
-    import Logo from './Logo.vue'
     import SidebarItem from './SidebarItem.vue'
-    import {leftMenuApi} from '@/api/function'
-    import {onMounted, reactive} from "vue";
+    import { reactive } from "vue";
 
     const store = useStore();
     const router = useRouter()
@@ -74,51 +45,78 @@
             {
                 'funId': '2',
                 'funName': '菜谱管理',
-                'url': '/cart',
-                'icon':'KnifeFork'
+                'url': '/menu/index',
+                'icon':'KnifeFork',
+                'children':[{
+                    'funId': '21',
+                    'funName': '菜谱评论管理',
+                    'url': '/menucomment/index',
+                    'icon': 'KnifeFork'
+                },{
+                    'funId': '22',
+                    'funName': '菜谱列表',
+                    'url': '/menu/index',
+                    'icon': 'KnifeFork'
+                },{
+                    'funId': '22',
+                    'funName': '菜谱收藏管理',
+                    'url': '/menucollection/index',
+                    'icon': 'KnifeFork'
+                },{
+                    'funId': '22',
+                    'funName': '菜谱点赞管理',
+                    'url': '/menulike/index',
+                    'icon': 'KnifeFork'
+                }]
             },
             {
                 'funId': '3',
                 'funName': '菜品管理',
-                'url': '/cart',
+                'icon': 'Dish',
+                'children':[{
+                    'funId': '31',
+                    'funName': '菜品分类管理',
+                    'url': '/shopitemcategory/index',
+                    'icon': 'Dish'
+                },{
+                    'funId': '32',
+                    'funName': '菜品列表',
+                    'url': '/shopitem/index',
+                    'icon': 'Dish'
+                }]
             },
             {
                 'funId': '4',
                 'funName': '商城管理',
-                'url': '/cart',
+                'url': '/community/index',
+                'icon': 'SoldOut',
             },
             {
                 'funId': '5',
                 'funName': '社区管理',
-                'url': '/cart',
+                'url': '/community/index',
+                'icon': 'ChatLineRound',
+                'children':[{
+                    'funId': '51',
+                    'funName': '社区分类管理',
+                    'url': '/category/index',
+                    'icon': 'ChatLineRound'
+                },{
+                    'funId': '52',
+                    'funName': '社区列表',
+                    'url': '/community/index',
+                    'icon': 'ChatLineRound'
+                }]
             },
             {
                 'funId': '6',
                 'funName': '健康管理',
                 'url': '/cart',
+                'icon': 'Help',
             },
 
 
         ]
-    })
-
-    // Mounted
-    onMounted(() => {
-        leftMenuApi().then(response => {
-            // console.log(response)
-            // 不加载权限系统的
-            for (let i = 0;i < response.data.length; i++){
-                if (response.data[i].label !== '权限系统监控' && response.data[i].label !== '系统管理' && response.data[i].label !== '权限管理'){
-                    data.menuData.push(response.data[i])
-                }
-            }
-            // this.menuData = response.data;
-            //
-            // const findFun = this.menuData.find(fun => fun.funName === '');
-            // if (findFun !== undefined) {
-            //   this.openeds.push(findFun.funId);
-            // }
-        });
     })
 </script>
 
@@ -129,10 +127,7 @@
     height: 50%;
 }
 .el-menu{
-    height: 100vh;
+    height: 100%;
     background-color: #545c64;
-}
-.el-col-12 {
-    max-width: 100%;
 }
 </style>
