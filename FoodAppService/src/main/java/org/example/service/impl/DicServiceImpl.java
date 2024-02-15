@@ -40,6 +40,13 @@ import java.util.Map;
 public class DicServiceImpl extends ServiceImpl<DicMapper, Dic> implements IDicService {
 
     @Override
+    public List<Dic> listParentDic() {
+        LambdaQueryWrapper<Dic> query = new LambdaQueryWrapper<>();
+        query.isNull(Dic::getParentId);
+        return this.list(query);
+    }
+
+    @Override
     public FoodsVO listFoods() {
         LambdaQueryWrapper<Dic> query = new LambdaQueryWrapper<>();
         query.isNull(Dic::getParentId);
@@ -83,6 +90,7 @@ public class DicServiceImpl extends ServiceImpl<DicMapper, Dic> implements IDicS
 
     @Override
     public IPage<Dic> selectPage(Map<String, String> params) {
+        System.out.println(params);
         Page<Dic> page = PageUtils.pageHandler(params);
         QueryWrapper<Dic> query = getQuery(params);
         IPage<Dic> result = this.page(page, query);
@@ -169,8 +177,8 @@ public class DicServiceImpl extends ServiceImpl<DicMapper, Dic> implements IDicS
             if("id".equals(entry.getKey())){
                 query.eq("id",entry.getValue());
             }
-            if("key".equals(entry.getKey())){
-                query.eq("key",entry.getValue());
+            if("keyy".equals(entry.getKey())){
+                query.like("keyy",entry.getValue());
             }
             if("value".equals(entry.getKey())){
                 query.eq("value",entry.getValue());

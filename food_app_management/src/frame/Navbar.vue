@@ -1,7 +1,7 @@
 <template>
-    <div class="navbar">
+    <div class="navbar" style="border: 1px red solid">
         <el-row>
-            <el-col :span="14">
+            <el-col :span="14" style="border: 1px red solid">
                 <div class="l-content">
                     <el-breadcrumb separator="/">
                         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -14,36 +14,29 @@
                     </el-breadcrumb>
                 </div>
             </el-col>
-            <el-col :span="10">
+            <el-col :span="10" style="border: 1px red solid">
                 <div>
                     <div class="right-menu">
                         <el-dropdown class="avatar-container right-menu-item hover-effect"
                                      trigger="click">
                             <div class="avatar-wrapper">
-                                <img class="user-avatar" src="../assets/images/login.jpg" alt="">
-                                <!--                        <img src="@/assets/profile.png" class="user-avatar">-->
+<!--                                <img class="user-avatar" src="../assets/images/login.jpg" alt="">-->
                                 <span class="user-name">{{ data.name }}</span>
                                 <i class="el-icon-caret-bottom"/>
                             </div>
                             <template #dropdown>
                                 <el-dropdown-menu>
-                                    <!--                            <el-dropdown-item>-->
-                                    <!--                                <span style="display:block;"-->
-                                    <!--                                      @click="handlePersonal()">-->
-                                    <!--                                    修改个人信息-->
-                                    <!--                                </span>-->
-                                    <!--                            </el-dropdown-item>-->
                                     <el-dropdown-item>
-                                <span style="display:block;"
-                                      @click="handleModifyPass()">
-                                    修改密码
-                                </span>
+                                        <span style="display:block;"
+                                              @click="handleModifyPass()">
+                                            修改密码
+                                        </span>
                                     </el-dropdown-item>
                                     <el-dropdown-item divided>
-                                <span style="display:block;"
-                                      @click="logout()">
-                                    退出系统
-                                </span>
+                                        <span style="display:block;"
+                                              @click="logout()">
+                                            退出系统
+                                        </span>
                                     </el-dropdown-item>
                                 </el-dropdown-menu>
                             </template>
@@ -181,56 +174,27 @@ const handleSavePass = () => {
  */
 const logout = () => {
     Api.logout().then(res => {
-        console.log(res);
         removeToken();
         router.push({
             path: '/login',
         })
     })
 }
-
-/**
- *
- */
-const handlePersonal = () =>{
-
-}
 </script>
 
 <style lang="scss" scoped>
 .l-content{
-    text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 .navbar {
-  width: 100%;
+    margin-left: 10px;
+  width: 99%;
   height: 60px;
   overflow: hidden;
   position: relative;
   background: #fafafa;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 
-  .hamburger-container {
-    line-height: 46px;
-    height: 100%;
-    float: left;
-    cursor: pointer;
-    transition: background .3s;
-    -webkit-tap-highlight-color: transparent;
-
-    &:hover {
-      background: rgba(0, 0, 0, .025)
-    }
-  }
-
-  .breadcrumb-container {
-    float: left;
-  }
-
-  .errLog-container {
-    display: inline-block;
-    vertical-align: top;
-  }
 
   .right-menu {
     float: right;
@@ -277,9 +241,6 @@ const handlePersonal = () =>{
 
         .user-name {
           font-size: 16px;
-          /*line-height: 50px;*/
-          /*height: 50px;*/
-          /*display: inline-block;*/
           color: #000;
         }
 
@@ -295,13 +256,4 @@ const handlePersonal = () =>{
   }
 }
 
-.hideSidebar {
-  width: calc(100% - #{54px});
-  transition: width 0.28s;
-}
-
-.openSidebar {
-  width: calc(100% - #{210px});
-  transition: width 0.28s;
-}
 </style>

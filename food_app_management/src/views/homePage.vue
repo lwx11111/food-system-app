@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-card style="margin: 10px; border: 1px solid gold">
+      <el-card style="margin: 10px;">
           <h1>
               首页
           </h1>

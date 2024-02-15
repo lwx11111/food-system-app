@@ -1,45 +1,55 @@
 <template>
     <div>
-        <el-card style="margin: 10px; border: 1px solid gold">
-            <!-- 查询条件 -->
-            <el-collapse
-                    accordion
-                    v-model="data.activeName"
-                    class="card-bg">
-                <el-collapse-item name="1">
-                    <template #title>
-                        <div class="innerHeader">
-                          店铺物品表（只有官方一家店）管理
-                        </div>
-                    </template>
-                    <div style="display: flex;"
-                         class="card-search">
-                        <el-form :inline="true"
-                                 :model="data.formList"
-                                 size="default"
-                                 label-width="100px">
-                            <el-form-item label="物品名">
-                                <el-input placeholder="请输入物品名"
-                                            v-model="data.formList.name"
-                                            style="width: 200px"
-                                            @keyup.enter.native="getData">
-                                  </el-input>
-                            </el-form-item>
-                            <el-form-item label="物品分类">
-                                <el-select v-model="data.formList.categoryId"
-                                           placeholder="请选择"
-                                           style="width: 200px"
-                                           @keyup.enter.native="getData">
-                                    <el-option v-for="(item, index) in data.shopItemCategory"
-                                               :label="item.name"
-                                               :value="item.id" />
-                                </el-select>
-                            </el-form-item>
-                        </el-form>
-                    </div>
-                </el-collapse-item>
-            </el-collapse>
+        <!-- 查询条件 -->
+        <el-card style="margin: 10px;">
+            <template #header>
+                <div class="innerHeader">
+                    店铺物品表（只有官方一家店）管理
+                </div>
+            </template>
+            <div style="display: flex;"
+                 class="card-search">
+                <el-form :inline="true"
+                         :model="data.formList"
+                         size="default"
+                         label-width="100px">
+                    <el-form-item label="物品名">
+                        <el-input placeholder="请输入物品名"
+                                  v-model="data.formList.name"
+                                  style="width: 200px"
+                                  @keyup.enter.native="getData">
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item label="物品分类">
+                        <el-select v-model="data.formList.categoryId"
+                                   placeholder="请选择"
+                                   style="width: 200px"
+                                   @keyup.enter.native="getData">
+                            <el-option v-for="(item, index) in data.shopItemCategory"
+                                       :label="item.name"
+                                       :value="item.id" />
+                        </el-select>
+                    </el-form-item>
+                </el-form>
+            </div>
+            <template #footer>
+                <div style="float:right; margin-bottom: 5px">
+                    <el-button
+                        type="primary"
+                        @click="queryData()"
+                        icon="Search"
+                        :loading="data.isSearch">
+                        查询
+                    </el-button>
+                    <el-button
+                        @click="resetData()"
+                        icon="Close">
+                        清空
+                    </el-button>
+                </div>
+            </template>
         </el-card>
+
         <el-card style="margin: 10px; border: 1px solid gold">
             <!-- 操作按钮区 -->
             <div style="margin:10px 0;">
@@ -50,25 +60,11 @@
                   新增
                 </el-button>
                 <el-button
-                        type="warning"
+                        type="danger"
                         icon="DocumentDelete"
                         @click="deleteDataMany()">
                   删除
                 </el-button>
-                <div style="float:right;">
-                    <el-button
-                          type="primary"
-                          @click="queryData()"
-                          icon="Search"
-                          :loading="data.isSearch">
-                    查询
-                    </el-button>
-                    <el-button
-                          @click="resetData()"
-                          icon="Close">
-                    清空
-                    </el-button>
-                </div>
             </div>
 
             <!-- 表格呈现 -->
@@ -77,7 +73,7 @@
                   :height="data.screenHeight - data.otherHeight"
                   tooltip-effect="dark"
                   style="width:100%"
-                  stripe
+                  :row-class-name="tableRowClassName"
                   size="default"
                   border
                   @selection-change="selectionChanged">
@@ -220,7 +216,14 @@
     })
 
     // Methods
-
+    const tableRowClassName = ({row, rowIndex}) => {
+        if (rowIndex === 1) {
+            return 'warning-row'
+        } else if (rowIndex === 3) {
+            return 'success-row'
+        }
+        return ''
+    }
     /**
      * 修改枚举值到具体含义
      * @param row
@@ -480,8 +483,14 @@
 
 </script>
 <style lang="css" scoped>
-/* 单页面样式 */
->>>.el-table .cell {
-  white-space: nowrap
-}
+    .el-table >>> .warning-row {
+        background: oldlace;
+    }
+    .el-table >>> .success-row {
+        background: #f0f9eb;
+    }
+    /* 单页面样式 */
+    >>>.el-table .cell {
+        white-space: nowrap
+    }
 </style>

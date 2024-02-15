@@ -21,6 +21,8 @@ import java.util.Map;
  */
 public interface IDicService extends IService<Dic> {
 
+    List<Dic> listParentDic();
+
     FoodsVO listFoods();
     /**
      * 根据参数保存

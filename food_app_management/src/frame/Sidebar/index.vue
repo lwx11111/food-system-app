@@ -1,7 +1,8 @@
 <template>
     <div>
-        <el-scrollbar wrap-class="scrollbar-wrapper">
-            <el-menu
+        <el-scrollbar >
+            <el-menu style="margin-right: -1px;"
+                class="myMenu"
                 default-active="1"
                 :collapse="data.isCollapse"
                 :unique-opened="true"
@@ -45,7 +46,6 @@
             {
                 'funId': '2',
                 'funName': '菜谱管理',
-                'url': '/menu/index',
                 'icon':'KnifeFork',
                 'children':[{
                     'funId': '21',
@@ -88,8 +88,13 @@
             {
                 'funId': '4',
                 'funName': '商城管理',
-                'url': '/community/index',
                 'icon': 'SoldOut',
+                'children':[{
+                    'funId': '41',
+                    'funName': '订单管理',
+                    'url': '/shoporder/index',
+                    'icon': 'SoldOut'
+                }]
             },
             {
                 'funId': '5',
@@ -111,23 +116,16 @@
             {
                 'funId': '6',
                 'funName': '健康管理',
-                'url': '/cart',
                 'icon': 'Help',
+                'children':[{
+                    'funId': '51',
+                    'funName': '食物热量管理',
+                    'url': '/dic/index',
+                    'icon': 'Help'
+                }]
             },
 
 
         ]
     })
 </script>
-
-<style>
-.sidebar-foot{
-    margin-left: 20%;
-    width: 50%;
-    height: 50%;
-}
-.el-menu{
-    height: 100%;
-    background-color: #545c64;
-}
-</style>

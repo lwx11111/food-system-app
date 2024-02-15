@@ -14,45 +14,86 @@
                 <el-row>
                     <el-col :span="6">
                         <el-form-item
-                                label="communityId"
-                                prop="communityId">
+                                label="食物名"
+                                prop="keyy">
                             <el-input
-                                    v-model="data.item.communityId"
+                                    v-model="data.item.keyy"
                                     :disabled="data.disabled">
                             </el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
                         <el-form-item
-                                label="userId"
-                                prop="userId">
+                                label="热量值"
+                                prop="value">
                             <el-input
-                                    v-model="data.item.userId"
-                                    :disabled="data.disabled">
-                            </el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-form-item
-                                label="内容"
-                                prop="content">
-                            <el-input
-                                    v-model="data.item.content"
-                                    :disabled="data.disabled">
-                            </el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-form-item
-                                label="发布时间"
-                                prop="releaseTime">
-                            <el-input
-                                    v-model="data.item.releaseTime"
+                                    v-model="data.item.value"
                                     :disabled="data.disabled">
                             </el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item
+                                label="备注"
+                                prop="remark">
+                            <el-input type="textarea"
+                                    v-model="data.item.remark"
+                                    :disabled="data.disabled">
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <div v-if="data.type === 'add' ">
+                    <el-row>
+                        <el-col :span="6">
+                            <el-form-item
+                                label="是否有父级分类"
+                                prop="isParentId"
+                                label-width="150px">
+                                <!-- 绑定Boolean值无法渲染 Number只能渲染1次-->
+                                <el-select v-model="data.hasParent"
+                                           placeholder="请选择"
+                                           :disabled="data.disabled"
+                                           size="large">
+                                    <el-option label="是" value="1" />
+                                    <el-option label="否" value="0" />
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row v-if="data.hasParent === '1' ">
+                        <el-col :span="6">
+                            <el-form-item
+                                label="父类食物"
+                                prop="parentId">
+                                <el-select v-model="data.item.parentId"
+                                           :disabled="data.disabled">
+                                    <el-option v-for="(item, index) in data.parentDic"
+                                               :label="item.keyy"
+                                               :value="item.id" />
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </div>
+                <div v-if="data.type !== 'add' && data.item.parentId">
+                    <el-row v-if="data.hasParent === '1' ">
+                        <el-col :span="6">
+                            <el-form-item
+                                label="父类食物"
+                                prop="parentId">
+                                <el-select v-model="data.item.parentId"
+                                           :disabled="data.disabled">
+                                    <el-option v-for="(item, index) in data.parentDic"
+                                               :label="item.keyy"
+                                               :value="item.id" />
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </div>
                 <el-form-item>
                     <el-button
                             v-show="data.showBtn"
@@ -74,7 +115,7 @@
     </el-dialog>
 </template>
 <script lang="ts" setup>
-    import Api from '@/api/api_communitycomment.js'
+    import Api from '@/api/api_dic.js'
     import { reactive, ref, onMounted, toRefs } from 'vue'
     import { useStore } from "vuex";
     import { useRouter } from 'vue-router'
@@ -86,7 +127,7 @@
     // Data
     const data = reactive({
         operateTitle: '新增',
-        backUrl: '/name/communitycomment/index',
+        backUrl: '/name/dic/index',
         type: '',
         showBtn: true,
         disabled: false,
@@ -94,10 +135,10 @@
         item: {},
         params: {
         id: '',
-        communityId: '',
-        userId: '',
-        content: '',
-        releaseTime: ''
+        keyy: '',
+        value: '',
+        remark: '',
+        parentId: ''
         },
         OperatorLogParam: {
           operateContent: '',
@@ -107,19 +148,17 @@
         },
         showDialog: false,
         rules: {
-          communityId: [
-              { required: true, message: '不能为空', trigger: 'blur' }
+          keyy: [
+              { required: true, message: '食物名称不能为空', trigger: 'blur' }
           ],
-          userId: [
-              { required: true, message: '不能为空', trigger: 'blur' }
+          value: [
+              { required: true, message: '热量值不能为空', trigger: 'blur' }
           ],
-          content: [
-              { required: true, message: '内容不能为空', trigger: 'blur' }
-          ],
-          releaseTime: [
-              { required: true, message: '发布时间不能为空', trigger: 'blur' }
-          ]
         },
+        // 父类食物
+        parentDic: [],
+        // 是否有父级分类
+        hasParent: '0'
     })
 
     // Props
@@ -133,10 +172,24 @@
 
     // Mounted
     onMounted(() => {
-
+        getParentDic();
     })
 
     // Methods
+    const getParentDic = () => {
+        // 获取父类食物
+        Api.listParentDic().then(res => {
+            console.log(res)
+            if (res.code === 200){
+                data.parentDic = res.data;
+            } else {
+                ElMessage({
+                  message: '获取父类食物失败，请重试',
+                  type: 'warning',
+                })
+            }
+        })
+    }
     const init = (id, type) => {
         // 界面初始化接收参数
         data.type = type;
@@ -171,7 +224,7 @@
                 return;
             }
             // 发送请求
-            Api.sel4communitycomment(data.id).then(res => {
+            Api.sel4dic(data.id).then(res => {
                 console.log(res)
                 if (res.code === 200){
                     data.item = res.data;
@@ -231,7 +284,7 @@
     const saveOrUpdate = () => {
         // 保存或更新操作
         if (data.type === 'update') {
-            Api.update4communitycomment(data.id, data.item).then(res => {
+            Api.update4dic(data.id, data.item).then(res => {
                 if (res.code === 200){
                     ElMessage({
                       message: '修改成功',
@@ -246,7 +299,7 @@
                 }
             })
         } else if (data.type === 'add') {
-            Api.add4communitycomment(data.item).then(res => {
+            Api.add4dic(data.item).then(res => {
                 console.log(res)
                 if (res.code === 200){
                     ElMessage({

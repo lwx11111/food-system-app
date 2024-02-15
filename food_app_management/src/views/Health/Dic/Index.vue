@@ -1,49 +1,45 @@
 <template>
     <div>
-        <el-card style="margin: 10px; border: 1px solid gold">
-            <!-- 查询条件 -->
-            <el-collapse
-                    accordion
-                    v-model="data.activeName"
-                    class="card-bg">
-                <el-collapse-item name="1">
-                    <template #title>
-                        <div class="innerHeader">
-                          管理
-                        </div>
-                    </template>
-                    <div style="display: flex;"
-                         class="card-search">
-                        <el-form :inline="true"
-                                 :model="data.formList"
-                                 size="default"
-                                 label-width="100px">
-                            <el-form-item label="userId">
-                                  <el-input placeholder="请输入内容"
-                                            v-model="data.formList.userId"
-                                            style="width: 200px"
-                                            @keyup.enter.native="getData">
-                                  </el-input>
-                            </el-form-item>
-                            <el-form-item label="shopItemId">
-                                  <el-input placeholder="请输入内容"
-                                            v-model="data.formList.shopItemId"
-                                            style="width: 200px"
-                                            @keyup.enter.native="getData">
-                                  </el-input>
-                            </el-form-item>
-                            <el-form-item label="数量">
-                                <el-input placeholder="请输入数量"
-                                            v-model="data.formList.amount"
-                                            style="width: 200px"
-                                            @keyup.enter.native="getData">
-                                  </el-input>
-                            </el-form-item>
-                        </el-form>
-                    </div>
-                </el-collapse-item>
-            </el-collapse>
+        <!-- 查询条件 -->
+        <el-card style="margin: 10px;">
+            <template #header>
+                <div class="innerHeader">
+                    管理
+                </div>
+            </template>
+            <div style="display: flex;"
+                 class="card-search">
+                <el-form :inline="true"
+                         :model="data.formList"
+                         size="default"
+                         label-width="100px">
+                    <el-form-item label="食物名">
+                        <el-input placeholder="请输入key关键字"
+                                  v-model="data.formList.keyy"
+                                  style="width: 200px"
+                                  @keyup.enter.native="getData">
+                        </el-input>
+                    </el-form-item>
+                </el-form>
+            </div>
+            <template #footer>
+                <div style="float:right; margin-bottom: 5px">
+                    <el-button
+                        type="primary"
+                        @click="queryData()"
+                        icon="Search"
+                        :loading="data.isSearch">
+                        查询
+                    </el-button>
+                    <el-button
+                        @click="resetData()"
+                        icon="Close">
+                        清空
+                    </el-button>
+                </div>
+            </template>
         </el-card>
+
         <el-card style="margin: 10px; border: 1px solid gold">
             <!-- 操作按钮区 -->
             <div style="margin:10px 0;">
@@ -54,53 +50,11 @@
                   新增
                 </el-button>
                 <el-button
-                        type="info"
-                        icon="Download"
-                        @click="downloadExcelTemplate()">
-                  下载模板
-                </el-button>
-                <el-button
-                        type="primary"
-                        icon="Upload"
-                        @click="uploadExcel()">
-                  导入
-                </el-button>
-                <el-button
-                        type="warning"
+                        type="danger"
                         icon="DocumentDelete"
                         @click="deleteDataMany()">
                   删除
                 </el-button>
-                <el-dropdown
-                        style="margin-left:8px;"
-                        split-button
-                        type="primary">
-                    更多功能
-                    <template #dropdown>
-                        <el-dropdown-menu>
-                            <el-dropdown-item>功能1</el-dropdown-item>
-                            <el-dropdown-item>功能2</el-dropdown-item>
-                        </el-dropdown-menu>
-                    </template>
-                </el-dropdown>
-                <div style="float:right;">
-                    <el-button
-                          type="primary"
-                          @click="queryData()"
-                          icon="Search"
-                          :loading="data.isSearch">
-                    查询
-                    </el-button>
-                    <el-button
-                          @click="resetData()"
-                          icon="Close">
-                    清空
-                    </el-button>
-                    <el-button
-                          @click="excelData()">
-                    导出数据
-                    </el-button>
-                </div>
             </div>
 
             <!-- 表格呈现 -->
@@ -109,10 +63,11 @@
                   :height="data.screenHeight - data.otherHeight"
                   tooltip-effect="dark"
                   style="width:100%"
-                  stripe
+                  :row-class-name="tableRowClassName"
                   size="default"
                   border
-                  @selection-change="selectionChanged">
+                  @selection-change="selectionChanged"
+                  row-key="id">
                 <el-table-column
                         type="selection"
                         width="60">
@@ -124,20 +79,20 @@
                         align="center">
                 </el-table-column>
                  <el-table-column
-                        prop="userId"
-                        label="userId"
+                        prop="keyy"
+                        label="食物名"
                         width="180"
                         align="center">
                 </el-table-column>
                  <el-table-column
-                        prop="shopItemId"
-                        label="shopItemId"
+                        prop="value"
+                        label="热量值"
                         width="180"
                         align="center">
                 </el-table-column>
                  <el-table-column
-                        prop="amount"
-                        label="数量"
+                        prop="remark"
+                        label="备注"
                         width="180"
                         align="center">
                 </el-table-column>
@@ -165,7 +120,7 @@
                         </el-link>
                         <el-link
                                 @click="toDelete(scope)"
-                                type="primary"
+                                type="danger"
                                 size="small"
                                 :underline="false">
                           删除
@@ -193,7 +148,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-    import Api from '@/api/api_shoporder.js'
+    import Api from '@/api/api_dic.js'
     import ItemDialog from './Item.vue'
     import { reactive, ref, defineProps, toRefs, onMounted} from 'vue'
     import Upload from "@/utils/oss/upload.vue";
@@ -210,13 +165,14 @@
         screenHeight: window.innerHeight,// screenHeight:控制高度自适应-页面高度
         otherHeight: 310,// otherHeight:控制高度自适应-表格外的高度
         isSearch: false, // isSearch:控制搜索状态
-        detailUrl: '/name/shoporder/item', // detailUrl:详情页面地址
+        detailUrl: '/name/dic/item', // detailUrl:详情页面地址
         selectedRows: {}, // selectedRows:选中行对象
         // formList:搜索条件对象 分页控制对象
         formList: {
-            userId: '',
-            shopItemId: '',
-            amount: ''
+            keyy: '',
+            value: '',
+            remark: '',
+            parentId: ''
         },
         // tableData:表格数据
         tableData: [],
@@ -243,48 +199,62 @@
     // Mounted
     onMounted(() => {
         getData();
-        // window.onresize = () => {
-        //     return (() => {
-        //         data.screenHeight = window.innerHeight
-        //     })()
-        // }
-
-        // 菜单界面生成时日志记录
-        // const islog = Vue.prototype.$config.ISLOG;
-        // if (true==islog){
-        //     this.OperatorLogParam.operateFeatures = '菜单点击'
-        //     this.OperatorLogParam.operateType = LogType.Query
-        //     this.OperatorLogParam.operateState = '成功'
-        //     OperatorLog.setOperationLog(this.OperatorLogParam)
-        // }
     })
 
     // Methods
+    const tableRowClassName = ({row, rowIndex}) => {
+        if (rowIndex === 1) {
+            return 'warning-row'
+        } else if (rowIndex === 3) {
+            return 'success-row'
+        }
+        return ''
+    }
+
     const getData = () => {
         // 查询方法
         // 查询参数
         const params = {
-            userId : data.formList.userId,
-            shopItemId : data.formList.shopItemId,
-            amount : data.formList.amount,
+            keyy : data.formList.keyy,
+            value : data.formList.value,
+            remark : data.formList.remark,
+            parentId : data.formList.parentId,
             pageIndex : data.pageConfig.currentPage,
             pageSize : data.pageConfig.pageSize
         }
         // 后台请求
-        Api.selpage4shoporder(params).then(res=> {
+        Api.selpage4dic(params).then(res => {
             if (res.code === 200){
-                data.tableData = res.data.records
+                console.log(res)
+                let treeData = [];
+                const map = new Map();
+                // 第一次遍历父节点，放入treeData，并吧数组id和对象id用map对应
+                for (let i = 0; i < res.data.records.length; i++) {
+                    if (res.data.records[i].parentId === null){
+                        treeData.push(res.data.records[i])
+                        map.set(res.data.records[i].id, res.data.records[i])
+                    }
+                }
+                //  第二次遍历子节点，放入treeData的children
+                for (let i = 0; i < res.data.records.length; i++) {
+                    if (res.data.records[i].parentId !== null){
+                        if (map.has(res.data.records[i].parentId)){
+                            const temp = map.get(res.data.records[i].parentId)
+                            // 子节点放入父节点的children
+                            if (!temp.children){
+                                temp.children = []
+                            }
+                            temp.children.push(res.data.records[i])
+                        } else {
+                            treeData.push(res.data.records[i])
+                        }
+                    }
+                }
+                console.log(treeData)
+                data.tableData = treeData
                 data.pageConfig.total = res.data.total
                 data.isSearch = false
             }
-
-            // 日志记录
-            // data.OperatorLogParam.operateContent = JSON.stringify(params)
-            // data.OperatorLogParam.operateFeatures = '查询列表'
-            // data.OperatorLogParam.operateType = LogType.Query
-            // data.OperatorLogParam.operateState = '成功'
-            // OperatorLog.setOperationLog(this.OperatorLogParam)
-
         })
     }
     // 添加记录
@@ -302,7 +272,7 @@
             const blobUrl = URL.createObjectURL(blob)
             const a = document.createElement('a')
             a.href = blobUrl
-            a.download = 'ShopOrder.xls'
+            a.download = 'Dic.xls'
             a.click()
             window.URL.revokeObjectURL(blobUrl)
         })
@@ -312,7 +282,7 @@
     const uploadExcelRef = ref();
     const uploadExcel = () => {
         // const uploadExcelUrl = Api.uploadExcelUrl();
-        uploadExcelRef.value.init(this.SHOP_SERVER + '/shoporder/uploadExcel');
+        uploadExcelRef.value.init(this.SHOP_SERVER + '/dic/uploadExcel');
     }
 
     const deleteDataMany = () => {
@@ -337,7 +307,7 @@
                         type: 'warning',
                     }
             ).then(() => {
-                Api.dels4shoporder(dataids).then(res => {
+                Api.dels4dic(dataids).then(res => {
                     if (res.code === 200){
                         ElMessage({
                             type: 'success',
@@ -350,13 +320,6 @@
                             message: '删除失败',
                         })
                     }
-
-                    // 日志记录
-                    // this.OperatorLogParam.operateContent = JSON.stringify(dataids)
-                    // this.OperatorLogParam.operateFeatures = '删除记录'
-                    // this.OperatorLogParam.operateType = LogType.Query
-                    // this.OperatorLogParam.operateState = '成功'
-                    // OperatorLog.setOperationLog(this.OperatorLogParam)
                 })
             }).catch(() => {
                 ElMessage({
@@ -383,12 +346,12 @@
 
     const excelData = () => {
         const params = {}
-        Api.excelData4shoporder(params).then(data => {
+        Api.excelData4dic(params).then(data => {
             const blob = new Blob([data], { type: 'application/vnd.ms-excel' })
             const blobUrl = URL.createObjectURL(blob)
             const a = document.createElement('a')
             a.href = blobUrl
-            a.download = 'ShopOrder.xls'
+            a.download = 'Dic.xls'
             a.click()
             window.URL.revokeObjectURL(blobUrl)
         })
@@ -443,7 +406,7 @@
                 }
         ).then(() => {
             console.log(scope.row.id)
-            Api.del4shoporder(scope.row.id).then(res => {
+            Api.del4dic(scope.row.id).then(res => {
                 console.log(res)
                 if (res.code === 200){
                     ElMessage({
@@ -491,8 +454,14 @@
 
 </script>
 <style lang="css" scoped>
-/* 单页面样式 */
->>>.el-table .cell {
-  white-space: nowrap
-}
+    .el-table >>> .warning-row {
+        background: oldlace;
+    }
+    .el-table >>> .success-row {
+        background: #f0f9eb;
+    }
+    /* 单页面样式 */
+    >>>.el-table .cell {
+        white-space: nowrap
+    }
 </style>

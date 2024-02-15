@@ -149,7 +149,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
                 query.eq("id",entry.getValue());
             }
             if("name".equals(entry.getKey())){
-                query.eq("name",entry.getValue());
+                query.like("name",entry.getValue());
             }
         }
         return  query;

@@ -1,55 +1,55 @@
 <template>
     <div class="back" style="border: 1px solid white">
-        <el-card class="login-form-content">
-            <h1 style="text-align: center">登录</h1>
-            <el-form :model="form"
-                     ref="formRef"
-                     :rules="data.rules"
-                     label-width="100px">
-                <el-form-item label="用户名"
-                              prop="username"
-                              class="input-item flex align-center">
-                    <el-input v-model="form.username" />
-                </el-form-item>
-                <el-form-item label="密码"
-                              prop="password"
-                              class="input-item flex align-center">
-                    <el-input v-model="form.password"
-                              show-password/>
-                </el-form-item>
-                <el-form-item label="验证码"
-                              prop="verifyCode"
-                              class="input-item flex align-center">
-                    <el-input v-model="form.verifyCode"
-                              style="width: 80%">
-                    </el-input>
-                    <img class="login-code"
-                         alt="验证码"
-                         id="captchaImg"
-                         :src="data.captchaUrl"
-                         @click="setCaptchaUrl"/>
-                </el-form-item>
-                <el-form-item class="input-item flex align-center">
-                    <el-button type="primary"
-                               @click="onSubmit()">
-                        登录
-                    </el-button>
-<!--                    <el-button  @click="toRegister()">-->
-<!--                        注册-->
-<!--                    </el-button>-->
-                </el-form-item>
-            </el-form>
-        </el-card>
+        <div class="loginBack">
+            <el-card class="login-form-content">
+                <h2 style="text-align: center">登录</h2>
+                <el-form :model="form"
+                         ref="formRef"
+                         :rules="data.rules"
+                         label-width="100px">
+                    <el-form-item label="用户名"
+                                  prop="username"
+                                  class="input-item flex align-center">
+                        <el-input style="width: 200px" v-model="form.username" />
+                    </el-form-item>
+                    <el-form-item label="密码"
+                                  prop="password"
+                                  class="input-item flex align-center">
+                        <el-input v-model="form.password"
+                                  style="width: 200px"
+                                  show-password/>
+                    </el-form-item>
+                    <el-form-item label="验证码"
+                                  prop="verifyCode"
+                                  class="input-item flex align-center">
+                        <el-input v-model="form.verifyCode"
+                                  style="width: 100px">
+                        </el-input>
+                        <img class="login-code"
+                             alt="验证码"
+                             id="captchaImg"
+                             :src="data.captchaUrl"
+                             @click="setCaptchaUrl"/>
+                    </el-form-item>
+                    <el-form-item class="input-item flex align-center">
+                        <el-button type="success"
+                                   style="width: 200px"
+                                   @click="onSubmit()">
+                            登录
+                        </el-button>
+                    </el-form-item>
+                </el-form>
+            </el-card>
+        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
 import {getCurrentInstance, onMounted, reactive, ref} from 'vue'
 import commonUtil from '../../utils/common-util.js';
-import {getEncryptPassword} from '../../utils/passwordEncrypt.js';
+import {getEncryptPassword} from '@/utils/passwordEncrypt';
 import Api from '@/api/auth.js';
 
-import ApiUser from '@/api/auth.js';
 import { setToken } from '@/utils/auth/auth.js'
 import { useStore } from "vuex";
 import { useRouter} from "vue-router";
@@ -103,7 +103,6 @@ const setCaptchaUrl = () => {
     form.verifyCode = ''
 }
 
-
 /**
  * 登录校验
  */
@@ -152,16 +151,6 @@ const loginWithCode = () => {
             ElMessage.error(res.message)
         }
     });
-
-}
-
-/**
- * 跳转注册页面
- */
-const toRegister = () => {
-    router.push({
-        path: '/register',
-    })
 }
 </script>
 
@@ -188,14 +177,20 @@ const toRegister = () => {
     padding: 0;
     border: 1px red solid;
 }
+.loginBack{
+    width:1000px;
+    height:500px;
+    MARGIN-RIGHT: auto;
+    MARGIN-LEFT: auto;
+}
 
 .login-form-content {
     text-align: center;
-    margin-top: 10%;
+    margin-top: 15%;
     margin-left: 25%;
-    width: 50%;
-    height: 60%;
-    background-color: #f5f6f7;
+    width: 40%;
+    height: 80%;
+    background-color: white;
     .input-item {
         margin: 20px auto;
         height: 45px;

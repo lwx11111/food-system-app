@@ -32,6 +32,22 @@ public class DicController {
     @Autowired
     private IDicService service;
 
+    @GetMapping("/listParentDic")
+    @ResponseBody
+    @Operation(description = "获取父类食物")
+    public SimpleResponse listParentDic(){
+        SimpleResponse response = new SimpleResponse();
+        try {
+            response.setData(service.listParentDic());
+        } catch (Exception e) {
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        System.out.println(response);
+        return response;
+    }
+
     @GetMapping("/listFoods")
     @ResponseBody
     @Operation(description = "创建")

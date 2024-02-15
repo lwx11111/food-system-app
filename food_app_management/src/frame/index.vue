@@ -3,8 +3,8 @@
         <el-aside width="200px">
             <Sidebar class="sidebar-container"></Sidebar>
         </el-aside>
-        <el-container>
-            <el-header style="border-bottom: 1px solid gold">
+        <el-container >
+            <el-header>
                 <Navbar></Navbar>
             </el-header>
             <el-main>
@@ -23,7 +23,7 @@
 <style>
 .sidebar-container {
     transition: width 0.28s;
-    width: 210px;
+    width: 200px;
     background-color: #545c64;
     height: 100%;
     position: fixed;

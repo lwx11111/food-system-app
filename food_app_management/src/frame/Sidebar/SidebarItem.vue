@@ -76,29 +76,10 @@ const resolvePath = (routePath) => {
     return routePath;
 }
 </script>
+
 <style scoped lang="scss">
     a {
         text-decoration: none;
     }
 
-    .router-link-active {
-    text-decoration: none;
-    }
-
-    .fa-margin {
-    margin-right: 10px;
-    }
-
-    .myMenu v-deep .el-menu-item {
-    white-space: pre;
-    height: 50px;
-    line-height: 50px;
-    padding: 0 10px;
-    }
-
-    .myMenu v-deep .el-submenu__title {
-    height: 50px;
-    line-height: 50px;
-    padding: 0 10px;
-    }
 </style>

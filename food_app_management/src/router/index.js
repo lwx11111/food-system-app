@@ -5,34 +5,46 @@ import {
 } from 'vue-router'
 
 import Login from '@/views/Login/index.vue';
-import Register from '@/views/Login/register.vue'
 
 import Frame from "@/frame/index.vue";
 import HomePage from "@/views/homePage.vue";
 import Cart from "@/views/cart/index.vue";
 
-// 菜谱
+/**
+ * 菜谱管理
+ */
 const MenuIndex = () => import('../views/Menu/Index.vue')
 // 菜谱-收藏
-const MenuCollectionIndex = () => import('@/views/Menu/Menucollection/Index.vue')
+const MenuCollectionIndex = () => import('@/views/Menu/MenuCollection/Index.vue')
 // 菜谱-评论
 const MenuCommentIndex = () => import('@/views/Menu/MenuComment/Index.vue')
 // 菜谱-点赞
 const MenuLikeIndex = () => import('@/views/Menu/MenuLike/Index.vue')
 
-// 菜品
+/**
+ * 菜品管理
+ */
 const ShopItemIndex = () => import('../views/ShopItem/Index.vue')
 // 菜品-物品分类
 const ShopItemCategoryIndex = () => import('@/views/ShopItem/ShopItemCategory/Index.vue')
-const ShopOrderIndex = () => import('../views/shoporder/Index.vue')
 
-// 社区
+/**
+ * 商城管理
+ */
+// 商城管理-订单管理
+const ShopOrderIndex = () => import('@/views/Shop/ShopOrder/Index.vue')
+
+/**
+ * 社区管理
+ */
 const CommunityIndex = () => import('../views/Community/Index.vue')
 // 社区-分类管理
 const CategoryIndex = () => import('@/views/Community/Category/Index.vue')
-const CommunityCommentIndex = () => import('../views/communitycomment/Index.vue')
-const CommunityLikeIndex = () => import('../views/communitylike/Index.vue')
-const OrderIndex = () => import('../views/order/Index.vue')
+
+/**
+ * 健康管理
+ */
+const DicIndex = () => import('@/views/Health/Dic/Index.vue')
 
 // 模块化路由
 const routes = [
@@ -46,11 +58,6 @@ const routes = [
         component: Login,
         name: 'Login'
     },
-    // {
-    //     path: '/register',
-    //     component: Register,
-    //     name: 'Register'
-    // },
     {
         path: '/',
         component: Frame,
@@ -109,27 +116,17 @@ const routes = [
                 component: CommunityIndex,
                 name: 'CommunityIndex'
             },
-            {
-                path: '/communitycomment/index',
-                component: CommunityCommentIndex,
-                name: 'CommunityCommentIndex'
-            },
-            {
-                path: '/communitylike/index',
-                component: CommunityLikeIndex,
-                name: 'CommunityLikeIndex'
-            },
             // 购物车
             {
                 path: '/cart',
                 component: Cart,
                 name: 'cart',
             },
-            // 订单
+            // 健康
             {
-                path: '/order/index',
-                component: OrderIndex,
-                name: 'OrderIndex'
+                path: '/dic/index',
+                component: DicIndex,
+                name: 'DicIndex'
             },
         ]
     }
