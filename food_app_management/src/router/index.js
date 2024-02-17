@@ -8,7 +8,6 @@ import Login from '@/views/Login/index.vue';
 
 import Frame from "@/frame/index.vue";
 import HomePage from "@/views/homePage.vue";
-import Cart from "@/views/cart/index.vue";
 
 /**
  * 菜谱管理
