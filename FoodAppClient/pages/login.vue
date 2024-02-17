@@ -98,10 +98,10 @@
 				appId: this.globalConfig.appInfo.appId,
 				appName: this.globalConfig.appInfo.appName
 			}
-			console.log(params);
+		
 			Api.loginWithCode(params).then(res => {
-				console.log(res);
 				if (res.code === "20000"){
+					console.log(res);
 					let account = res.data.info.account
 					// store存储
 					this.$store.commit('setAccount',res.data.info.account);
@@ -111,7 +111,7 @@
 					// 本地存储
 		            localStorage.setItem('userId', account.accountId)
 		            localStorage.setItem('userName', account.loginName)
-					console.log(res.data.token.accessToken);
+					
 					setToken(res.data.token.accessToken);
 					this.$tab.reLaunch('/pages/home')
 				} else {

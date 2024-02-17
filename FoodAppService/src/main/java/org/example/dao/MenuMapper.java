@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Mapper
 public interface MenuMapper extends BaseMapper<Menu> {
-
+    IPage<Menu> getMenuCollectionByUserId(Page<Menu> page, @Param("userId") String userId);
     /**
      * 分页查询-自定义sql-Wrapper
      *

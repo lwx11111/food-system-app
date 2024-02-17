@@ -18,9 +18,9 @@ const request = config => {
 	}
 	// get请求映射params参数
 	if (config.params === 'get') {
-	let url = config.url + '?' + tansParams(config.params)
-	url = url.slice(0, -1)
-	config.url = url
+		let url = config.url + '?' + tansParams(config.params)
+		url = url.slice(0, -1)
+		config.url = url
 	}
 
 	return new Promise((resolve, reject) => {
@@ -42,11 +42,8 @@ const request = config => {
 				dataType: 'json'
 			}).then(response => {
 				let [error, res] = response
-				console.log(error)
-				console.log(res)
 				resolve(res.data)
 			}).catch(error => {
-				  console.log(error)
 				let { message } = error
 				if (message === 'Network Error') {
 				  message = '后端接口连接异常'
@@ -93,7 +90,6 @@ const request = config => {
 				}
 				resolve(res.data)
 			}).catch(error => {
-				  console.log(error)
 				let { message } = error
 				if (message === 'Network Error') {
 				  message = '后端接口连接异常'

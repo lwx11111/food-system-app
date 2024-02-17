@@ -46,7 +46,6 @@ export const getLocalStorageItem = (key) => {
     const expiretime = expIdx > -1 ? (val.slice(expIdx + expiretimeStr.length) - 0) : 0;
     val = expIdx > -1 ? val.slice(0, expIdx) : val;
     if (expiretime !== 0 && (expiretime < Date.now())) {
-      // clearLocalStorageItem(key);
       return null;
     }
     if (!val || val === 'undefined') {

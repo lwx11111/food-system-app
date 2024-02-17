@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.dao.MenuMapper">
-
+    <select id="getMenuCollectionByUserId" resultType="org.example.domain.Menu">
+        select *
+        from menu m join menu_collection mc on m.id = mc.menu_id
+        where mc.user_id = #{userId}
+    </select>
 
     <!-- 分页查询-自定义sql-Wrapper -->
     <select id="selpageCustomSqlByWrapper" resultType="org.example.domain.Menu">

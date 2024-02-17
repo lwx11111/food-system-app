@@ -1,6 +1,14 @@
 import request from '@/utils/request'
 
 export default {
+	getMenuCollectionByUserId(data) {
+		return request({
+		  url:'/menu/getMenuCollectionByUserId',
+		  method: 'post',
+		  data: data
+		})
+	},
+	
 	// 分页查询
 	selpage4menu(data) {
 		return request({

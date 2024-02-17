@@ -13,7 +13,6 @@ function getPageTitle(pageTitle) {
     return title;
 }
 router.beforeEach(async (to, from, next) => {
-    console.log("Permission")
     // 设置页面标题
     document.title = getPageTitle(to.meta.title)
 

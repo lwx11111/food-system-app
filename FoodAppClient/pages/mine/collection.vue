@@ -1,46 +1,93 @@
 <template>
-  <view>
-	<!-- 物品数据 -->
-	<uni-card v-for="(item,index) in shopItems" @click="toShopItemDetail(index)">
-		<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
-		<view>
-			<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
-		</view>
-		<view>{{item.price}}¥</view>
-	</uni-card>
-  </view>
+	<view>
+		<u-tabs :list="list1" @click="click"></u-tabs>
+		
+		<uni-card v-for="(item,index) in menuCollection"
+				  v-if="showIndex === 0"
+				  @click="toMenuDetail(index)">
+			<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
+			<view>
+				<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+			</view>
+		</uni-card>
+		
+		<!-- 物品数据 -->
+		<uni-card v-for="(item,index) in shopItems" 
+				v-if="showIndex === 1"
+				@click="toShopItemDetail(index)">
+			<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
+			<view>
+				<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+			</view>
+			<view>{{item.price}}¥</view>
+		</uni-card>
+	</view>
 </template>
 
 <script>
 	import ApiShopItem from '@/api/shop/api_shopitem.js';
 	import ApiShopCategory from '@/api/shop/api_shopitemcategory.js'
+	import ApiMenu from '@/api/menu/menu.js'
 	
 	export default {
 		data() {
-		  return {
-			// 物品
-			shopItems: [
-				{
-					id:'1',
-					name:'1',
-					picture:'1',
-					description:'1',
-					price:'1'
-				},
-			],
-			// 查询参数
-			params: {
-				userId: localStorage.getItem('userId'),
-				name:'',
-				categoryId: '',
-				pageSize: '10'
+			return {
+				// 顶部tag
+				list1: [{
+				  name: '菜谱',
+				}, {
+				  name: '菜品',
+				}],
+				// 用来确定展示什么内容
+				showIndex: 0,
+				menuCollection: [],
+				// 物品
+				shopItems: [
+					{
+						id:'1',
+						name:'1',
+						picture:'1',
+						description:'1',
+						price:'1'
+					},
+				],
+				// 查询参数
+				params: {
+					userId: localStorage.getItem('userId'),
+					name:'',
+					categoryId: '',
+					pageSize: '10'
+				}
 			}
-		  }
 		},
 		onLoad: function() {
-			this.getShopItem();
+			this.getMenuCollection();
 		},
 		methods: {
+			
+			/**
+			 * 标签点击
+			 * @param {Object} item
+			 */
+			click(item) {
+				this.showIndex = item.index;
+				if(item.index === 0){
+					this.getMenuCollection();
+				} else if (item.index === 1){
+					this.getShopItem();
+				}
+			},
+			// 菜谱收藏
+			getMenuCollection() {
+				let that = this;
+				ApiMenu.getMenuCollectionByUserId(this.params).then(res => {
+					console.log(res)
+					if(res.code === 200){
+						that.menuCollection = res.data.records;
+					}
+				})
+				
+			},
 			// 物品信息
 			getShopItem() {
 				let that = this;
@@ -56,7 +103,25 @@
 				uni.navigateTo({
 				  url: '/pages/shop/shopItemDetail?id=' + this.shopItems[index].id,
 				})
-			}
+			},
+			toMenuDetail(index) {
+				uni.navigateTo({
+				  url: '/pages/menu/menuDetail?id=' + this.menu[index].id,
+				  events: {
+				    // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+				    acceptDataFromOpenedPage: function(data) {
+				      console.log(data)
+				    },
+				    someEvent: function(data) {
+				      console.log(data)
+				    }
+				  },
+				  success: function(res) {
+				    // 通过eventChannel向被打开页面传送数据
+				    res.eventChannel.emit('acceptDataFromOpenerPage', { data: 'data from starter page' })
+				  }
+				})
+			},
 			
 		 
 		}

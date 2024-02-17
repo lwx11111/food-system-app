@@ -57,16 +57,6 @@ axios.interceptors.response.use(
                 response.headers['content-type'].indexOf('application/octet-stream') !== -1)) {
             return response;
         } else {
-            // if (res.code !== '20000') {
-            //     Message({
-            //         message: res.message || '操作失败，请联系管理员',
-            //         type: 'error',
-            //         duration: 5 * 1000
-            //     })
-            //     return Promise.reject(new Error(JSON.stringify(res) || '操作失败，请联系管理员'))
-            // } else {
-            //     return res
-            // }
             return response.data
         }
     },
@@ -79,29 +69,12 @@ axios.interceptors.response.use(
                 removeToken();
                 router.replace('/login');
             } else {
-                // Message({
-                //     message: error.message,
-                //     type: 'error',
-                //     duration: 5 * 1000
-                // });
+
             }
         } else {
             ElMessage.error('网络出现问题，请稍后再试');
         }
         return Promise.reject(error)
     }
-
-    // response => {
-    //     if (response.data.success === false) {
-    //         return ElMessage.error(response.data.errDesc)
-    //     } else {
-    //         return response.data
-    //     }
-    // },
-    // error => {
-    //     return Promise.reject(error.response) // 返回接口返回的错误信息
-    // }
-
-
 )
 export default axios

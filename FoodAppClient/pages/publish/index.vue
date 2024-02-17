@@ -4,12 +4,12 @@
 			<u-row gutter="16">
 				<u-col  @click="toMenuPublish()" span="4">
 					<image style="width: 50px; height: 50px;" 
-						 src="http://127.0.0.1:9000/appsys/community.png"></image>
+						 src="http://8.130.120.92:9000/appsys/community.png"></image>
 					<view>菜谱发布</view>
 				</u-col>
 				<u-col @click="toCommunityPublish()" span="4">
 					<image style="width: 50px; height: 50px;" 
-							src="http://127.0.0.1:9000/appsys/health.png"></image>
+							src="http://8.130.120.92:9000/appsys/health.png"></image>
 					<view>社区帖子发布</view>
 				</u-col>
 			</u-row>

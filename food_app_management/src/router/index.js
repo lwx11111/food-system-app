@@ -33,6 +33,7 @@ const ShopItemCategoryIndex = () => import('@/views/ShopItem/ShopItemCategory/In
  */
 // 商城管理-订单管理
 const ShopOrderIndex = () => import('@/views/Shop/ShopOrder/Index.vue')
+const MessageIndex = () => import('@/views/Shop/Message/Index.vue')
 
 /**
  * 社区管理
@@ -62,71 +63,102 @@ const routes = [
         path: '/',
         component: Frame,
         redirect: '/homePage',
+        name: '首页',
         children: [
             {
                 path: 'homePage',
                 component: HomePage,
-                name: 'homePage',
+                name: '欢迎页',
             },
             // 菜谱
             {
-                path: '/menu/index',
-                component: MenuIndex,
-                name: 'MenuIndex'
-            },
-            {
-                path: '/menucollection/index',
-                component: MenuCollectionIndex,
-                name: 'MenuCollectionIndex'
-            },
-            {
-                path: '/menucomment/index',
-                component: MenuCommentIndex,
-                name: 'MenuCommentIndex'
-            },
-            {
-                path: '/menulike/index',
-                component: MenuLikeIndex,
-                name: 'MenuLikeIndex'
+                path: '/menu',
+                name: '菜谱管理',
+                children: [
+                    {
+                        path: '/menu/index',
+                        component: MenuIndex,
+                        name: '菜谱列表'
+                    },
+                    {
+                        path: '/menucollection/index',
+                        component: MenuCollectionIndex,
+                        name: '菜谱收藏'
+                    },
+                    {
+                        path: '/menucomment/index',
+                        component: MenuCommentIndex,
+                        name: '菜谱评论'
+                    },
+                    {
+                        path: '/menulike/index',
+                        component: MenuLikeIndex,
+                        name: '菜谱点赞'
+                    },
+                ]
             },
             // 商品
             {
-                path: '/shopitem/index',
-                component: ShopItemIndex,
-                name: 'ShopItemIndex'
+                path: '/shopItem',
+                name: '菜品管理',
+                children: [
+                    {
+                        path: '/shopitem/index',
+                        component: ShopItemIndex,
+                        name: '菜品列表'
+                    },
+                    {
+                        path: '/shopitemcategory/index',
+                        component: ShopItemCategoryIndex,
+                        name: '菜品分类'
+                    },
+                ]
             },
+            // 商城
             {
-                path: '/shoporder/index',
-                component: ShopOrderIndex,
-                name: 'ShopOrderIndex'
-            },
-            {
-                path: '/shopitemcategory/index',
-                component: ShopItemCategoryIndex,
-                name: 'ShopItemCategoryIndex'
+                path: '/shop',
+                name: '菜品管理',
+                children: [
+                    {
+                        path: '/shoporder/index',
+                        component: ShopOrderIndex,
+                        name: '订单管理'
+                    },
+                    {
+                        path: '/message/index',
+                        component: MessageIndex,
+                        name: '私信管理'
+                    },
+                ]
             },
             // 社区
             {
-                path: '/category/index',
-                component: CategoryIndex,
-                name: 'CategoryIndex'
-            },
-            {
-                path: '/community/index',
-                component: CommunityIndex,
-                name: 'CommunityIndex'
-            },
-            // 购物车
-            {
-                path: '/cart',
-                component: Cart,
-                name: 'cart',
+                path: '/community',
+                name: '社区管理',
+                children: [
+                    {
+                        path: '/category/index',
+                        component: CategoryIndex,
+                        name: '社区分类'
+                    },
+                    {
+                        path: '/community/index',
+                        component: CommunityIndex,
+                        name: '社区列表'
+                    },
+                ]
             },
             // 健康
             {
-                path: '/dic/index',
-                component: DicIndex,
-                name: 'DicIndex'
+                path: '/health',
+                name: '健康管理',
+                children: [
+                    {
+                        path: '/dic/index',
+                        component: DicIndex,
+                        name: '食物热量'
+                    },
+                ]
             },
         ]
     }

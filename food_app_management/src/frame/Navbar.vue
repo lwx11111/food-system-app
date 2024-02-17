@@ -1,47 +1,43 @@
 <template>
-    <div class="navbar" style="border: 1px red solid">
+    <div class="navbar">
         <el-row>
-            <el-col :span="14" style="border: 1px red solid">
+            <el-col :span="14" >
                 <div class="l-content">
                     <el-breadcrumb separator="/">
-                        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                        <el-breadcrumb-item><a href="/">用户管理</a></el-breadcrumb-item>
-                        <el-breadcrumb-item>菜谱管理</el-breadcrumb-item>
-                        <el-breadcrumb-item>菜品管理</el-breadcrumb-item>
-                        <el-breadcrumb-item>商城管理</el-breadcrumb-item>
-                        <el-breadcrumb-item>社区管理</el-breadcrumb-item>
-                        <el-breadcrumb-item>健康管理</el-breadcrumb-item>
+                        <el-breadcrumb-item
+                            v-for="(item,index) in data.breadList"
+                            :key="index"
+                            :to="{ path: item.path }"
+                        >{{item.name}}</el-breadcrumb-item>
                     </el-breadcrumb>
                 </div>
             </el-col>
-            <el-col :span="10" style="border: 1px red solid">
-                <div>
-                    <div class="right-menu">
-                        <el-dropdown class="avatar-container right-menu-item hover-effect"
-                                     trigger="click">
-                            <div class="avatar-wrapper">
-<!--                                <img class="user-avatar" src="../assets/images/login.jpg" alt="">-->
-                                <span class="user-name">{{ data.name }}</span>
-                                <i class="el-icon-caret-bottom"/>
-                            </div>
-                            <template #dropdown>
-                                <el-dropdown-menu>
-                                    <el-dropdown-item>
+            <el-col :span="10">
+                <div class="right-menu">
+                    <el-dropdown class="avatar-container right-menu-item hover-effect"
+                                 trigger="click">
+                        <div class="avatar-wrapper">
+                            <img class="user-avatar" src="../assets/images/login.jpg" alt="">
+                            <span class="user-name">{{ data.name }}</span>
+                            <i class="el-icon-caret-bottom"/>
+                        </div>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item>
                                         <span style="display:block;"
                                               @click="handleModifyPass()">
                                             修改密码
                                         </span>
-                                    </el-dropdown-item>
-                                    <el-dropdown-item divided>
+                                </el-dropdown-item>
+                                <el-dropdown-item divided>
                                         <span style="display:block;"
                                               @click="logout()">
                                             退出系统
                                         </span>
-                                    </el-dropdown-item>
-                                </el-dropdown-menu>
-                            </template>
-                        </el-dropdown>
-                    </div>
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
                 </div>
             </el-col>
         </el-row>
@@ -79,16 +75,20 @@
 <script lang="js" setup>
 import { useStore } from 'vuex'
 import { onMounted, reactive, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import Api from '@/api/auth'
 import {ElMessage} from "element-plus";
 import { removeToken } from '@/utils/auth/auth.js'
 import {getEncryptPassword} from "@/utils/passwordEncrypt";
+import { onBeforeRouteUpdate } from "vue-router";
 
 const store = useStore();
 const router = useRouter()
+const route = useRoute();
 
 const data = reactive({
+    // 路由集合
+    breadList: [],
     sidebarOpened: false,
     dialogVisible: false,
     form: {
@@ -118,12 +118,35 @@ const data = reactive({
 
 // Mounted
 onMounted(() => {
-    console.log(localStorage.getItem("userId"))
     data.name = localStorage.getItem("userName")
-    data.form.name = data.name
+    data.form.name = data.name;
+
+    getBreadcrumb();
 })
 
+/**
+ * 路由变化
+ */
+onBeforeRouteUpdate((val, oldVal) => {
+    getBreadcrumb(val.matched);
+});
+
 // Methods
+const isHome = (route) => {
+    return route.name === "首页";
+}
+
+const getBreadcrumb = (matched) => {
+    if (matched === undefined) {
+        matched = route.matched;
+    }
+    //如果不是首页
+    if (!isHome(matched[0])) {
+        matched = [{ path: "/home", meta: { title: "首页" } }].concat(matched);
+    }
+    data.breadList = matched;
+}
+
 const validatePass = (rule, value, callback) => {
     if (value === '') {
         callback(new Error('请输入确认密码'));
@@ -133,15 +156,11 @@ const validatePass = (rule, value, callback) => {
         callback();
     }
 };
-const toggleSideBar = () => {
-    // this.$store.dispatch('app/toggleSideBar')
-}
 
 /**
  * 修改密码
  */
 const handleModifyPass = () => {
-    // data.form.name = this.name;
     data.dialogVisible = true;
 }
 

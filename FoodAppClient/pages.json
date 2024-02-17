@@ -114,31 +114,24 @@
      }
    },
   {
-    "path": "pages/mine/avatar/index",
-    "style": {
-      "navigationBarTitleText": "修改头像"
-    }
-  }, {
-    "path": "pages/mine/info/index",
-    "style": {
-      "navigationBarTitleText": "个人信息"
-    }
-  }, {
     "path": "pages/mine/info/edit",
     "style": {
       "navigationBarTitleText": "编辑资料"
     }
-  }, {
-    "path": "pages/mine/pwd/index",
+  }, 
+  {
+    "path": "pages/mine/info/editPassword",
     "style": {
       "navigationBarTitleText": "修改密码"
     }
-  }, {
-    "path": "pages/mine/setting/index",
+  }, 
+  {
+    "path": "pages/mine/info/setting",
     "style": {
       "navigationBarTitleText": "应用设置"
     }
-  }, {
+  }, 
+  {
     "path": "pages/common/webview/index",
     "style": {
       "navigationBarTitleText": "浏览网页"

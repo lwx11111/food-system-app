@@ -20,6 +20,7 @@ import java.util.Map;
  * @since 2023-10-27
  */
 public interface IMenuService extends IService<Menu> {
+    IPage<MenuVO> getMenuCollectionByUserId(Map<String, String> params);
     /**
      * 根据参数保存
      * @param obj

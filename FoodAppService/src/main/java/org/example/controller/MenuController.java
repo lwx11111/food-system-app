@@ -36,6 +36,23 @@ public class MenuController {
     @Autowired
     private IMenuService service;
 
+
+    @PostMapping("/getMenuCollectionByUserId")
+    @Operation(description = "查询用户收藏的菜谱")
+    @ResponseBody
+    public SimpleResponse getMenuCollectionByUserId(@RequestBody Map<String, String> params) {
+        SimpleResponse response = new SimpleResponse();
+        try {
+            IPage<MenuVO> page = service.getMenuCollectionByUserId(params);
+            response.setData(page);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
     @PostMapping
     @ResponseBody
     @Operation(description = "创建菜谱信息表")

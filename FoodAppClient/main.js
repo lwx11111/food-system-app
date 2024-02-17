@@ -6,7 +6,6 @@ import './permission' // permission
 import uView from "uview-ui";
 Vue.use(uView);
 Vue.use(plugins)
-// uni.$u.config.unit = 'rpx'
 Vue.config.productionTip = false
 Vue.prototype.$store = store
 

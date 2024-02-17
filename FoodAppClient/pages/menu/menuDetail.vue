@@ -71,12 +71,38 @@
 		<uni-card v-if="!this.isTourist">
 			<h2>评论信息</h2>
 			<view v-for="(item,key) in comments">
-				<!-- <view>{{item.user.username}}</view> -->
-				<view>{{item.releaseTime}}</view>
-				<view>{{item.content}}</view>
+				<u-row>
+					<u-col span="2">
+						<image style="width: 30px; height: 30px;"
+								@click="toSendMessage(1)"
+								src="/static/images/tabbar/gouwuche-s.png"></image>
+					</u-col>
+					<u-col span="10">
+						<u-row>
+							<!-- <view>{{item.user.username}}</view> -->
+							123
+						</u-row>
+						<u-row>
+							<view>{{item.releaseTime}}</view>
+						</u-row>
+					</u-col>
+				</u-row>
+				<u-row>
+					<view>{{item.content}}</view>
+				</u-row>
 				<u-divider></u-divider>
 			</view>
 		</uni-card>
+		
+		<!-- 私信弹出层 -->
+		<u-popup style :show="showPop" mode="center" @close="closeMsg">
+			<view style="width:300px;">
+				<uni-card>
+					<u--textarea style="margin-bottom: 10px;" v-model="messageContent" placeholder="请输入私信内容"></u--textarea>
+					<u-button @click="sendMessage()" type="primary" text="确定"></u-button>
+				</uni-card>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
@@ -85,6 +111,8 @@
 	import ApiMenuLike from '@/api/menu/api_menulike.js';
 	import ApiMenuCollection from '@/api/menu/api_menucollection.js';
 	import ApiMenuComment from '@/api/menu/api_menucomment.js';
+	import ApiMessage from '@/api/api_message.js';
+	
 	export default {
 		data() {
 			return {
@@ -124,6 +152,12 @@
 				],
 				isMenuLike: false,
 				isMenuCollection: false,
+				// 私信展示
+				showPop: false,
+				// 私信内容
+				messageContent: '',
+				// 接受者UserId
+				receiveUserId: '',
 			}
 		},
 		onLoad(option) {
@@ -137,6 +171,47 @@
 			}
 		},
 		methods: {
+			
+			/**
+			 * 发送私信
+			 */
+			sendMessage(){
+				var that = this;
+				if(that.messageContent === ""){
+					uni.showToast({
+						title: `请输入私信内容`,
+						icon: 'none'
+					})
+					return;
+				}
+				const messageObj = {
+					sendUserId: localStorage.getItem('userId'),
+					receiveUserId: that.receiveUserId,
+					content: that.messageContent
+				}
+				ApiMessage.add4message(messageObj).then(res => {
+					console.log(res);
+					if(res.code === 200){
+						uni.showToast({
+							title: `发送成功`,
+							icon: 'none'
+						})
+						that.closeMsg();
+					}
+				})
+			},
+			
+			/**
+			 * 打开私信面板
+			 * @param {Object} receiveUserId
+			 */
+			toSendMessage(receiveUserId){
+				this.receiveUserId = receiveUserId;
+				this.showPop = true;
+			},
+			closeMsg(){
+				this.showPop = false;
+			},
 			close(){
 				this.show = false
 			},

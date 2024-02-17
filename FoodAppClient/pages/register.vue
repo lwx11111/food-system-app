@@ -55,7 +55,8 @@
           password: "",
           confirmPassword: "",
           verifyCode: "",
-        }
+        },
+		globalConfig: getApp().globalData.config,
       }
     },
     created() {
@@ -68,7 +69,7 @@
 		getCaptchaUrl(){
 			const uuid = commonUtil.createGuid()
 			this.uuid = uuid;
-			return 'http://localhost:8921/manager/v1/public/anon/verification-code/create?uuid=' + uuid;
+			return this.globalConfig.authUrl + this.globalConfig.managerPrefix + 'v1/public/anon/verification-code/create?uuid=' + uuid;
 		},
 		
 		/**
@@ -115,6 +116,10 @@
 		Api.register(data1).then(res => {
 			console.log(res);
 			if (res.code === '20000'){
+				uni.showToast({
+					title: `注册成功`,
+					icon: 'success'
+				})
 				// 页面跳转
 				this.$tab.navigateTo(`/pages/login`)
 			} else {

@@ -7,12 +7,12 @@
 				<u-row gutter="16">
 					<u-col @click="toCommunity()" span="4">
 						<image style="width: 50px; height: 50px;" 
-							 src="http://127.0.0.1:9000/appsys/community.png"></image>
+							 src="http://8.130.120.92:9000/appsys/community.png"></image>
 						<view>社区</view>
 					</u-col>
 					<u-col @click="toHealth()" span="4">
 						<image style="width: 50px; height: 50px;" 
-								src="http://127.0.0.1:9000/appsys/health.png"></image>
+								src="http://8.130.120.92:9000/appsys/health.png"></image>
 						<view>卡路里计算</view>
 					</u-col>
 				</u-row>
@@ -70,7 +70,8 @@
 				params: {
 					name:'',
 					pageSize: '10'
-				}
+				},
+				globalConfig: getApp().globalData.config,
 			
 		  }
 		},

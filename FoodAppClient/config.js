@@ -6,5 +6,7 @@ module.exports = {
   appInfo:{
 	  appName:'好好吃',
 	  appId:'1'
-  }
+  },
+  minioUrl: 'http://8.130.120.92/',
+  minioBucketName: 'appsys'
 }

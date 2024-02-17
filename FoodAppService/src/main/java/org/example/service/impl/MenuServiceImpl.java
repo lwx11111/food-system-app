@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.example.vo.MenuVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.StringUtils;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
@@ -37,6 +39,17 @@ import java.util.Map;
  */
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
+
+    @Autowired
+    private MenuMapper menuMapper;
+
+    @Override
+    public IPage<MenuVO> getMenuCollectionByUserId(Map<String, String> params) {
+        Page<Menu> page = PageUtils.pageHandler(params);
+        String userId = params.get("userId");
+        IPage<Menu> result = menuMapper.getMenuCollectionByUserId(page, userId);
+        return this.MenuToMenuVO(result);
+    }
 
     @Override
     public void saveByParam(MenuVO obj) {
@@ -200,6 +213,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
                 query.eq("type",entry.getValue());
             }
         }
-        return  query;
+        return query;
     }
 }

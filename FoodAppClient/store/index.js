@@ -57,15 +57,6 @@ const store = new Vuex.Store({
 	            let res = await api.getGoods(id);
 	            content.commit('setGoods',res.data);
 	        }
-	
-	        // console.log(store.state.goods);
-	        // console.log(store.getters['goodsData']);
-	        // store.commit('changeGoods',123);
-	        // async function abc() {
-	        //     await store.dispatch("setGoods", {
-	        //         id: 123,
-	        //     });
-	        // }
 	    },
   modules: {
     user
