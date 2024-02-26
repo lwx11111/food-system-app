@@ -42,7 +42,7 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import Api from '../../api/api_sysossfile.js'
+import Api from '@/api/sys/api_sysossfile.js'
 import Vue, {watch} from 'vue'
 import { reactive, ref } from 'vue'
 import {ElMessage} from "element-plus";

@@ -1,6 +1,10 @@
+<!--
+    限制一个的上传
+    普通时候点击上传
+    更新时候显示已经上传的文件加更新
+    查看时只显示图片
+-->
 <template>
-<!--    :limit="props.limit"-->
-<!--    :on-exceed="handleExceed"-->
     <div>
         <div v-if="props.show" v-for="(item,key) in props.fileList">
             <el-image style="width: 100px; height: 100px"
@@ -12,7 +16,7 @@
                    :file-list="data.fileList"
                    :auto-upload="true"
                    list-type="picture"
-
+                   :limit="1"
                    :action="data.minioUrl"
                    :data="data.fileData"
                    :on-preview="handlePreview"
@@ -20,7 +24,7 @@
                    :on-success="handleSuccess"
                    :on-error="handleError"
                    :before-upload="handleBeforeUpload"
-
+                   :on-exceed="handleExceed"
                    :on-change="handleChange">
             <el-button type="primary">点击上传</el-button>
             <template #tip>
@@ -51,15 +55,18 @@ const data = reactive({
         groupName:''
     },
     minioUrl: "http://localhost:8081/sysoss/uploadOSS",
-    minioServerUrl: "http://127.0.0.1:9000/",
+    // minioServerUrl: "http://127.0.0.1:9000/",
+    minioServerUrl: "http://8.130.120.92:9000/",
     fileList: [],
 })
 
 // Props
 const props = defineProps({
-    limit: {
-        type: Number,
-        default: 100
+    // 上传的url
+    url: {
+        type: String,
+        default: '',
+        required: false
     },
     // 上传的文件列表
     fileList: {

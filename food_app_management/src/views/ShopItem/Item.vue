@@ -38,11 +38,12 @@
                         <el-form-item
                                 label="物品价格"
                                 prop="price">
-                            <el-input
-                                    type="number"
-                                    v-model="data.item.price"
-                                    :disabled="data.disabled">
-                            </el-input>
+                            <el-input-number :disabled="data.disabled"
+                                             v-model="data.item.price"
+                                             :precision="2"
+                                             :step="1">
+
+                            </el-input-number>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
@@ -93,8 +94,8 @@
     </el-dialog>
 </template>
 <script lang="ts" setup>
-    import Api from '@/api/api_shopitem.js'
-    import ShopItemCategoryApi from '@/api/api_shopitemcategory.js'
+    import Api from '@/api/ShopItem/api_shopitem.js'
+    import ShopItemCategoryApi from '@/api/ShopItem/api_shopitemcategory.js'
     import { reactive, ref, onMounted, toRefs } from 'vue'
     import { useStore } from "vuex";
     import { useRouter } from 'vue-router'
@@ -242,10 +243,22 @@
                     return;
                 }
             })
+
+            // 图片
+            if (data.item.picture !== null || data.item.picture !== ''){
+                let item1 = {
+                    url: data.item.picture
+                }
+                data.fileList = [];
+                data.fileList.push(item1)
+            }
+
         } else {
             // 界面显示
             data.showDialog = true;
         }
+
+
     }
     const back = () => {
         // 返回操作

@@ -44,7 +44,7 @@
     </el-dialog>
 </template>
 <script lang="ts" setup>
-    import Api from '@/api/api_shopitemcategory.js'
+    import Api from '@/api/ShopItem/api_shopitemcategory.js'
     import { reactive, ref, onMounted, toRefs } from 'vue'
     import { useStore } from "vuex";
     import { useRouter } from 'vue-router'

@@ -8,6 +8,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.example.vo.ShopOrderStatisticalDataVo;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,4 +41,6 @@ public interface ShopOrderMapper extends BaseMapper<ShopOrder> {
      * @return: IPage<ShopOrder>
     */
     IPage<ShopOrder> selpageCustomSqlByMap(Page<ShopOrder> page, @Param("params") Map<String, String> params);
+
+    List<ShopOrderStatisticalDataVo> getStatisticalData();
 }

@@ -23,7 +23,7 @@ const MenuLikeIndex = () => import('@/views/Menu/MenuLike/Index.vue')
 /**
  * 菜品管理
  */
-const ShopItemIndex = () => import('../views/ShopItem/Index.vue')
+const ShopItemIndex = () => import('@/views/ShopItem/Index.vue')
 // 菜品-物品分类
 const ShopItemCategoryIndex = () => import('@/views/ShopItem/ShopItemCategory/Index.vue')
 
@@ -69,6 +69,16 @@ const routes = [
                 component: HomePage,
                 name: '欢迎页',
             },
+            {
+                path: '/shopitem/index',
+                component: ShopItemIndex,
+                name: '菜品列表'
+            },
+            {
+                path: '/shopitemcategory/index',
+                component: ShopItemCategoryIndex,
+                name: '菜品分类'
+            },
             // 菜谱
             {
                 path: '/menu',
@@ -97,22 +107,22 @@ const routes = [
                 ]
             },
             // 商品
-            {
-                path: '/shopItem',
-                name: '菜品管理',
-                children: [
-                    {
-                        path: '/shopitem/index',
-                        component: ShopItemIndex,
-                        name: '菜品列表'
-                    },
-                    {
-                        path: '/shopitemcategory/index',
-                        component: ShopItemCategoryIndex,
-                        name: '菜品分类'
-                    },
-                ]
-            },
+            // {
+            //     path: '/item',
+            //     name: '菜品管理',
+            //     children: [
+            //         {
+            //             path: '/shop/index',
+            //             component: ShopItemIndex,
+            //             name: '菜品列表'
+            //         },
+            //         {
+            //             path: '/shopitemcategory/index',
+            //             component: ShopItemCategoryIndex,
+            //             name: '菜品分类'
+            //         },
+            //     ]
+            // },
             // 商城
             {
                 path: '/shop',

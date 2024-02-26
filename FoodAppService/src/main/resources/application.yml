@@ -7,9 +7,11 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/food_app?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: lwxMysql
+    url: jdbc:mysql://43.138.149.121:3306/food_app?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: xjuer
+    password:  Xju#1234
+#    username: root
+#    password: lwxMysql
 
   # swagger配置 http://localhost:8080/swagger-ui/index.html
 
@@ -52,11 +54,13 @@ logging:
     org.example: trace
 
 minio:
-  endpoint: http://127.0.0.1
+#  endpoint: http://127.0.0.1
+  endpoint: http://8.130.120.92
   port: 9000
   accessKey: minioadmin
   secretKey: minioadmin
-  bucket: test
+  bucket: appsys
+#  bucket: test
 
 
 

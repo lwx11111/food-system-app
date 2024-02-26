@@ -1,5 +1,7 @@
 <template>
   <view>
+	  <!-- 悬浮按钮 -->
+	  <u-button type="primary" style="width: 10px;" shape="circle" size="small" text="大小尺寸"></u-button>
 	  <uni-search-bar  v-model="params.title" @confirm="search"></uni-search-bar>
 	  <!-- 分类标签 -->
 	  <view>

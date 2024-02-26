@@ -78,22 +78,25 @@
 		这些食物的卡路里数：{{foodNum}}
 	</uni-card>
 	
+<!-- 	
+	废弃效果
 	<uni-card>
 		<u-cell-group>
 			<u-cell
 				@click="pickFood()"
 				title="选择食物"
 				isLink>
-<!-- 				<image
-					slot="icon"
-					class="u-cell-icon"
-					:src="item.iconUrl"
-					mode="widthFix"
-				></image> -->
 			</u-cell>
 		</u-cell-group>
 		<u-picker :show="showFood" keyName="keyy" ref="uPicker" :columns="columns" @cancel="showFood = false" @confirm="confirm" @change="changeHandler"></u-picker>
+	</uni-card> -->
+
+	<uni-card v-for="(item, key) in categoryNames">
+		<h3>{{item.keyy}}</h3>
+	
+			<u-tag v-for="(i, k) in foods[key]" style="width: 50px;" plain size="mini" :text="i.keyy"></u-tag>					
 	</uni-card>
+	
   </view>
 </template>
 
@@ -104,14 +107,18 @@
 		data() {
 			return {
 				showFood: false,
+				// 分类信息-废弃
 				columns: [
 					[{"id":1,"name":"赛尔威"},{"id":2,"name":"龙岗图书馆"}],
 					['深圳', '厦门', '上海', '拉萨'] // 默认加载
 				],
+				// 食物信息-废弃
 				columnData: [
 					['深圳', '厦门', '上海', '拉萨'],
 					['得州', '华盛顿', '纽约', '阿拉斯加']
 				],
+				categoryNames:[],
+				foods:[],
 				foodNum:0,
 				text:[
 					{
@@ -195,13 +202,18 @@
 		onLoad: function(option) {
 			ApiDic.listFoods().then(res => {
 				console.log(res);
-				this.columns = [];
-				this.columns.push(res.data.categoryNames);
-				this.columns.push(res.data.foods[0]);
-				console.log(this.columns);
-				this.columnData = [];
-				this.columnData = res.data.foods;
-				this.text = []
+				// 废弃功能
+				// this.columns = [];
+				// this.columns.push(res.data.categoryNames);
+				// this.columns.push(res.data.foods[0]);
+				// console.log(this.columns);
+				// this.columnData = [];
+				// this.columnData = res.data.foods;
+				// this.text = []
+				if(res.code === 200){
+					this.categoryNames = res.data.categoryNames;
+					this.foods = res.data.foods
+				}
 			})
 		},
 		methods: {

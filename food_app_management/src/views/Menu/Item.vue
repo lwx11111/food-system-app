@@ -97,7 +97,7 @@
     </el-dialog>
 </template>
 <script lang="ts" setup>
-    import Api from '@/api/api_menu.js'
+    import Api from '@/api/Menu/api_menu.js'
     import { reactive, ref, onMounted, toRefs } from 'vue'
     import { useStore } from "vuex";
     import { useRouter } from 'vue-router'

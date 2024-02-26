@@ -12,4 +12,14 @@
     <select id="selpageCustomSqlByMap" resultType="org.example.domain.ShopOrder">
         select * from shop_order t where id=#{params.id} and name=#{params.name}
     </select>
+
+    <select id="getStatisticalData" resultType="org.example.vo.ShopOrderStatisticalDataVo">
+        select id,name as shopItemName,amount,t.price
+        from shop_item si JOIN (SELECT shop_item_id,sum(amount) as amount,sum(price) as price
+        FROM `shop_order`
+        GROUP BY shop_item_id) t
+        on si.id = t.shop_item_id
+        ORDER BY t.price DESC
+        limit 8
+    </select>
 </mapper>

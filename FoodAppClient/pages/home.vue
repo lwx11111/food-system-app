@@ -1,6 +1,10 @@
 <template>
 	<view>
-		<uni-search-bar v-model="params.name" @confirm="search"></uni-search-bar>
+		<view style="width: ;">
+			<uni-search-bar v-model="params.name" @confirm="search"></uni-search-bar>
+			<u-search placeholder="请搜索" v-model="params.name" @search="search"></u-search>
+		</view>
+		
 		<!-- 应用列表 -->
 		<view>
 			<uni-card> 
@@ -8,12 +12,13 @@
 					<u-col @click="toCommunity()" span="4">
 						<image style="width: 50px; height: 50px;" 
 							 src="http://8.130.120.92:9000/appsys/community.png"></image>
-						<view>社区</view>
+						<view>社区管理</view>
 					</u-col>
-					<u-col @click="toHealth()" span="4">
-						<image style="width: 50px; height: 50px;" 
+					<u-col span="4"></u-col>
+					<u-col @click="toHealth()" style="text-align: right;" span="4">
+						<image style="margin-left: 50px;width: 50px; height: 50px;" 
 								src="http://8.130.120.92:9000/appsys/health.png"></image>
-						<view>卡路里计算</view>
+						<view>健康管理</view>
 					</u-col>
 				</u-row>
 			</uni-card>

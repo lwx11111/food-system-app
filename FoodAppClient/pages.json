@@ -3,12 +3,15 @@
 			"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 		},
 		
-  "pages": [{
-    "path": "pages/login",
-    "style": {
-      "navigationBarTitleText": "登录"
-    }
-  }, {
+  "pages": [
+	  
+	{
+		"path": "pages/login",
+		"style": {
+		  "navigationBarTitleText": "登录"
+		}
+	}, 
+	{
     "path": "pages/register",
     "style": {
       "navigationBarTitleText": "注册"
@@ -159,7 +162,7 @@
         "text": "菜谱"
       },
 	  {
-        "pagePath": "pages/publish/index",
+        "pagePath": "pages/menu/menuPublish",
         "iconPath": "static/images/tabbar/jiahao.png",
         "selectedIconPath": "static/images/tabbar/jiahao-s.png",
         "text": "发布页"

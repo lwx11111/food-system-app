@@ -135,7 +135,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-    import Api from '@/api/api_category.js'
+    import Api from '@/api/Community/api_category.js'
     import ItemDialog from './Item.vue'
     import { reactive, ref, defineProps, toRefs, onMounted} from 'vue'
     import Upload from "@/utils/oss/upload.vue";
@@ -187,9 +187,9 @@
 
     // Methods
     const tableRowClassName = ({row, rowIndex}) => {
-        if (rowIndex === 1) {
+        if (rowIndex % 2 === 0) {
             return 'warning-row'
-        } else if (rowIndex === 3) {
+        } else if (rowIndex % 1 === 0) {
             return 'success-row'
         }
         return ''

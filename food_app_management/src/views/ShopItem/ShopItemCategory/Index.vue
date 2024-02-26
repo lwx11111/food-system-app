@@ -4,7 +4,7 @@
         <el-card style="margin: 10px;">
             <template #header>
                 <div class="innerHeader">
-                    物品分类管理
+                    菜品分类管理
                 </div>
             </template>
             <div style="display: flex;"
@@ -135,7 +135,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-    import Api from '@/api/api_shopitemcategory.js'
+    import Api from '@/api/ShopItem/api_shopitemcategory.js'
     import ItemDialog from './Item.vue'
     import { reactive, ref, defineProps, toRefs, onMounted} from 'vue'
     import Upload from "@/utils/oss/upload.vue";
@@ -188,9 +188,9 @@
 
     // Methods
     const tableRowClassName = ({row, rowIndex}) => {
-        if (rowIndex === 1) {
+        if (rowIndex % 2 === 0) {
             return 'warning-row'
-        } else if (rowIndex === 3) {
+        } else if (rowIndex % 1 === 0) {
             return 'success-row'
         }
         return ''

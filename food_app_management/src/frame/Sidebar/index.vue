@@ -42,6 +42,7 @@
                 'funId': '1',
                 'funName': '首页',
                 'url': '/homePage',
+                'icon':'House'
             },
             {
                 'funId': '2',
@@ -51,22 +52,22 @@
                     'funId': '21',
                     'funName': '菜谱评论管理',
                     'url': '/menucomment/index',
-                    'icon': 'KnifeFork'
+                    'icon': 'EditPen'
                 },{
                     'funId': '22',
                     'funName': '菜谱列表',
                     'url': '/menu/index',
-                    'icon': 'KnifeFork'
+                    'icon': 'Document'
                 },{
                     'funId': '22',
                     'funName': '菜谱收藏管理',
                     'url': '/menucollection/index',
-                    'icon': 'KnifeFork'
+                    'icon': 'Star'
                 },{
                     'funId': '22',
                     'funName': '菜谱点赞管理',
                     'url': '/menulike/index',
-                    'icon': 'KnifeFork'
+                    'icon': 'Pointer'
                 }]
             },
             {
@@ -77,12 +78,12 @@
                     'funId': '31',
                     'funName': '菜品分类管理',
                     'url': '/shopitemcategory/index',
-                    'icon': 'Dish'
+                    'icon': 'CopyDocument'
                 },{
                     'funId': '32',
                     'funName': '菜品列表',
                     'url': '/shopitem/index',
-                    'icon': 'Dish'
+                    'icon': 'Document'
                 }]
             },
             {
@@ -93,7 +94,7 @@
                     'funId': '41',
                     'funName': '订单管理',
                     'url': '/shoporder/index',
-                    'icon': 'SoldOut'
+                    'icon': 'Document'
                 }]
             },
             {
@@ -110,22 +111,20 @@
                     'funId': '52',
                     'funName': '社区列表',
                     'url': '/community/index',
-                    'icon': 'ChatLineRound'
+                    'icon': 'Document'
                 }]
             },
             {
                 'funId': '6',
                 'funName': '健康管理',
-                'icon': 'Help',
+                'icon': 'Bicycle',
                 'children':[{
                     'funId': '51',
                     'funName': '食物热量管理',
                     'url': '/dic/index',
-                    'icon': 'Help'
+                    'icon': 'IceTea'
                 }]
             },
-
-
         ]
     })
 </script>

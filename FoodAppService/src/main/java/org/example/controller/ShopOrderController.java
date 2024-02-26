@@ -32,6 +32,21 @@ public class ShopOrderController {
     @Autowired
     private IShopOrderService service;
 
+    @GetMapping("/getStatisticalData")
+    @ResponseBody
+    @Operation(description = "获取统计数据")
+    public SimpleResponse getStatisticalData(){
+        SimpleResponse response = new SimpleResponse();
+        try {
+            response.setData(service.getStatisticalData());
+        } catch (Exception e) {
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
     @PostMapping("/listShopOrderByUserId")
     @ResponseBody
     @Operation(description = "创建")

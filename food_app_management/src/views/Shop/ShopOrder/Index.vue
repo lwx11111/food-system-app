@@ -141,7 +141,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-    import Api from '@/api/api_shoporder.js'
+    import Api from '@/api/Shop/api_shoporder.js'
     import ItemDialog from './Item.vue'
     import { reactive, ref, defineProps, toRefs, onMounted} from 'vue'
     import Upload from "@/utils/oss/upload.vue";
@@ -191,27 +191,13 @@
     // Mounted
     onMounted(() => {
         getData();
-        // window.onresize = () => {
-        //     return (() => {
-        //         data.screenHeight = window.innerHeight
-        //     })()
-        // }
-
-        // 菜单界面生成时日志记录
-        // const islog = Vue.prototype.$config.ISLOG;
-        // if (true==islog){
-        //     this.OperatorLogParam.operateFeatures = '菜单点击'
-        //     this.OperatorLogParam.operateType = LogType.Query
-        //     this.OperatorLogParam.operateState = '成功'
-        //     OperatorLog.setOperationLog(this.OperatorLogParam)
-        // }
     })
 
     // Methods
     const tableRowClassName = ({row, rowIndex}) => {
-        if (rowIndex === 1) {
+        if (rowIndex % 2 === 0) {
             return 'warning-row'
-        } else if (rowIndex === 3) {
+        } else if (rowIndex % 1 === 0) {
             return 'success-row'
         }
         return ''

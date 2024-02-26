@@ -1,8 +1,17 @@
 import request from '@/utils/request.js'
 
-
-
 export default {
+
+  /**
+   * 获取统计数据
+   * @returns {Promise<axios.AxiosResponse<any>> | *}
+   */
+  getStatisticalData() {
+    return request({
+      url: '/shoporder/getStatisticalData',
+      method: 'get',
+    })
+  },
 
   // 分页查询
   selpage4shoporder(data) {

@@ -154,7 +154,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-    import Api from '@/api/api_message.js'
+    import Api from '@/api/Shop/api_message.js'
     import ItemDialog from './Item.vue'
     import { reactive, ref, defineProps, toRefs, onMounted} from 'vue'
     import Upload from "@/utils/oss/upload.vue";
@@ -210,9 +210,9 @@
 
     // Methods
     const tableRowClassName = ({row, rowIndex}) => {
-        if (rowIndex === 1) {
+        if (rowIndex % 2 === 0) {
             return 'warning-row'
-        } else if (rowIndex === 3) {
+        } else if (rowIndex % 1 === 0) {
             return 'success-row'
         }
         return ''
@@ -237,14 +237,6 @@
                 data.pageConfig.total = res.data.total
                 data.isSearch = false
             }
-
-            // 日志记录
-            // data.OperatorLogParam.operateContent = JSON.stringify(params)
-            // data.OperatorLogParam.operateFeatures = '查询列表'
-            // data.OperatorLogParam.operateType = LogType.Query
-            // data.OperatorLogParam.operateState = '成功'
-            // OperatorLog.setOperationLog(this.OperatorLogParam)
-
         })
     }
     // 添加记录
