@@ -1,5 +1,8 @@
 package org.example.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import org.example.domain.Dic;
 import org.example.domain.Menu;
 import org.example.dao.MenuMapper;
 import org.example.service.IMenuService;
@@ -42,6 +45,48 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 
     @Autowired
     private MenuMapper menuMapper;
+
+    @Autowired
+    private DicServiceImpl dicService;
+
+    @Override
+    public List<Menu> listMenuByNames(Map<String, String> params) {
+        System.out.println(params.get("name"));
+        JSONArray array = JSONArray.parseArray(params.get("name"));
+        List<Menu> list = new ArrayList<>();
+        for (Object obj : array) {
+            String name = (String) obj;
+            System.out.println(name);
+            LambdaQueryWrapper<Menu> query = new LambdaQueryWrapper<Menu>()
+                    .like(Menu::getName, name);
+            Page<Menu> page = PageUtils.pageHandler(params);
+            list.addAll(this.list(query));
+        }
+        return list;
+    }
+
+    @Override
+    public IPage<MenuVO> getDailyRecommendation(Map<String, String> params) {
+        Dic dic = dicService.getDicByKeyy("每日推荐id");
+        String randomId = dic.getValue();
+        if (dic.getValue() == null) {
+            List<String> randomIds = menuMapper.getRandomIds();
+            String value = "(";
+            for (int i = 0; i < randomIds.size(); i++) {
+                if (i == randomIds.size() - 1) {
+                    value += "'" + randomIds.get(i) + "')";
+                } else {
+                    value += "'" + randomIds.get(i) + "',";
+                }
+            }
+            dic.setValue(value);
+            dicService.updateValueById(dic.getId(), value);
+        }
+        String value = dic.getValue();
+        Page<Menu> page = PageUtils.pageHandler(params);
+        IPage<Menu> result = menuMapper.getDailyRecommendation(page, value);
+        return this.MenuToMenuVO(result);
+    }
 
     @Override
     public IPage<MenuVO> getMenuCollectionByUserId(Map<String, String> params) {

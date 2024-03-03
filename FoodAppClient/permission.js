@@ -1,4 +1,4 @@
-import { getToken } from '@/utils/auth'
+import { getToken } from '@/utils/auth/auth.js'
 
 // 登录页面
 const loginPage = "/pages/login"

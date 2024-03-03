@@ -1,6 +1,6 @@
 import store from '@/store'
 import config from '@/config'
-import { getToken } from '@/utils/auth'
+import { getToken } from '@/utils/auth/auth.js'
 import errorCode from '@/utils/errorCode'
 import { toast, showConfirm, tansParams } from '@/utils/common'
 import qs from "qs";
@@ -13,8 +13,10 @@ const request = config => {
 	// 是否需要设置 token
 	const isToken = (config.headers || {}).isToken === false
 	config.header = config.header || {}
-	if (getToken() && !isToken) {
-		config.header['Authorization'] = 'Bearer ' + getToken()
+	
+	console.log(getToken());
+	if (getToken()) {
+		config.header['Authorization'] = getToken()
 	}
 	// get请求映射params参数
 	if (config.params === 'get') {
@@ -33,7 +35,8 @@ const request = config => {
 		if(config.type === 'form'){
 			uni.request({
 				header: {
-					"Content-Type": "application/x-www-form-urlencoded"
+					"Content-Type": "application/x-www-form-urlencoded",
+					"Authorization": getToken()
 				}, // 请求头
 				method: config.method || 'get',
 				timeout: config.timeout ||  timeout,

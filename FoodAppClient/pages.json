@@ -55,6 +55,12 @@
     }
   }, 
   {
+    "path": "pages/menu/menuList",
+    "style": {
+      "navigationBarTitleText": "菜谱列表"
+    }
+  }, 
+  {
     "path": "pages/menu/menuDetail",
     "style": {
       "navigationBarTitleText": "菜谱详情"
@@ -64,6 +70,18 @@
     "path": "pages/menu/menuPublish",
     "style": {
       "navigationBarTitleText": "菜谱发布"
+    }
+  }, 
+  {
+    "path": "pages/message/index",
+    "style": {
+      "navigationBarTitleText": "私信列表"
+    }
+  }, 
+  {
+    "path": "pages/message/messageDetail",
+    "style": {
+      "navigationBarTitleText": "私信详情"
     }
   }, 
   // 发布

@@ -212,6 +212,11 @@
 				// this.text = []
 				if(res.code === 200){
 					this.categoryNames = res.data.categoryNames;
+					for(let i = 0;i < res.data.categoryNames.length; i++){
+						if(res.data.categoryNames[i].keyy === '每日推荐id'){
+							res.data.categoryNames.splice(i,1);
+						}
+					}
 					this.foods = res.data.foods
 				}
 			})
@@ -253,7 +258,6 @@
 				// 计算 BMR 后，将结果乘以活动系数以计算体力活动水平。
 				
 				this.$refs.uForm.validate().then(res => {
-					console.log("lwx");
 					let bmr = 0;
 					console.log(this.form.sex);
 					if(this.form.sex === '男'){

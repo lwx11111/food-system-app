@@ -20,6 +20,9 @@ import java.util.Map;
  * @since 2024-01-22
  */
 public interface IDicService extends IService<Dic> {
+    void updateValueById(String id, String value);
+
+    Dic getDicByKeyy(String keyy);
 
     List<Dic> listParentDic();
 

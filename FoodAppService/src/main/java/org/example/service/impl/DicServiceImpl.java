@@ -1,6 +1,7 @@
 package org.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import org.example.domain.Dic;
 import org.example.dao.DicMapper;
 import org.example.service.IDicService;
@@ -38,6 +39,25 @@ import java.util.Map;
  */
 @Service
 public class DicServiceImpl extends ServiceImpl<DicMapper, Dic> implements IDicService {
+
+    @Override
+    public void updateValueById(String id, String value) {
+        LambdaUpdateWrapper<Dic> update = new LambdaUpdateWrapper<Dic>()
+                .eq(Dic::getId, id)
+                .set(Dic::getValue, value);
+        this.update(update);
+    }
+
+    @Override
+    public Dic getDicByKeyy(String keyy) {
+        LambdaQueryWrapper<Dic> query = new LambdaQueryWrapper<Dic>()
+                .eq(Dic::getKeyy, keyy);
+        List<Dic> list = this.list(query);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 
     @Override
     public List<Dic> listParentDic() {

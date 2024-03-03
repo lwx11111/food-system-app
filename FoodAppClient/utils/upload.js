@@ -1,6 +1,6 @@
 import store from '@/store'
 import config from '@/config'
-import { getToken } from '@/utils/auth'
+import { getToken } from '@/utils/auth/auth.js'
 import errorCode from '@/utils/errorCode'
 import { toast, showConfirm, tansParams } from '@/utils/common'
 

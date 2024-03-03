@@ -1,11 +1,10 @@
 package org.example.service;
 
-import org.example.domain.Menu;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.vo.MenuVO;
+import org.example.domain.SysDict;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -13,24 +12,20 @@ import java.util.Map;
 
 /**
  * <p>
- * 菜谱信息表 服务类
+ * 字典表 服务类
  * </p>
  *
  * @author lwx20
- * @since 2023-10-27
+ * @since 2023-12-12
  */
-public interface IMenuService extends IService<Menu> {
-
-    List<Menu> listMenuByNames(Map<String, String> params);
-    IPage<MenuVO> getDailyRecommendation(Map<String, String> params);
-
-    IPage<MenuVO> getMenuCollectionByUserId(Map<String, String> params);
+public interface ISysDictService extends IService<SysDict> {
     /**
      * 根据参数保存
      * @param obj
+     * @param params
      * @return: void
      */
-    void saveByParam(MenuVO obj);
+    void saveByParam(SysDict obj,Map<String, String> params);
 
     /**
      * 根据参数更新
@@ -38,7 +33,7 @@ public interface IMenuService extends IService<Menu> {
      * @param params
      * @return: void
      */
-    void updateByParam(Menu obj,Map<String, String> params);
+    void updateByParam(SysDict obj,Map<String, String> params);
     /**
      * 根据条件删除
      *
@@ -47,40 +42,37 @@ public interface IMenuService extends IService<Menu> {
      */
     void deleteBy(Map<String, String> params);
 
-
-    MenuVO getMenuVOById(String id);
-
     /**
      * 根据条件查询
      *
      * @param params
-     * @return: List<Menu>
+     * @return: List<SysDict>
      */
-     List<Menu> selectBy(Map<String, String> params);
+     List<SysDict> selectBy(Map<String, String> params);
 
     /**
      * 分页查询
      *
      * @param params
-     * @return: IPage<Menu>
+     * @return: IPage<SysDict>
     */
-    IPage<MenuVO> selectPage(Map<String, String> params);
+    IPage<SysDict> selectPage(Map<String, String> params);
 
     /**
      * 分页查询-自定义sql-Wrapper
      *
      * @param params
-     * @return: IPage<Menu>
+     * @return: IPage<SysDict>
     */
-    IPage<Menu> selpageCustomSqlByWrapper(Map<String, String> params);
+    IPage<SysDict> selpageCustomSqlByWrapper(Map<String, String> params);
 
     /**
      * 分页查询-自定义sql-Map
      *
      * @param params
-     * @return: IPage<Menu>
+     * @return: IPage<SysDict>
     */
-    IPage<Menu> selpageCustomSqlByMap(Map<String, String> params);
+    IPage<SysDict> selpageCustomSqlByMap(Map<String, String> params);
 
     /**
      * 下载excel模板

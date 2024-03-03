@@ -13,13 +13,38 @@
 		</view>
 	</view>
 	<!-- 物品数据 -->
-	<uni-card v-for="(item,index) in shopItems" @click="toShopItemDetail(index)">
+	<view v-for="(item,index) in shopItems" v-if="index%2==0">
+		<u-row gutter="16">
+			<u-col span="6" @click="toShopItemDetail(index)">
+				<uni-card>
+					<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
+					<view>
+						<image style="width: 200px; height: 100px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+					</view>
+					<view>{{item.price}}¥</view>
+				</uni-card>
+			</u-col>
+			<u-col span="6" 
+					@click="toShopItemDetail(index + 1)" 
+					v-if=" index + 1 < shopItems.length">
+				<uni-card>
+					<view style="margin-bottom: 10px;"><h2>{{shopItems[index + 1].name}}</h2></view>
+					<view>
+						<image style="width: 200px; height: 100px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+					</view>
+					<view>{{shopItems[index + 1].price}}¥</view>
+				</uni-card>
+			</u-col>
+		</u-row>
+	</view>
+	
+<!-- 	<uni-card v-for="(item,index) in shopItems" v-if="index%2==0" @click="toShopItemDetail(index)">
 		<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
 		<view>
 			<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
 		</view>
 		<view>{{item.price}}¥</view>
-	</uni-card>
+	</uni-card> -->
   </view>
 </template>
 

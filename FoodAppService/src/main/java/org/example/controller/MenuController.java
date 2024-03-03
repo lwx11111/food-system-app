@@ -37,6 +37,40 @@ public class MenuController {
     private IMenuService service;
 
 
+    @PostMapping("/listMenuByNames")
+    @Operation(description = "分页查询菜谱信息表")
+    @ResponseBody
+    public SimpleResponse listMenuByNames(@RequestBody Map<String, String> params) {
+        SimpleResponse response = new SimpleResponse();
+        try {
+            response.setData(service.listMenuByNames(params));
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+        }
+        System.out.println(response);
+        return response;
+    }
+
+    @PostMapping("/getDailyRecommendation")
+    @Operation(description = "分页查询菜谱信息表")
+    @ResponseBody
+    public SimpleResponse getDailyRecommendation(@RequestBody Map<String, String> params) {
+        SimpleResponse response = new SimpleResponse();
+        try {
+            IPage<MenuVO> page = service.getDailyRecommendation(params);
+            response.setData(page);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+        }
+        System.out.println(response);
+        return response;
+    }
+
+
     @PostMapping("/getMenuCollectionByUserId")
     @Operation(description = "查询用户收藏的菜谱")
     @ResponseBody

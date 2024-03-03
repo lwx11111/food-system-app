@@ -19,5 +19,21 @@ export default {
 			data: data
 		})
 	},
+	
+	logout() {
+		return request({
+			url: '/manager/' + 'v1/account/logout',
+			method: 'post'
+		})
+	},
+	
+	    modifyPass(data) {
+	        return request({
+	            url: '/manager/' + 'v1/account/modify-password',
+	            method: 'post',
+	            type: 'form',
+	            data: data
+	        })
+	    },
 }
 

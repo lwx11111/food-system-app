@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,6 +22,8 @@ import java.util.Map;
  */
 @Mapper
 public interface MenuMapper extends BaseMapper<Menu> {
+    IPage<Menu> getDailyRecommendation(Page<Menu> page, @Param("value") String value);
+    List<String> getRandomIds();
     IPage<Menu> getMenuCollectionByUserId(Page<Menu> page, @Param("userId") String userId);
     /**
      * 分页查询-自定义sql-Wrapper

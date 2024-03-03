@@ -31,7 +31,9 @@
 </template>
 
 <script>
+	  import  Api from '@/api/auth.js'
   export default {
+	
     data() {
       return {
         windowHeight: uni.getSystemInfoSync().windowHeight
@@ -52,9 +54,12 @@
       },
       handleLogout() {
         this.$modal.confirm('确定注销并退出系统吗？').then(() => {
-          this.$store.dispatch('LogOut').then(() => {
-            this.$tab.reLaunch('/pages/index')
-          })
+			localStorage.removeItem("userId");
+			this.$tab.reLaunch('/pages/login')
+        //   Api.logout().then(res => {
+        //           console.log(res);
+                  
+        //       })
         })
       }
     }

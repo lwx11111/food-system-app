@@ -22,10 +22,10 @@
 		<view class="content-section">
 			
 			<view class="mine-actions grid col-4 text-center">
-				<!-- <view class="action-item" @click="toShoppingCart">
+				<view class="action-item" @click="toShoppingCart">
 					<view class="iconfont icon-friendfill text-pink icon"></view>
 					<text class="text">购物车</text>
-				</view> -->
+				</view>
 				<view class="action-item" @click="toCollection">
 					<view class="iconfont icon-service text-blue icon"></view>
 					<text class="text">我的收藏</text>
@@ -96,9 +96,9 @@
 					this.$tab.reLaunch('/pages/login')
 				}
 			},
-			// toShoppingCart() {
-			// 	this.$tab.navigateTo('/pages/mine/shoppingCart')
-			// },
+			toShoppingCart() {
+				this.$tab.navigateTo('/pages/mine/shoppingCart')
+			},
 			toCollection() {
 				this.$tab.navigateTo('/pages/mine/collection')
 			},
@@ -106,7 +106,7 @@
 				this.$tab.navigateTo('/pages/mine/shopOrder')
 			},
 			toMessages(){
-				this.$tab.navigateTo('/pages/mine/myMessages')
+				this.$tab.navigateTo('/pages/message/index')
 			},
 			/**
 			 * 修改个人信息

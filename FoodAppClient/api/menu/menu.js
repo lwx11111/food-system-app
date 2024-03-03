@@ -1,9 +1,24 @@
 import request from '@/utils/request'
 
 export default {
+	listMenuByNames(data) {
+		return request({
+		  url:'/menu/listMenuByNames',
+		  method: 'post',
+		  data: data
+		})
+	},
 	getMenuCollectionByUserId(data) {
 		return request({
 		  url:'/menu/getMenuCollectionByUserId',
+		  method: 'post',
+		  data: data
+		})
+	},
+	
+	getDailyRecommendation(data){
+		return request({
+		  url:'/menu/getDailyRecommendation',
 		  method: 'post',
 		  data: data
 		})

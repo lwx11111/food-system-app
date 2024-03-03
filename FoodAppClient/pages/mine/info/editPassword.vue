@@ -16,6 +16,8 @@
 </template>
 
 <script>
+	import {getEncryptPassword} from '@/utils/login/passwordEncrypt.js';
+	import  Api from '@/api/auth.js'
   export default {
     data() {
       return {
@@ -62,9 +64,30 @@
     methods: {
       submit() {
         this.$refs.form.validate().then(res => {
-          updateUserPwd(this.user.oldPassword, this.user.newPassword).then(response => {
-            this.$modal.msgSuccess("修改成功")
-          })
+			
+			const data = {
+				oldPass: this.user.oldPass,
+				newPass: this.user.newPass,
+				confirmPass: this.user.confirmPassword,
+				accountId: localStorage.getItem("userId"),
+			}
+			
+			data.newPass = getEncryptPassword(data.newPass, 'aes');
+			data.oldPass = getEncryptPassword(data.oldPass, 'aes');
+			Api.modifyPass(data).then(res => {
+				console.log(res)
+				if (res.code === '20000'){
+					uni.showToast({
+						title: `修改成功`,
+						icon: 'none'
+					})
+					localStorage.removeItem("userId");
+					this.$tab.reLaunch('/pages/login')
+				} else {
+					ElMessage.error(res.message)
+				}
+			})
+
         })
       }
     }

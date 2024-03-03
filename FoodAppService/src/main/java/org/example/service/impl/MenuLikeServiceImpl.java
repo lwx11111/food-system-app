@@ -1,5 +1,7 @@
 package org.example.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import org.example.domain.Menu;
 import org.example.domain.MenuLike;
 import org.example.dao.MenuLikeMapper;
 import org.example.service.IMenuLikeService;
@@ -7,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.StringUtils;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
@@ -37,16 +40,29 @@ import java.util.Map;
 @Service
 public class MenuLikeServiceImpl extends ServiceImpl<MenuLikeMapper, MenuLike> implements IMenuLikeService {
 
+    @Autowired
+    private MenuServiceImpl menuService;
+
     @Override
     public void deleteMenuLikeByParams(MenuLike obj) {
         Map<String, Object> params = new HashMap<>();
         params.put("user_id", obj.getUserId().toString());
         params.put("menu_id", obj.getMenuId().toString());
+        // 点赞数减一
+        LambdaUpdateWrapper<Menu> updateWrapper = new LambdaUpdateWrapper<Menu>()
+                .eq(Menu::getId, obj.getMenuId())
+                .setSql("likes = likes - 1");
+        menuService.update(updateWrapper);
         this.removeByMap(params);
     }
 
     @Override
     public void saveByParam(MenuLike obj,Map<String, String> params){
+        // 点赞数加一
+        LambdaUpdateWrapper<Menu> updateWrapper = new LambdaUpdateWrapper<Menu>()
+                .eq(Menu::getId, obj.getMenuId())
+                .setSql("likes = likes + 1");
+        menuService.update(updateWrapper);
         this.save(obj);
     }
 

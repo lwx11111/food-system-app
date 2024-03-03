@@ -50,6 +50,7 @@ public class Menu extends Model<Menu> implements Serializable {
         System.out.println(jsonArray);
         this.steps = jsonArray1.toString();
         this.type = menuVO.getType();
+        this.likes = 0;
     }
 
     public Menu(){
@@ -98,7 +99,7 @@ public class Menu extends Model<Menu> implements Serializable {
     @Schema(description = "点赞数")
     @Excel(name = "点赞数")
     @TableField("likes")
-    private String likes;
+    private Integer likes;
 
     @Schema(description = "菜谱图片")
     @Excel(name = "菜谱图片")

@@ -183,13 +183,13 @@
 				})
 			},
 			toShoppingCart(){
-				uni.showToast({
-					title: `暂时没有购物车`,
-					icon: 'none'
-				})
-				// uni.navigateTo({
-				//   url: '/pages/mine/shoppingCart'
+				// uni.showToast({
+				// 	title: `暂时没有购物车`,
+				// 	icon: 'none'
 				// })
+				uni.navigateTo({
+				  url: '/pages/mine/shoppingCart'
+				})
 			},
 			// 商品导航-左侧点击事件
 			onClick(e) {
@@ -209,11 +209,11 @@
 				console.log(e)
 				if(e.index === 0){
 					// 购物车, 打开面板
-					// this.$refs.popup.open()
-					uni.showToast({
-						title: `暂时没有购物车`,
-						icon: 'none'
-					})
+					this.$refs.popup.open()
+					// uni.showToast({
+					// 	title: `暂时没有购物车`,
+					// 	icon: 'none'
+					// })
 				} else {
 					// 购买
 					this.$refs.shopOrder.open()

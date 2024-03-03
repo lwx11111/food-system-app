@@ -2,48 +2,42 @@
 	<view>
 		<view style="width: ;">
 			<uni-search-bar v-model="params.name" @confirm="search"></uni-search-bar>
-			<u-search placeholder="请搜索" v-model="params.name" @search="search"></u-search>
+			<!-- <u-search placeholder="请搜索" v-model="params.name" @search="search"></u-search> -->
 		</view>
-		
+
 		<!-- 应用列表 -->
-		<view>
-			<uni-card> 
-				<u-row gutter="16">
-					<u-col @click="toCommunity()" span="4">
-						<image style="width: 50px; height: 50px;" 
+		<view style="display: flex; justify-content: space-between; margin: 0 -8px;">
+			<uni-card style="border-radius: 10px;"> 
+					<u-col @click="toCommunity()">
+						<image style="width: 100px; height: 100px;" 
 							 src="http://8.130.120.92:9000/appsys/community.png"></image>
 						<view>社区管理</view>
 					</u-col>
-					<u-col span="4"></u-col>
-					<u-col @click="toHealth()" style="text-align: right;" span="4">
-						<image style="margin-left: 50px;width: 50px; height: 50px;" 
+			</uni-card>
+			<uni-card style="border-radius: 10px;"> 
+					<u-col @click="toHealth()">
+						<image style="width: 100px; height:100px;" 
 								src="http://8.130.120.92:9000/appsys/health.png"></image>
 						<view>健康管理</view>
 					</u-col>
-				</u-row>
 			</uni-card>
 		</view>
-		<!-- 菜谱列表 -->
+		
 		<view>
-			<uni-card v-for="(item,index) in menu"
-					  @click="toMenuDetail(index)">
-				<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
+			<h1 style="margin-left: 30px;">每日推荐</h1>
+			<uni-card v-for="(item,index) in dailyMenu"
+					  @click="toMenuDetail(index)" style="border-radius: 10px;">
 				<view>
-					<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+					<image style="width: 400px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
 				</view>
+				<uni-card style="border-radius: 10px;">
+						<view>
+							<text>{{ item.name }}</text>
+						</view>
+					</uni-card>
 			</uni-card>
 		</view>
-		<!-- <view>
-			<h1>每日推荐</h1>
-		</view>
-		<view>
-			<uni-card v-for="(item,index) in dailyMenu">
-				<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
-				<view>
-					<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
-				</view>
-			</uni-card>
-		</view> -->
+				
 	</view>
 </template>
 
@@ -56,9 +50,7 @@
 			  // 游客模式不展示
 			  isTourist: localStorage.getItem("isTourist"),
 				// 每日推荐
-				dailyMenu : [],
-				// 菜谱列表
-				menu : [
+				dailyMenu : [
 					{
 					 description: "11",
 					 id:1,
@@ -81,7 +73,7 @@
 		  }
 		},
 		onLoad: function() {
-			this.getMenuList();
+			// this.getMenuList();
 			this.getDailyRecommendation();
 		},
 		methods: {
@@ -96,25 +88,18 @@
 				// 	url: '/pages/menu/index?name' + this.name
 				// });
 			},
-			getMenuList() {
+
+			getDailyRecommendation() {
 				let that = this;
-				ApiMenu.selpage4menu(this.params).then(res => {
+				ApiMenu.getDailyRecommendation(this.params).then(res => {
 					if(res.code === 200){
-						that.menu = res.data.records
+						that.dailyMenu = res.data.records
 					}
 				})
 			},
-			getDailyRecommendation() {
-				let that = this;
-				// ApiMenu.selpage4menu(this.params).then(res => {
-				// 	if(res.code === 200){
-				// 		that.dailyMenu = res.data.records
-				// 	}
-				// })
-			},
 			toMenuDetail(index) {
 				uni.navigateTo({
-				  url: '/pages/menu/menuDetail?id=' + this.menu[index].id,
+				  url: '/pages/menu/menuDetail?id=' + this.dailyMenu[index].id,
 				  events: {
 				    // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
 				    acceptDataFromOpenedPage: function(data) {

@@ -94,6 +94,6 @@ public class MenuVO {
 
     private String type;
 
-    private String likes;
+    private Integer likes;
 
 }

@@ -1,7 +1,6 @@
 <template>
   <view>
-	  <!-- 悬浮按钮 -->
-	  <u-button type="primary" style="width: 10px;" shape="circle" size="small" text="大小尺寸"></u-button>
+
 	  <uni-search-bar  v-model="params.title" @confirm="search"></uni-search-bar>
 	  <!-- 分类标签 -->
 	  <view>
@@ -37,6 +36,9 @@
 			</u-col>
 		</u-row>
 	  </view>
+	  
+	  <u-button type="primary" size="small" 
+		@click="toCommunityPublish()" style="width: 50px;margin-top: 200px;">去发布</u-button>
   </view>
 </template>
 
@@ -46,6 +48,8 @@
 	export default {
 		data() {
 		  return {
+			  // 游客模式不展示
+			  isTourist: localStorage.getItem("isTourist"),
 			  // 筛选
 			  lastChoose: '',
 			  // 分类
@@ -78,6 +82,19 @@
 			this.listCommunities();
 		},
 		methods: {
+			toCommunityPublish(){
+				if(this.isTourist){
+					uni.showToast({
+						title: `您是游客，该功能不开放`,
+						icon: 'none'
+					})
+					return;
+				}
+				uni.navigateTo({
+				  url: '/pages/community/communityPublish',
+				})
+			},
+			
 			// 分类信息
 			getCategoryData() {
 				let that = this;

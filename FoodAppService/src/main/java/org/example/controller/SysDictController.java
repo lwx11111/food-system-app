@@ -1,159 +1,150 @@
 package org.example.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.springframework.beans.factory.annotation.Autowired;
-import java.util.*;
-import org.example.web.SimpleResponse;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.example.domain.MenuLike;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.service.IMenuLikeService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.example.domain.SysDict;
+import org.example.service.ISysDictService;
+import org.example.web.SimpleResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
- * 用户点赞表 前端控制器
+ * 字典表 前端控制器
  * </p>
  *
  * @author lwx20
- * @since 2023-10-27
+ * @since 2023-12-12
  */
 @RestController
-@Tag(name = "用户点赞表服务")
-@RequestMapping("/menulike")
+@Tag(name = "字典表服务")
+@RequestMapping("/sysdict")
 @CrossOrigin(origins = "*",maxAge = 3600)
-public class MenuLikeController {
+public class SysDictController {
     @Autowired
-    private IMenuLikeService service;
+    private ISysDictService service;
 
-    @PostMapping("/deleteMenuLikeByParams")
-    @ResponseBody
-    @Operation(description = "创建用户点赞表")
-    public SimpleResponse deleteMenuLikeByParams(@RequestBody MenuLike obj){
-        SimpleResponse response = new SimpleResponse();
-        try {
-            service.deleteMenuLikeByParams(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.setCode(500);
-            response.setMessage(e.getMessage());
-        }
-        return response;
-    }
     @PostMapping
     @ResponseBody
-    @Operation(description = "创建用户点赞表")
-    public SimpleResponse save(@RequestBody MenuLike obj){
+    @Operation(description = "创建字典表")
+    public SimpleResponse save(@RequestBody SysDict obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.saveByParam(obj,obj.getParams());
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @PutMapping("/{id}")
     @ResponseBody
-    @Operation(description = "更新用户点赞表")
-    public SimpleResponse update(@PathVariable(name = "id") String id,@RequestBody MenuLike obj){
+    @Operation(description = "更新字典表")
+    public SimpleResponse update(@PathVariable(name = "id") Integer id,@RequestBody SysDict obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.updateByParam(obj,obj.getParams());
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @DeleteMapping("/{id}")
     @ResponseBody
-    @Operation(description = "按ID删除用户点赞表")
-    public SimpleResponse remove(@PathVariable(name = "id") String id){
-            SimpleResponse response = new SimpleResponse();
+    @Operation(description = "按ID删除字典表")
+    public SimpleResponse remove(@PathVariable(name = "id") Integer id){
+        SimpleResponse response = new SimpleResponse();
         try {
         service.removeById(id);
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @GetMapping("/{id}")
-    @Operation(description = "按ID查询用户点赞表")
+    @Operation(description = "按ID查询字典表")
     @ResponseBody
-    public SimpleResponse select(@PathVariable(name = "id") String id) {
+    public SimpleResponse select(@PathVariable(name = "id") Integer id) {
         SimpleResponse response = new SimpleResponse();
         try {
             response.setData(service.getById(id));
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @PostMapping("/dels")
     @ResponseBody
-    @Operation(description = "按ID删除多个用户点赞表")
-    public SimpleResponse removes(@RequestBody List<String> ids){
+    @Operation(description = "按ID删除多个字典表")
+    public SimpleResponse removes(@RequestBody List<Integer> ids){
         SimpleResponse response = new SimpleResponse();
         try {
             service.removeByIds(ids);
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
 
     @PostMapping("/delby")
-    @Operation(description = "条件删除用户点赞表")
+    @Operation(description = "条件删除字典表")
     public void deleteBy(@RequestBody(required = false) Map<String, String> params) {
         service.deleteBy(params);
     }
 
     @PostMapping("/selby")
     @ResponseBody
-    public List<MenuLike> selectBy(@RequestBody(required = false) Map<String, String> params) {
+    public List<SysDict> selectBy(@RequestBody(required = false) Map<String, String> params) {
         return  service.selectBy(params);
     }
 
     @PostMapping("/selpage")
-    @Operation(description = "分页查询用户点赞表")
+    @Operation(description = "分页查询字典表")
     @ResponseBody
     public SimpleResponse selectPage(@RequestBody Map<String, String> params) {
         SimpleResponse response = new SimpleResponse();
         try {
-            IPage<MenuLike> page = service.selectPage(params);
+            IPage<SysDict> page = service.selectPage(params);
             response.setData(page);
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
     @PostMapping("/selpageCustomSqlByWrapper")
     @ResponseBody
-    public IPage<MenuLike> selpageCustomSqlByWrapper(@RequestBody Map<String, String> params) {
+    public IPage<SysDict> selpageCustomSqlByWrapper(@RequestBody Map<String, String> params) {
         return service.selpageCustomSqlByWrapper(params);
     }
 
     @PostMapping("/selpageCustomSqlByMap")
-    @Operation(description = "分页查询-自定义sql-Map用户点赞表")
+    @Operation(description = "分页查询-自定义sql-Map字典表")
     @ResponseBody
-    public IPage<MenuLike> selpageCustomSqlByMap(@RequestBody Map<String, String> params) {
+    public IPage<SysDict> selpageCustomSqlByMap(@RequestBody Map<String, String> params) {
         return service.selpageCustomSqlByMap(params);
     }
 
@@ -182,8 +173,7 @@ public class MenuLikeController {
 
     @PostMapping("/excel")
     @ResponseBody
-    public void excel(HttpServletResponse response, HttpServletRequest request,
-            @RequestBody Map<String, String> params) throws Exception {
+    public void excel(HttpServletResponse response, HttpServletRequest request, @RequestBody Map<String, String> params) throws Exception {
         service.excel(response, request, params);
     }
 }

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.dao.MenuMapper">
+
+    <select id="getDailyRecommendation" resultType="org.example.domain.Menu">
+    <!-- 防止自动加引号        -->
+        SELECT * FROM menu WHERE id in ${value}
+    </select>
+
+    <select id="getRandomIds" resultType="String">
+        SELECT id FROM menu  ORDER BY  RAND() LIMIT 10
+    </select>
+
     <select id="getMenuCollectionByUserId" resultType="org.example.domain.Menu">
         select *
         from menu m join menu_collection mc on m.id = mc.menu_id
