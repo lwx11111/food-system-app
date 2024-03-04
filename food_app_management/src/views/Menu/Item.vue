@@ -26,53 +26,123 @@
                         <el-form-item
                                 label="描述"
                                 prop="description">
-                            <el-input
+                            <el-input type="textarea"
                                     v-model="data.item.description"
                                     :disabled="data.disabled">
                             </el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="6">
-                        <el-form-item
-                                label="原料JSON"
-                                prop="Ingredients">
-                            <el-input
-                                    v-model="data.item.Ingredients"
-                                    :disabled="data.disabled">
-                            </el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-form-item
-                                label="步骤JSON"
-                                prop="steps">
-                            <el-input
-                                    v-model="data.item.steps"
-                                    :disabled="data.disabled">
-                            </el-input>
-                        </el-form-item>
-                    </el-col>
                 </el-row>
+
+                <div v-for="(item,index) in data.ingredientsList">
+                    <el-card style="margin-bottom: 10px">
+                        <el-row>
+                            <el-col :span="6">
+                                <el-form-item label="原料名">
+                                    <el-input v-model="item.name"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-form-item label="原料数量">
+                                    <el-input v-model="item.amount"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+
+                        <el-row>
+                            <el-col :span="6">
+                                <el-form-item label="原料图片">
+                                    <MinioUpload :file-list="item.img"
+                                                 ref="uploadRef"
+                                                 @uploadCallback="uploadCallbackPicture"
+                                                 :limit="1">
+                                    </MinioUpload>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+
+                        <el-row>
+                            <el-col :span="18"></el-col>
+                            <el-col :span="3">
+                                <el-button type="danger"
+                                           @click="deleteIngredientItem(index)">
+                                    删除物品
+                                </el-button>
+                            </el-col>
+                            <el-col :span="3">
+                                <el-button type="primary"
+                                           @click="addIngredientItem(index)">
+                                    添加新物品
+                                </el-button>
+                            </el-col>
+                        </el-row>
+                    </el-card>
+                </div>
+
+                <div v-for="(item,index) in data.stepsList">
+                    <el-card style="margin-bottom: 10px">
+                        <el-row>
+                            <el-col :span="6">
+                                <el-form-item label="步骤描述">
+                                    <el-input type="textarea" v-model="item.description"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+
+                        <el-row>
+                            <el-col :span="6">
+                                <el-form-item label="步骤图片">
+                                    <MinioUpload :file-list="item.img"
+                                                 ref="uploadRef"
+                                                 @uploadCallback="uploadCallbackPicture"
+                                                 :limit="1">
+                                    </MinioUpload>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+
+                        <el-row>
+                            <el-col :span="18"></el-col>
+                            <el-col :span="3">
+                                <el-button type="danger"
+                                           @click="deleteStepsItem(index)">
+                                    删除物品
+                                </el-button>
+                            </el-col>
+                            <el-col :span="3">
+                                <el-button type="primary"
+                                           @click="addStepsItem(index)">
+                                    添加新物品
+                                </el-button>
+                            </el-col>
+                        </el-row>
+                    </el-card>
+                </div>
+
                 <el-row>
                     <el-col :span="6">
                         <el-form-item
-                                label="菜谱首页图片"
-                                prop="image">
-                            <el-input
-                                    v-model="data.item.image"
-                                    :disabled="data.disabled">
-                            </el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-form-item
-                                label="分类"
-                                prop="type">
+                            label="分类"
+                            prop="type">
                             <el-select v-model="data.item.type"
                                        :disabled="data.disabled">
                                 <el-option label="素菜" value="0"></el-option>
                                 <el-option label="荤菜" value="1"></el-option>
                             </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="6">
+                        <el-form-item
+                                label="菜谱首页图片"
+                                prop="image">
+                            <MinioUpload :file-list="data.item.image"
+                                         ref="uploadRef"
+                                         @uploadCallback="uploadCallbackPicture"
+                                         :limit="1">
+                            </MinioUpload>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -97,17 +167,33 @@
     </el-dialog>
 </template>
 <script lang="ts" setup>
+    import MinioUpload from "@/views/common/MinioUpload.vue";
     import Api from '@/api/Menu/api_menu.js'
     import { reactive, ref, onMounted, toRefs } from 'vue'
     import { useStore } from "vuex";
     import { useRouter } from 'vue-router'
     import {ElMessage, ElMessageBox} from "element-plus";
+    import StringUtil from '@/utils/stringUtil.js'
 
     const store = useStore();
     const router = useRouter()
 
     // Data
     const data = reactive({
+        // 原料
+        ingredientsList:[
+            {
+                name:'',
+                img:'',
+                amount:'',
+            }
+        ],
+        stepsList: [
+            {
+                description: '',
+                img:'',
+            }
+        ],
         operateTitle: '新增',
         backUrl: '/name/menu/index',
         type: '',
@@ -116,14 +202,14 @@
         id: 0,
         item: {},
         params: {
-        id: '',
-        name: '',
-        description: '',
-        Ingredients: '',
-        steps: '',
-        likes: '',
-        image: '',
-        type: ''
+            id: '',
+            name: '',
+            description: '',
+            Ingredients: '',
+            steps: '',
+            likes: '',
+            image: '',
+            type: ''
         },
         OperatorLogParam: {
           operateContent: '',
@@ -172,6 +258,91 @@
     })
 
     // Methods
+    const uploadCallbackPicture = (response, url) => {
+        console.log(url)
+        data.ingredientsList[0].img = url
+    }
+
+    const addIngredientItem = (index) => {
+        for (let i = 0; i < data.ingredientsList.length; i++){
+            if (StringUtil.isEmpty(data.ingredientsList[i].name)){
+                ElMessage({
+                    message: '原料名不能为空',
+                    type: 'warning',
+                })
+                return;
+            }
+            // if (StringUtil.isEmpty(data.ingredientsList[i].img)){
+            //     ElMessage({
+            //         message: '原料图片不能为空',
+            //         type: 'warning',
+            //     })
+            //     return;
+            // }
+            if (StringUtil.isEmpty(data.ingredientsList[i].amount)){
+                ElMessage({
+                    message: '原料数量不能为空',
+                    type: 'warning',
+                })
+                return;
+            }
+        }
+        const item = {
+            name:'',
+            img:'',
+            amount:'',
+        }
+        data.ingredientsList.push(item)
+    }
+
+    const deleteIngredientItem = (index) => {
+        console.log(index)
+        if (data.ingredientsList.length === 1){
+            ElMessage({
+                message: '至少保留一个原料',
+                type: 'warning',
+            })
+            return;
+        }
+        data.ingredientsList.splice(index,1);
+    }
+
+    const addStepsItem = (index) => {
+        for (let i = 0; i < data.stepsList.length; i++){
+            if (StringUtil.isEmpty(data.stepsList[i].description)){
+                ElMessage({
+                    message: '原料名不能为空',
+                    type: 'warning',
+                })
+                return;
+            }
+            // if (StringUtil.isEmpty(data.stepsList[i].img)){
+            //     ElMessage({
+            //         message: '原料图片不能为空',
+            //         type: 'warning',
+            //     })
+            //     return;
+            // }
+        }
+        const item = {
+            description: '',
+            img:'',
+        }
+        data.stepsList.push(item)
+    }
+
+    const deleteStepsItem = (index) => {
+        console.log(index)
+        if (data.stepsList.length === 1){
+            ElMessage({
+                message: '至少保留一个步骤',
+                type: 'warning',
+            })
+            return;
+        }
+        data.stepsList.splice(index,1);
+    }
+
     const init = (id, type) => {
         // 界面初始化接收参数
         data.type = type;
