@@ -34,6 +34,9 @@
     z-index: 1001;
     overflow: hidden;
 }
+.el-header{
+	padding: 0;
+}
 </style>
 
 

@@ -1,7 +1,7 @@
 <template>
     <div class="back" style="border: 1px solid white">
         <div class="loginBack">
-            <el-card class="login-form-content">
+            <div class="login-form-content" >
                 <h2 style="text-align: center">登录</h2>
                 <el-form :model="form"
                          ref="formRef"
@@ -10,20 +10,20 @@
                     <el-form-item label="用户名"
                                   prop="username"
                                   class="input-item flex align-center">
-                        <el-input style="width: 200px" v-model="form.username" />
+                        <el-input style="width: 300px" v-model="form.username" />
                     </el-form-item>
                     <el-form-item label="密码"
                                   prop="password"
                                   class="input-item flex align-center">
                         <el-input v-model="form.password"
-                                  style="width: 200px"
+                                  style="width: 300px"
                                   show-password/>
                     </el-form-item>
                     <el-form-item label="验证码"
                                   prop="verifyCode"
                                   class="input-item flex align-center">
                         <el-input v-model="form.verifyCode"
-                                  style="width: 100px">
+                                  style="width: 150px">
                         </el-input>
                         <img class="login-code"
                              alt="验证码"
@@ -33,13 +33,13 @@
                     </el-form-item>
                     <el-form-item class="input-item flex align-center">
                         <el-button type="success"
-                                   style="width: 200px"
+                                   style="width: 215px"
                                    @click="onSubmit()">
                             登录
                         </el-button>
                     </el-form-item>
                 </el-form>
-            </el-card>
+            </div>
         </div>
     </div>
 </template>
@@ -155,6 +155,8 @@ const loginWithCode = () => {
 </script>
 
 <style scoped>
+	
+
 @media screen and (max-width: 1500px){
     /* 当屏幕小于1500px的时候 id为bg的元素 进行改变 */
     .back{
@@ -165,7 +167,7 @@ const loginWithCode = () => {
 }
 
 .back {
-    background-image: url('/src/assets/backgroud.jpg');
+    background-image: url('/src/assets/images/bg.jpg');
     background-size: cover;
     /* 背景图片不重复 */
     background-repeat: no-repeat;
@@ -175,22 +177,29 @@ const loginWithCode = () => {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    border: 1px red solid;
+    /* border: 1px red solid; */
+	font-weight: bold;
+	
+}
+h2{
+	font-size: 35px;
 }
 .loginBack{
     width:1000px;
     height:500px;
     MARGIN-RIGHT: auto;
     MARGIN-LEFT: auto;
+	
 }
 
 .login-form-content {
     text-align: center;
-    margin-top: 15%;
-    margin-left: 25%;
-    width: 40%;
+    margin-top: 25%;
+    margin-left: 28%;
+    width: 44%;
     height: 80%;
-    background-color: white;
+    background-color: transparent;
+	border: 1px solid transparent;
     .input-item {
         margin: 20px auto;
         height: 45px;
@@ -201,5 +210,6 @@ const loginWithCode = () => {
         height: 38px;
         float: right;
     }
+	
 }
 </style>

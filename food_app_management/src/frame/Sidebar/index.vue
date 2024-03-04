@@ -1,5 +1,6 @@
 <template>
     <div>
+		<Logo></Logo>
         <el-scrollbar >
             <el-menu style="margin-right: -1px;"
                 class="myMenu"
@@ -13,6 +14,7 @@
                 background-color="#545c64"
                 text-color="#fff"
             >
+			
             <sidebar-item v-for="route in data.indexDate" :key="route.funId.toString()" :item="route" :base-path="route.url"/>
             <sidebar-item v-for="route in data.menuData"
                           :key="route.funId.toString()"
@@ -28,6 +30,7 @@
     import { useRouter } from 'vue-router'
     import SidebarItem from './SidebarItem.vue'
     import { reactive } from "vue";
+	import Logo from "./Logo.vue";
 
     const store = useStore();
     const router = useRouter()

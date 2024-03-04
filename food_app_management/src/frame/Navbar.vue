@@ -203,15 +203,16 @@ const logout = () => {
 
 <style lang="scss" scoped>
 .l-content{
-    margin-top: 20px;
+    margin-top: 23px;
+	margin-left: 50px;
 }
 .navbar {
-    margin-left: 10px;
-  width: 99%;
+  margin-left: -20px;
+  width: 103%;
   height: 60px;
   overflow: hidden;
   position: relative;
-  background: #fafafa;
+  background: #FFFFFF;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 
 

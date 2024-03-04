@@ -11,7 +11,7 @@
         <el-table
             :data="data.tableData"
             tooltip-effect="dark"
-            style="width:100%"
+            style="width:40%"
             size="default"
             border>
             <el-table-column
@@ -21,25 +21,25 @@
             <el-table-column
                 prop="id"
                 label="序号"
-                width="130"
+                width="60"
                 align="center">
             </el-table-column>
             <el-table-column
                 prop="shopItemName"
                 label="菜品名"
-                width="130"
+                width="80"
                 align="center">
             </el-table-column>
             <el-table-column
                 prop="amount"
                 label="购买量"
-                width="180"
+                width="80"
                 align="center">
             </el-table-column>
             <el-table-column
                 prop="price"
                 label="总营业额"
-                width="180"
+                width="100"
                 align="center">
             </el-table-column>
         </el-table>
@@ -60,57 +60,27 @@
                 <el-collapse  accordion>
                     <el-collapse-item title="菜谱管理" name="1">
                         <div>
-                            Consistent with real life: in line with the process and logic of real
-                            life, and comply with languages and habits that the users are used to;
-                        </div>
-                        <div>
-                            Consistent within interface: all elements should be consistent, such
-                            as: design style, icons and texts, position of elements, etc.
+                           菜谱管理涉及创建、编辑、删除和查询菜谱，包括菜品的详细信息、制作步骤、所需食材和烹饪时间等。 
                         </div>
                     </el-collapse-item>
                     <el-collapse-item title="菜品管理" name="2">
                         <div>
-                            Operation feedback: enable the users to clearly perceive their
-                            operations by style updates and interactive effects;
-                        </div>
-                        <div>
-                            Visual feedback: reflect current state by updating or rearranging
-                            elements of the page.
+                           菜品管理关注具体的菜品，包括增加、删除、编辑、查询等。包括菜品的分类和菜品列表。
                         </div>
                     </el-collapse-item>
                     <el-collapse-item title="商城管理" name="3">
                         <div>
-                            Simplify the process: keep operating process simple and intuitive;
-                        </div>
-                        <div>
-                            Definite and clear: enunciate your intentions clearly so that the
-                            users can quickly understand and make decisions;
-                        </div>
-                        <div>
-                            Easy to identify: the interface should be straightforward, which helps
-                            the users to identify and frees them from memorizing and recalling.
+                          商城管理涵盖整个在线平台，确保用户能够轻松访问并购买菜品。
                         </div>
                     </el-collapse-item>
                     <el-collapse-item title="社区管理" name="4">
                         <div>
-                            Decision making: giving advices about operations is acceptable, but do
-                            not make decisions for the users;
-                        </div>
-                        <div>
-                            Controlled consequences: users should be granted the freedom to
-                            operate, including canceling, aborting or terminating current
-                            operation.
+                           社区管理关注平台上的用户互动，包括评论、评分、分享和用户之间的交流。
                         </div>
                     </el-collapse-item>
                     <el-collapse-item title="健康管理" name="5">
                         <div>
-                            Decision making: giving advices about operations is acceptable, but do
-                            not make decisions for the users;
-                        </div>
-                        <div>
-                            Controlled consequences: users should be granted the freedom to
-                            operate, including canceling, aborting or terminating current
-                            operation.
+                           健康管理关注用户的饮食习惯和健康状况。包括计算相关卡路里以及个性化推荐食物热量等。
                         </div>
                     </el-collapse-item>
                 </el-collapse>
