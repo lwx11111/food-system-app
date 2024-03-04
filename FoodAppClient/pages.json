@@ -15,11 +15,12 @@
     "path": "pages/register",
     "style": {
       "navigationBarTitleText": "注册"
+	  
     }
   }, {
     "path": "pages/home",
     "style": {
-      "navigationBarTitleText": "若依移动端框架",
+      "navigationBarTitleText": "首页",
       "navigationStyle": "custom"
     }
   }, {
