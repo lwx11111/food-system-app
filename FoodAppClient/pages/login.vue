@@ -2,9 +2,9 @@
 	<view class="normal-login-container">
 		<!-- 标题 -->
 		<view class="logo-content align-center justify-center flex">
-			<image style="width: 100rpx;height: 100rpx;" src="/static/favicon.ico" mode="widthFix">
+			<image style="width: 400rpx;height: 400rpx;" src="/static/images/mg.png" mode="widthFix">
 			</image>
-			<text class="title">{{globalConfig.appInfo.appName}}</text>
+			<!-- <text class="title">{{globalConfig.appInfo.appName}}</text> -->
 		</view>
 		<!-- 内容 -->
 		<view class="login-form-content">
