@@ -9,9 +9,10 @@
           <div class="flex h-full items-center">
             <img
               class="w-20 h-20 mr-5 rounded-full"
-
+              src="../../assets/images/little-red-hood小红帽.png"
+			  style="width: 50px;height: 50px;"
             />
-            <div>
+            <div style="margin-left: -50px;">
               <p>偷偷向银河要了一把碎星，只等你闭上眼睛撒入你的梦中，晚安🌛！</p>
               <p class="text-sm text-gray">
                 今日天气晴朗，气温在15℃至25℃之间，东南风。
@@ -24,8 +25,8 @@
           <div class="flex h-full items-center justify-around">
             <el-statistic :value="99">
               <template #title>
-                <div class="flex items-center">
-                  <svg-icon icon-class="message" size="20px" />
+                <div class="flex items-center ">
+                  <img src="../../assets/images/消息.png" style="height: 30px ;width: 30px;"/>
                   <span class="text-[16px] ml-1">消息</span>
                 </div>
               </template>
@@ -33,8 +34,8 @@
 
             <el-statistic :value="50">
               <template #title>
-                <div class="flex items-center">
-                  <svg-icon icon-class="todolist" size="20px" />
+                <div class="flex items-center ">
+                 <img src="../../assets/images/文件夹.png" style="height: 30px ;width: 30px;"/>
                   <span class="text-[16px] ml-1">待办</span>
                 </div>
               </template>
@@ -43,8 +44,8 @@
 
             <el-statistic :value="10">
               <template #title>
-                <div class="flex items-center">
-                  <svg-icon icon-class="project" size="20px" />
+                <div class="flex items-center ">
+                  <img src="../../assets/images/消息.png" style="height: 30px ;width: 30px;"/>
                   <span class="text-[16px] ml-1">项目</span>
                 </div>
               </template>
@@ -61,7 +62,7 @@
           <template #header>
             <div class="flex items-center justify-between">
               <span class="text-[var(--el-text-color-secondary)]">访客数</span>
-              <el-tag type="success">日</el-tag>
+              <el-tag type="success" style="margin-left: 110px;">日</el-tag>
             </div>
           </template>
 
@@ -69,7 +70,7 @@
             <div class="text-lg text-right">
              111
             </div>
-            <svg-icon icon-class="visit" size="2em" />
+            <img src="../../assets/images/好友认证.png" style="height: 40px ;width: 40px; margin-left: 160px;" />
           </div>
 
           <div
@@ -86,8 +87,8 @@
         <el-card shadow="never">
           <template #header>
             <div class="flex items-center justify-between">
-              <span class="text-[var(--el-text-color-secondary)]">IP数</span>
-              <el-tag type="success">日</el-tag>
+              <span class="text-[var(--el-text-color-secondary)]">收藏数</span>
+              <el-tag type="success" style="margin-left: 110px;">日</el-tag>
             </div>
           </template>
 
@@ -95,13 +96,13 @@
             <div class="text-lg text-right">
               11
             </div>
-            <svg-icon icon-class="ip" size="2em" />
+             <img src="../../assets/images/收藏.png" style="height: 40px ;width: 40px; margin-left: 160px;" />
           </div>
 
           <div
             class="flex items-center justify-between mt-5 text-sm text-[var(--el-text-color-secondary)]"
           >
-            <span> 总IP数 </span>
+            <span> 总收藏数 </span>
             <span> 11</span>
           </div>
         </el-card>
@@ -113,7 +114,7 @@
           <template #header>
             <div class="flex items-center justify-between">
               <span class="text-[var(--el-text-color-secondary)]">销售额</span>
-              <el-tag>月</el-tag>
+              <el-tag style="margin-left: 110px;">月</el-tag>
             </div>
           </template>
 
@@ -121,7 +122,7 @@
             <div class="text-lg text-right">
              1
             </div>
-            <svg-icon icon-class="money" size="2em" />
+             <img src="../../assets/images/余额.png" style="height: 40px ;width: 40px; margin-left: 160px;" />
           </div>
 
           <div
@@ -139,7 +140,7 @@
           <template #header>
             <div class="flex items-center justify-between">
               <span class="text-[var(--el-text-color-secondary)]">订单量</span>
-              <el-tag type="danger">季</el-tag>
+              <el-tag type="danger" style="margin-left: 110px;">月</el-tag>
             </div>
           </template>
 
@@ -147,7 +148,7 @@
             <div class="text-lg text-right">
               1
             </div>
-            <svg-icon icon-class="order" size="2em" />
+            <img src="../../assets/images/商品.png" style="height: 40px ;width: 40px; margin-left: 160px;" />
           </div>
 
           <div
@@ -292,5 +293,12 @@ import FunnelChart from "@/views/dashboard/components/FunnelChart.vue";
   .svg-icon {
     fill: currentcolor !important;
   }
+  .flex {
+    display: flex;
+    flex-direction: row; /* 水平方向排列 */
+    justify-content: space-around; /* 在容器中均匀分布子元素 */
+    align-items: center; /* 在交叉轴上居中对齐子元素 */
+  }
+  
 }
 </style>

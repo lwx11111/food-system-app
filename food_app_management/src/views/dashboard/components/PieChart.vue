@@ -1,7 +1,7 @@
 <!-- 饼图 -->
 <template>
   <el-card>
-    <template #header> 产品分类饼图 </template>
+    <template #header> 商城物品分类 </template>
     <div :id="id" :class="className" :style="{ height, width }"></div>
   </el-card>
 </template>
