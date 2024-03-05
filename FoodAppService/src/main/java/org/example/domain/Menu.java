@@ -111,6 +111,11 @@ public class Menu extends Model<Menu> implements Serializable {
     @TableField("type")
     private String type;
 
+    @Schema(description = "用户ID")
+    @Excel(name = "用户ID")
+    @TableField("user_id")
+    private String userId;
+
     @TableField(exist = false)
     private Map<String,String> params;
 

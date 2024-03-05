@@ -48,6 +48,12 @@
       "navigationBarTitleText": "社区发布"
     }
   }, 
+  {
+    "path": "pages/community/communityMyList",
+    "style": {
+      "navigationBarTitleText": "我的帖子"
+    }
+  }, 
   // 菜谱
   {
     "path": "pages/menu/index",
@@ -71,6 +77,12 @@
     "path": "pages/menu/menuPublish",
     "style": {
       "navigationBarTitleText": "菜谱发布"
+    }
+  }, 
+  {
+    "path": "pages/menu/menuMyList",
+    "style": {
+      "navigationBarTitleText": "我的菜谱"
     }
   }, 
   {

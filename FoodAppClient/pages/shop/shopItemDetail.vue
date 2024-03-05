@@ -74,10 +74,10 @@
 				amount: 1,
 				// 商品导航-左侧
 				options: [
-					{
-						icon: 'chat',
-						text: '客服'
-					}, 
+					// {
+					// 	icon: 'chat',
+					// 	text: '客服'
+					// }, 
 					{
 						icon: 'shop',
 						text: '店铺',

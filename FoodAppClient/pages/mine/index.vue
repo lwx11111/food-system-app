@@ -41,6 +41,18 @@
 			</view>
 
 			<view class="menu-list">
+				<view class="list-cell list-cell-arrow" @click="toMyMenu()">
+				  <view class="menu-item-box">
+					<view class="iconfont icon-help menu-icon"></view>
+					<view>我的菜谱</view>
+				  </view>
+				</view>
+				<view class="list-cell list-cell-arrow" @click="toMyCommunity()">
+				  <view class="menu-item-box">
+					<view class="iconfont icon-help menu-icon"></view>
+					<view>我的帖子</view>
+				  </view>
+				</view>
 				<view class="list-cell list-cell-arrow" @click="handleLocation">
 				  <view class="menu-item-box">
 					<view class="iconfont icon-help menu-icon"></view>
@@ -87,6 +99,16 @@
 
 		},
 		methods: {
+			toMyMenu(){
+				uni.navigateTo({
+					url:'/pages/menu/menuMyList'
+				})
+			},
+			toMyCommunity(){
+				uni.navigateTo({
+					url:'/pages/community/communityMyList'
+				})
+			},
 			/**
 			 * 导航栏点击事件
 			 */

@@ -94,7 +94,7 @@
 	<uni-card v-for="(item, key) in categoryNames">
 		<h3>{{item.keyy}}</h3>
 	
-			<u-tag v-for="(i, k) in foods[key]" style="width: 50px;" plain size="mini" :text="i.keyy"></u-tag>					
+			<u-tag v-for="(i, k) in foods[key]" style="width: 80px;" plain size="mini" :text="i.keyy + ' ' + i.value"></u-tag>					
 	</uni-card>
 	
   </view>

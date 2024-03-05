@@ -1,16 +1,15 @@
 const TokenKey = 'Auth-Token'
 
 export function getToken() {
-    return sessionStorage.getItem(TokenKey);
+    return localStorage.getItem(TokenKey);
 }
 
 export function setToken(token) {
-    console.log(token)
-    sessionStorage.setItem(TokenKey, token);
+    localStorage.setItem(TokenKey, token);
 }
 
 export function removeToken() {
-    sessionStorage.removeItem(TokenKey);
+    localStorage.removeItem(TokenKey);
 }
 
 export function setLoginInfo(info) {
