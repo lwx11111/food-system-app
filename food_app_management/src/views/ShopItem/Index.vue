@@ -87,6 +87,13 @@
                         width="180"
                         align="center">
                 </el-table-column>
+                <el-table-column label="picture">
+                    <template #default="scope">
+                        <div style="display: flex; align-items: center">
+                            <el-image :src="scope.row.picture"/>
+                        </div>
+                    </template>
+                </el-table-column>
                  <el-table-column
                         prop="name"
                         label="物品名"
