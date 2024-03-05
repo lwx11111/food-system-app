@@ -5,7 +5,7 @@
 		<view style="margin-bottom: 10px;"><h2>{{item.shopItem.name}}</h2></view>
 		<view>
 			<image style="width: 200px; height: 200px;" 
-					src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+					:src="item.image"></image>
 		</view>
 		<view>{{item.shopItem.price}}¥</view>
 		<view>{{item.amount}}</view>

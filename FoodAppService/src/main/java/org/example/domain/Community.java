@@ -80,6 +80,8 @@ public class Community extends Model<Community> {
     @TableField("category_id")
     private String categoryId;
 
+    private String img;
+
     @TableField(exist = false)
     private Map<String,String> params;
 

@@ -19,7 +19,8 @@
 			<u-col span="6" @click="toCommunityDetail(index)">
 				<uni-card>
 					<view>
-						<image style="width: 100px; height: 100px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+						<image style="width: 100px; height: 100px;" 
+							:src="item.img"></image>
 					</view>
 						<view style="margin-bottom: 10px;"><h2>{{item.title}}</h2></view>
 				</uni-card>
@@ -29,7 +30,7 @@
 					v-if="index+1 < communities.length">
 				<uni-card>
 					<view>
-						<image style="width: 100px; height: 100px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+						<image style="width: 100px; height: 100px;" :src="communities[index + 1].img"></image>
 					</view>
 						<view style="margin-bottom: 10px;"><h2>{{ communities[index+1].title }}</h2></view>
 				</uni-card>

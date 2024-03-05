@@ -28,7 +28,7 @@
 			<uni-card v-for="(item,index) in dailyMenu"
 					  @click="toMenuDetail(index)" style="border-radius: 10px;">
 				<view>
-					<image style="width: 400px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+					<image style="width: 400px; height: 200px;" :src="item.image"></image>
 				</view>
 				<uni-card style="border-radius: 10px;">
 						<view>

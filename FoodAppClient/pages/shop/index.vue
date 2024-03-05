@@ -19,7 +19,7 @@
 				<uni-card>
 					<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
 					<view>
-						<image style="width: 200px; height: 100px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+						<image style="width: 200px; height: 100px;" :src="item.picture"></image>
 					</view>
 					<view>{{item.price}}¥</view>
 				</uni-card>
@@ -30,7 +30,7 @@
 				<uni-card>
 					<view style="margin-bottom: 10px;"><h2>{{shopItems[index + 1].name}}</h2></view>
 					<view>
-						<image style="width: 200px; height: 100px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+						<image style="width: 200px; height: 100px;" :src="shopItems[index + 1].picture"></image>
 					</view>
 					<view>{{shopItems[index + 1].price}}¥</view>
 				</uni-card>

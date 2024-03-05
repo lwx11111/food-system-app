@@ -4,7 +4,7 @@
 		<uni-card>
 			<view style="margin-bottom: 10px;"><h2>{{menu.name}}</h2></view>
 			<view>
-				<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+				<image style="width: 200px; height: 200px;" :src="menu.image"></image>
 			</view>
 		</uni-card>
 		<!-- 收藏点赞评论 -->

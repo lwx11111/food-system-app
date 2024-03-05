@@ -2,7 +2,7 @@
   <view>
 	  <uni-card>
 	  	<view>
-	  		<image style="width: 100px; height: 100px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+	  		<image style="width: 100px; height: 100px;" :src="community.img"></image>
 	  	</view>
 		<u-line />
 		<view style="margin-bottom: 10px;"><h2>{{community.title}}</h2></view>

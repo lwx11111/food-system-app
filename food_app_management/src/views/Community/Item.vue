@@ -35,6 +35,19 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
+                <el-row>
+                    <el-col :span="6">
+                        <el-form-item
+                            label="物品图片"
+                            prop="picture">
+                            <MinioUpload :file-list="data.item.img"
+                                         ref="uploadRef"
+                                         @uploadCallback="uploadCallbackPicture"
+                                         :limit="1">
+                            </MinioUpload>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
                 <el-form-item>
                     <el-button
                             v-show="data.showBtn"
@@ -61,6 +74,7 @@
     import { useStore } from "vuex";
     import { useRouter } from 'vue-router'
     import {ElMessage, ElMessageBox} from "element-plus";
+    import MinioUpload from "@/views/common/MinioUpload.vue";
 
     const store = useStore();
     const router = useRouter()
@@ -118,6 +132,10 @@
     })
 
     // Methods
+    const uploadCallbackPicture = (response, url) => {
+        console.log(url)
+        data.item.img = url
+    }
     const init = (id, type) => {
         // 界面初始化接收参数
         data.type = type;
