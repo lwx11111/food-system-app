@@ -20,7 +20,7 @@ import java.util.Map;
  * 店铺物品表（只有官方一家店）
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2023-11-12
  */
 @Data

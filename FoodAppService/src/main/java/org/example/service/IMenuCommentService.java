@@ -15,7 +15,7 @@ import java.util.Map;
  * 菜谱评论表 服务类
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2023-10-27
  */
 public interface IMenuCommentService extends IService<MenuComment> {

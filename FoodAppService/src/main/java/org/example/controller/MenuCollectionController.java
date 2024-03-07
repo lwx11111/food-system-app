@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 用户点赞表 前端控制器
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2024-01-08
  */
 @RestController

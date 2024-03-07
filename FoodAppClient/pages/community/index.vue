@@ -38,8 +38,9 @@
 		</u-row>
 	  </view>
 	  
-	  <u-button type="primary" size="small" 
-		@click="toCommunityPublish()" style="width: 50px;margin-top: 200px;">去发布</u-button>
+	  <u-tabbar :fixed="true">
+	  	<u-tabbar-item text="去发布" icon="home" @click="toCommunityPublish()" ></u-tabbar-item>
+	  </u-tabbar>
   </view>
 </template>
 
@@ -49,6 +50,7 @@
 	export default {
 		data() {
 		  return {
+			  value1: 0,
 			  // 游客模式不展示
 			  isTourist: localStorage.getItem("isTourist"),
 			  // 筛选
@@ -83,6 +85,9 @@
 			this.listCommunities();
 		},
 		methods: {
+			click1(e) {
+				console.log('click1', e);
+			},
 			toCommunityPublish(){
 				if(this.isTourist){
 					uni.showToast({
@@ -152,78 +157,78 @@
 	}
 </script>
 
-<style lang="scss">
-  /* #ifndef APP-NVUE */
-  page {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    background-color: #fff;
-    min-height: 100%;
-    height: auto;
-  }
+// <style lang="scss">
+//   /* #ifndef APP-NVUE */
+//   page {
+//     display: flex;
+//     flex-direction: column;
+//     box-sizing: border-box;
+//     background-color: #fff;
+//     min-height: 100%;
+//     height: auto;
+//   }
 
-  view {
-    font-size: 14px;
-    line-height: inherit;
-  }
+//   view {
+//     font-size: 14px;
+//     line-height: inherit;
+//   }
 
-  /* #endif */
+//   /* #endif */
 
-  .text {
-    text-align: center;
-    font-size: 26rpx;
-    margin-top: 10rpx;
-  }
+//   .text {
+//     text-align: center;
+//     font-size: 26rpx;
+//     margin-top: 10rpx;
+//   }
 
-  .grid-item-box {
-    flex: 1;
-    /* #ifndef APP-NVUE */
-    display: flex;
-    /* #endif */
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 0;
-  }
+//   .grid-item-box {
+//     flex: 1;
+//     /* #ifndef APP-NVUE */
+//     display: flex;
+//     /* #endif */
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     padding: 15px 0;
+//   }
 
-  .uni-margin-wrap {
-    width: 690rpx;
-    width: 100%;
-    ;
-  }
+//   .uni-margin-wrap {
+//     width: 690rpx;
+//     width: 100%;
+//     ;
+//   }
 
-  .swiper {
-    height: 300rpx;
-  }
+//   .swiper {
+//     height: 300rpx;
+//   }
 
-  .swiper-box {
-    height: 150px;
-  }
+//   .swiper-box {
+//     height: 150px;
+//   }
 
-  .swiper-item {
-    /* #ifndef APP-NVUE */
-    display: flex;
-    /* #endif */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    height: 300rpx;
-    line-height: 300rpx;
-  }
+//   .swiper-item {
+//     /* #ifndef APP-NVUE */
+//     display: flex;
+//     /* #endif */
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     color: #fff;
+//     height: 300rpx;
+//     line-height: 300rpx;
+//   }
 
-  @media screen and (min-width: 500px) {
-    .uni-swiper-dot-box {
-      width: 400px;
-      /* #ifndef APP-NVUE */
-      margin: 0 auto;
-      /* #endif */
-      margin-top: 8px;
-    }
+//   @media screen and (min-width: 500px) {
+//     .uni-swiper-dot-box {
+//       width: 400px;
+//       /* #ifndef APP-NVUE */
+//       margin: 0 auto;
+//       /* #endif */
+//       margin-top: 8px;
+//     }
 
-    .image {
-      width: 100%;
-    }
-  }
-</style>
+//     .image {
+//       width: 100%;
+//     }
+//   }
+// </style>

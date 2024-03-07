@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 社区帖子评论表 前端控制器
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2023-10-27
  */
 @RestController

@@ -15,7 +15,7 @@ import java.util.Map;
  * 店铺信息 Mapper 接口
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2023-10-27
  */
 @Mapper

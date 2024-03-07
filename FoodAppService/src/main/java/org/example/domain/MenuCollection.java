@@ -20,7 +20,7 @@ import java.util.Map;
  * 用户点赞表
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2024-01-08
  */
 @Data

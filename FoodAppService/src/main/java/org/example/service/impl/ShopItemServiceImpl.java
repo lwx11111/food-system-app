@@ -30,7 +30,7 @@ import java.util.Map;
  * 店铺物品表（只有官方一家店） 服务实现类
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2023-11-12
  */
 @Service

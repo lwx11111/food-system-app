@@ -18,25 +18,23 @@ function checkWhite(url) {
 let list = ["navigateTo", "redirectTo", "reLaunch", "switchTab"]
 
 list.forEach(item => {
-  uni.addInterceptor(item, {
-    invoke(to) {
-		
-		
-      if (localStorage.getItem('userId') || localStorage.getItem("isTourist")) {
-        if (to.url === loginPage) {
-          uni.reLaunch({ url: "/" })
-        }
-        return true
-      } else {
-        if (checkWhite(to.url)) {
-          return true
-        }
-        uni.reLaunch({ url: loginPage })
-        return false
-      }
-    },
-    fail(err) {
-      console.log(err)
-    }
-  })
+	uni.addInterceptor(item, {
+		invoke(to) {
+			if (localStorage.getItem('userId') || localStorage.getItem("isTourist")) {
+				if (to.url === loginPage) {
+					uni.reLaunch({ url: "/" })
+				}
+				return true
+			} else {
+				if (checkWhite(to.url)) {
+					return true
+				}
+				uni.reLaunch({ url: loginPage })
+				return false
+			}
+		},
+		fail(err) {
+			console.log(err)
+		}
+	})
 })

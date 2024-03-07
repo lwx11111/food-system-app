@@ -21,7 +21,7 @@ import java.util.Map;
  * 菜谱评论表
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2023-10-27
  */
 @Data

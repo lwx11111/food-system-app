@@ -1,5 +1,7 @@
 package org.example.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import org.example.domain.Menu;
 import org.example.domain.MenuCollection;
 import org.example.dao.MenuCollectionMapper;
 import org.example.service.IMenuCollectionService;
@@ -7,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.StringUtils;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
@@ -31,11 +34,15 @@ import java.util.Map;
  * 用户点赞表 服务实现类
  * </p>
  *
- * @author lwx20
+ *
  * @since 2024-01-08
  */
 @Service
 public class MenuCollectionServiceImpl extends ServiceImpl<MenuCollectionMapper, MenuCollection> implements IMenuCollectionService {
+
+    @Autowired
+    private MenuServiceImpl menuService;
+
     @Override
     public void deleteMenuCollectionByParams(MenuCollection obj) {
         Map<String, Object> params = new HashMap<>();
@@ -45,6 +52,11 @@ public class MenuCollectionServiceImpl extends ServiceImpl<MenuCollectionMapper,
     }
     @Override
     public void saveByParam(MenuCollection obj,Map<String, String> params){
+        // 点赞数加一
+        LambdaUpdateWrapper<Menu> updateWrapper = new LambdaUpdateWrapper<Menu>()
+                .eq(Menu::getId, obj.getMenuId())
+                .setSql("collections = collections + 1");
+        menuService.update(updateWrapper);
         this.save(obj);
     }
 

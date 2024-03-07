@@ -60,6 +60,8 @@ public class MenuVO {
 //        this.userId = menu.getUserId();
         this.image = menu.getImage();
         this.type = menu.getType();
+        this.chats = menu.getChats();
+        this.collections = menu.getCollections();
     }
 
     public MenuVO(){
@@ -95,5 +97,9 @@ public class MenuVO {
     private String type;
 
     private Integer likes;
+
+    private Integer chats;
+
+    private Integer collections;
 
 }

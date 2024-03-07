@@ -27,7 +27,7 @@ import java.util.Map;
  * 菜谱信息表
  * </p>
  *
- * @author lwx20
+ *
  * @since 2023-10-27
  */
 @Data
@@ -100,6 +100,12 @@ public class Menu extends Model<Menu> implements Serializable {
     @Excel(name = "点赞数")
     @TableField("likes")
     private Integer likes;
+
+    @TableField("chats")
+    private Integer chats;
+
+    @TableField("collections")
+    private Integer collections;
 
     @Schema(description = "菜谱图片")
     @Excel(name = "菜谱图片")

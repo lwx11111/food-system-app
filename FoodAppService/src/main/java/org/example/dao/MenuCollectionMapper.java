@@ -15,7 +15,7 @@ import java.util.Map;
  * 用户点赞表 Mapper 接口
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2024-01-08
  */
 @Mapper

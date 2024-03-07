@@ -1,5 +1,7 @@
 package org.example.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import org.example.domain.Menu;
 import org.example.domain.MenuComment;
 import org.example.dao.MenuCommentMapper;
 import org.example.service.IMenuCommentService;
@@ -7,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.StringUtils;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
@@ -31,16 +34,23 @@ import java.util.Map;
  * 菜谱评论表 服务实现类
  * </p>
  *
- * @author lwx20
+ *
  * @since 2023-10-27
  */
 @Service
 public class MenuCommentServiceImpl extends ServiceImpl<MenuCommentMapper, MenuComment> implements IMenuCommentService {
 
+    @Autowired
+    private MenuServiceImpl menuService;
 
     @Override
     public void saveByParam(MenuComment obj,Map<String, String> params){
         obj.setReleaseTime(LocalDateTime.now());
+        // 点赞数加一
+        LambdaUpdateWrapper<Menu> updateWrapper = new LambdaUpdateWrapper<Menu>()
+                .eq(Menu::getId, obj.getMenuId())
+                .setSql("chats = chats + 1");
+        menuService.update(updateWrapper);
         this.save(obj);
     }
 

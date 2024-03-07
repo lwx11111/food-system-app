@@ -20,7 +20,7 @@ import java.util.Map;
  * 字典表 前端控制器
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2023-12-12
  */
 @RestController

@@ -34,7 +34,7 @@ import java.util.Map;
  * 用户点赞表 服务实现类
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2023-10-27
  */
 @Service

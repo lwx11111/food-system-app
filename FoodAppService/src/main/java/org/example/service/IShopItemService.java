@@ -15,7 +15,7 @@ import java.util.Map;
  * 店铺物品表 服务类
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2023-10-27
  */
 public interface IShopItemService extends IService<ShopItem> {

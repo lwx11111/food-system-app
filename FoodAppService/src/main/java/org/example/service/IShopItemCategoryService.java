@@ -15,7 +15,7 @@ import java.util.Map;
  *  服务类
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2023-11-12
  */
 public interface IShopItemCategoryService extends IService<ShopItemCategory> {

@@ -14,7 +14,6 @@ const request = config => {
 	const isToken = (config.headers || {}).isToken === false
 	config.header = config.header || {}
 	
-	console.log(getToken());
 	if (getToken()) {
 		config.header['Authorization'] = getToken()
 	}

@@ -7,29 +7,8 @@
 				<image style="width: 200px; height: 200px;" :src="menu.image"></image>
 			</view>
 		</uni-card>
-		<!-- 收藏点赞评论 -->
-		<uni-card v-if="!this.isTourist">
-			<u-row gutter="16">
-				<u-col span="4">
-					<u-icon v-if="!this.isMenuLike" 
-							@click="menuLike()" 
-							name="thumb-up" 
-							color="#2979ff" 
-							size="28">
-					</u-icon>
-					<u-icon v-else @click="menuLike()" name="thumb-up-fill" color="#2979ff" size="28"></u-icon>
-					
-				</u-col>
-				<u-col span="4">
-					<u-icon v-if="!this.isMenuCollection" @click="menuCollection()" name="star" color="#2979ff" size="28"></u-icon>
-					<u-icon v-else name="star-fill" @click="menuCollection()" color="#2979ff" size="28"></u-icon>
-				</u-col>
-				<u-col span="4">
-					<u-icon  @click="toComment()" name="chat" color="#2979ff" size="28"></u-icon>
-				</u-col>
-			</u-row>
-		</uni-card>
 		
+		<!-- 评论 -->
 		<u-popup :show="show" mode="bottom" @close="close()" :closeable="true">
 			<view style="height:500px;">
 				<view style="text-align: center;"><h1>发布评论</h1></view>
@@ -103,6 +82,12 @@
 				</uni-card>
 			</view>
 		</u-popup>
+				
+		<u-tabbar v-if="!this.isTourist" inactiveColor="#2979ff" :fixed="true">
+			<u-tabbar-item text="评论" :badge="this.menu.chats" icon="chat" color="#2979ff" size="28" @click="toComment()" ></u-tabbar-item>
+			<u-tabbar-item text="点赞" :badge="this.menu.likes" :icon="likeIcon" @click="menuLike()" ></u-tabbar-item>
+			<u-tabbar-item text="收藏" :badge="this.menu.collections" :icon="collectionIcon" @click="menuCollection()" ></u-tabbar-item>
+		</u-tabbar>
 	</view>
 </template>
 
@@ -116,6 +101,11 @@
 	export default {
 		data() {
 			return {
+				// "thumb-up", "thumb-up-fill,
+				likeIcon: "thumb-up",
+				// collectionIcon:["star", "star-fill"],
+				collectionIcon: "star",
+
 				// 游客模式不展示
 				isTourist: localStorage.getItem("isTourist"),
 				show: false,
@@ -150,8 +140,6 @@
 						releaseTime:''
 					}
 				],
-				isMenuLike: false,
-				isMenuCollection: false,
 				// 私信展示
 				showPop: false,
 				// 私信内容
@@ -161,6 +149,7 @@
 			}
 		},
 		onLoad(option) {
+		
 			this.getMenu(option.id)
 			this.listComments(option.id)
 			if(this.isTourist){
@@ -190,13 +179,14 @@
 					content: that.messageContent
 				}
 				ApiMessage.add4message(messageObj).then(res => {
-					console.log(res);
+
 					if(res.code === 200){
 						uni.showToast({
 							title: `发送成功`,
 							icon: 'none'
 						})
 						that.closeMsg();
+						
 					}
 				})
 			},
@@ -221,9 +211,9 @@
 					menuId: menuId
 				}
 				ApiMenuComment.selpage4menucomment(data).then(res => {
-					console.log(res);
+
 					if(res.code === 200){
-						console.log(res.records);
+
 						that.comments = res.data.records
 					}
 				})
@@ -248,16 +238,14 @@
 							title: `成功`,
 							icon: 'none'
 						})
-						
-						uni.navigateTo({
-						  url: '/pages/menu/menuDetail?id=' + this.menu.id
-						})
+						this.show = false;
+						this.listComments();
+						this.menu.chats  = this.menu.chats + 1;
 					}
 				})
 				
 			},
 			toComment(){
-				console.log("123");
 				this.show = true
 			},
 			getLikeAndCollection(){
@@ -265,35 +253,29 @@
 					userId: localStorage.getItem('userId'),
 					menuId: this.menu.id
 				}
-				console.log(this.menu.id);
+				
 				ApiMenuLike.selpage4menulike(obj).then(res => {
-					console.log(res);
 					if(res.data.records.length > 0){
-						this.isMenuLike = true;
+						this.likeIcon = "thumb-up-fill";
 					}
 					
 				})
 				
 				ApiMenuCollection.selpage4menucollection(obj).then(res => {
-					console.log(res);
 					if(res.data.records.length > 0){
-						this.isMenuCollection = true;
+						this.collectionIcon = "star-fill";
 					}
 					
 				})
 			},
 			menuLike(){
-				console.log(this.menu.id)
 				const obj = {
 					userId: localStorage.getItem('userId'),
 					menuId: this.menu.id
 				}
-				console.log(this.isMenuLike);
-				if(this.isMenuLike === true){
-					
-					console.log('cancel like');
+
+				if(this.likeIcon === "thumb-up-fill"){
 					ApiMenuLike.deleteMenuLikeByParams(obj).then(res => {
-						console.log(res)
 						if(res.code === 200){
 							uni.showToast({
 								title: `取消成功`,
@@ -301,17 +283,18 @@
 							})
 						}
 					})
+					this.likeIcon = "thumb-up";
+					this.menu.likes = this.menu.likes - 1;
 				} else {
 					ApiMenuLike.add4menulike(obj).then(res => {
-						console.log(res)
 						uni.showToast({
 							title: `成功`,
 							icon: 'none'
 						})
 					})
-					
+					this.likeIcon = "thumb-up-fill";
+					this.menu.likes = this.menu.likes + 1;
 				}
-				this.isMenuLike = !this.isMenuLike;
 			},
 
 			menuCollection(){
@@ -319,10 +302,8 @@
 					userId: localStorage.getItem('userId'),
 					menuId: this.menu.id
 				}
-				if(this.isMenuCollection === true){
-					
+				if(this.collectionIcon === "star-fill"){
 					ApiMenuCollection.deleteMenuCollectionByParams(obj).then(res => {
-						console.log(res)
 						if(res.code === 200){
 							uni.showToast({
 								title: `取消成功`,
@@ -330,9 +311,10 @@
 							})
 						}
 					})
+					this.menu.collections = this.menu.collections - 1;
+					this.collectionIcon = "star"
 				} else {
 					ApiMenuCollection.add4menucollection(obj).then(res => {
-						console.log(res)
 						if(res.code === 200){
 							uni.showToast({
 								title: `成功`,
@@ -340,16 +322,18 @@
 							})
 						}
 					})
-					
+					this.menu.collections = this.menu.collections + 1;
+					this.collectionIcon = "star-fill"
 				}
-				this.isMenuCollection = !this.isMenuCollection;
 			},
 			getMenu(id){
 				let that = this;
 				ApiMenu.sel4menu(id).then(res => {
-					console.log(res)
+
 					if(res.code === 200){
+						
 						that.menu = res.data
+
 						this.getLikeAndCollection()
 					}
 				})			

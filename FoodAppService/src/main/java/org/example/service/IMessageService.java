@@ -15,7 +15,7 @@ import java.util.Map;
  *  服务类
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2024-02-16
  */
 public interface IMessageService extends IService<Message> {

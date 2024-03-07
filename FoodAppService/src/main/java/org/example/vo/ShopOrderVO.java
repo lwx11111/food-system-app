@@ -9,7 +9,7 @@ import org.example.domain.ShopItem;
  *
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2024-01-09
  */
 @Data

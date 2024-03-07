@@ -16,7 +16,7 @@ import java.util.Map;
  *  服务类
  * </p>
  *
- * @author lwx20
+ * 
  * @since 2024-01-09
  */
 public interface ICartService extends IService<Cart> {
