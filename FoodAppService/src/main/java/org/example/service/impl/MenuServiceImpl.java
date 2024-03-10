@@ -37,7 +37,7 @@ import java.util.Map;
  * 菜谱信息表 服务实现类
  * </p>
  *
- * 
+ *
  * @since 2023-10-27
  */
 @Service
@@ -254,8 +254,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
             if("likes".equals(entry.getKey())){
                 query.eq("likes",entry.getValue());
             }
-            if("type".equals(entry.getKey())){
-                query.eq("type",entry.getValue());
+            if("categoryId".equals(entry.getKey())){
+                query.eq("category_id",entry.getValue());
             }
             if("userId".equals(entry.getKey())){
                 query.eq("user_id",entry.getValue());

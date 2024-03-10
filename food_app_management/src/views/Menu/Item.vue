@@ -123,11 +123,14 @@
                     <el-col :span="6">
                         <el-form-item
                             label="分类"
-                            prop="type">
-                            <el-select v-model="data.item.type"
+                            prop="categoryId">
+                            <el-select v-model="data.item.categoryId"
                                        :disabled="data.disabled">
-                                <el-option label="素菜" value="0"></el-option>
-                                <el-option label="荤菜" value="1"></el-option>
+                                <el-option v-for="(item,index) in data.categoryData"
+                                           :key="index"
+                                           :label="item.name"
+                                           :value="item.id">
+                                </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -169,6 +172,7 @@
 <script lang="ts" setup>
     import MinioUpload from "@/views/common/MinioUpload.vue";
     import Api from '@/api/Menu/api_menu.js'
+    import ApiMenuCategory from '@/api/Menu/api_menucategory.js'
     import { reactive, ref, onMounted, toRefs } from 'vue'
     import { useStore } from "vuex";
     import { useRouter } from 'vue-router'
@@ -180,6 +184,12 @@
 
     // Data
     const data = reactive({
+        categoryData: [
+            {
+                id:'',
+                name:''
+            }
+        ],
         // 原料
         ingredientsList:[
             {
@@ -209,7 +219,7 @@
             steps: '',
             likes: '',
             image: '',
-            type: ''
+            categoryId: ''
         },
         OperatorLogParam: {
           operateContent: '',
@@ -225,6 +235,9 @@
           description: [
               { required: true, message: '描述不能为空', trigger: 'blur' }
           ],
+            categoryId: [
+                { required: true, message: '分类不能为空', trigger: 'blur' }
+            ],
           // Ingredients: [
           //     { required: true, message: '原料JSON不能为空', trigger: 'blur' }
           // ],
@@ -258,6 +271,16 @@
     })
 
     // Methods
+    const getMenuCategoryData = () => {
+        const params = {};
+        ApiMenuCategory.selpage4menucategory(params).then(res => {
+            console.log(res)
+            if (res.code === 200){
+                data.categoryData = res.data.records;
+            }
+        });
+    }
+
     const uploadCallbackPicture = (response, url) => {
         console.log(url)
         data.ingredientsList[0].img = url
@@ -363,6 +386,8 @@
                 data.disabled = false
                 break
         }
+
+        getMenuCategoryData();
 
         // 获取数据
         if (data.type === 'detail' || data.type === 'update') {

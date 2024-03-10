@@ -14,6 +14,13 @@
 						<view>社区管理</view>
 					</u-col>
 			</uni-card>
+			<uni-card style="border-radius: 10px;">
+					<u-col @click="toMenuListNew()">
+						<image style="width: 100px; height: 100px;" 
+							 src="http://8.130.120.92:9000/appsys/community.png"></image>
+						<view>菜谱管理</view>
+					</u-col>
+			</uni-card>
 			<uni-card style="border-radius: 10px;"> 
 					<u-col @click="toHealth()">
 						<image style="width: 100px; height:100px;" 
@@ -77,6 +84,11 @@
 			this.getDailyRecommendation();
 		},
 		methods: {
+			toMenuListNew(){
+				uni.navigateTo({
+				  url: '/pages/menu/menuListNew',
+				})
+			},
 			toHealth(){
 				uni.navigateTo({
 				  url: '/pages/health/index',

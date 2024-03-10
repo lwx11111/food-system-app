@@ -1,57 +1,36 @@
 <template>
     <div>
-        <!-- 查询条件 -->
-        <el-card style="margin: 10px;">
-            <template #header>
-                <div class="innerHeader">
-                    菜谱信息表管理
-                </div>
-            </template>
-            <div style="display: flex;"
-                 class="card-search">
-                <el-form :inline="true"
-                         :model="data.formList"
-                         size="default"
-                         label-width="100px">
-                    <el-form-item label="菜谱名">
-                        <el-input placeholder="请输入菜谱名"
-                                  v-model="data.formList.name"
-                                  style="width: 200px"
-                                  @keyup.enter.native="getData">
-                        </el-input>
-                    </el-form-item>
-                    <el-form-item label="分类">
-                        <el-select v-model="data.formList.categoryId"
-                                   style="width: 200px"
-                                   @keyup.enter.native="getData">
-                            <el-option v-for="(item,index) in data.categoryData"
-                                       :key="index"
-                                       :label="item.name"
-                                       :value="item.id">
-                            </el-option>
-                        </el-select>
-                    </el-form-item>
-                </el-form>
-            </div>
-            <template #footer>
-                <div style="float:right; margin-bottom: 5px">
-                    <el-button
-                        type="primary"
-                        @click="queryData()"
-                        icon="Search"
-                        :loading="data.isSearch">
-                        查询
-                    </el-button>
-                    <el-button
-                        @click="resetData()"
-                        icon="Close">
-                        清空
-                    </el-button>
-                </div>
-            </template>
+        <el-card style="margin: 10px; border: 1px solid gold">
+            <!-- 查询条件 -->
+            <el-collapse
+                    accordion
+                    v-model="data.activeName"
+                    class="card-bg">
+                <el-collapse-item name="1">
+                    <template #title>
+                        <div class="innerHeader">
+                          管理
+                        </div>
+                    </template>
+                    <div style="display: flex;"
+                         class="card-search">
+                        <el-form :inline="true"
+                                 :model="data.formList"
+                                 size="default"
+                                 label-width="100px">
+                            <el-form-item label="分类名">
+                                <el-input placeholder="请输入分类名"
+                                            v-model="data.formList.name"
+                                            style="width: 200px"
+                                            @keyup.enter.native="getData">
+                                  </el-input>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </el-collapse-item>
+            </el-collapse>
         </el-card>
-
-        <el-card style="margin: 10px;">
+        <el-card style="margin: 10px; border: 1px solid gold">
             <!-- 操作按钮区 -->
             <div style="margin:10px 0;">
                 <el-button
@@ -61,20 +40,34 @@
                   新增
                 </el-button>
                 <el-button
-                        type="danger"
+                        type="warning"
                         icon="DocumentDelete"
                         @click="deleteDataMany()">
                   删除
                 </el-button>
+                <div style="float:right;">
+                    <el-button
+                          type="primary"
+                          @click="queryData()"
+                          icon="Search"
+                          :loading="data.isSearch">
+                    查询
+                    </el-button>
+                    <el-button
+                          @click="resetData()"
+                          icon="Close">
+                    清空
+                    </el-button>
+                </div>
             </div>
 
             <!-- 表格呈现 -->
             <el-table
-                :row-class-name="tableRowClassName"
                   :data="data.tableData"
                   :height="data.screenHeight - data.otherHeight"
                   tooltip-effect="dark"
                   style="width:100%"
+                  stripe
                   size="default"
                   border
                   @selection-change="selectionChanged">
@@ -88,28 +81,9 @@
                         width="180"
                         align="center">
                 </el-table-column>
-                <el-table-column label="图片">
-                    <template #default="scope">
-                        <div style="display: flex; align-items: center">
-                            <el-image :src="scope.row.image"/>
-                        </div>
-                    </template>
-                </el-table-column>
                  <el-table-column
                         prop="name"
-                        label="菜谱名"
-                        width="180"
-                        align="center">
-                </el-table-column>
-                 <el-table-column
-                        prop="likes"
-                        label="点赞数"
-                        width="180"
-                        align="center">
-                </el-table-column>
-                 <el-table-column :formatter="typeFormat"
-                        prop="categoryId"
-                        label="分类"
+                        label="分类名"
                         width="180"
                         align="center">
                 </el-table-column>
@@ -137,7 +111,7 @@
                         </el-link>
                         <el-link
                                 @click="toDelete(scope)"
-                                type="danger"
+                                type="primary"
                                 size="small"
                                 :underline="false">
                           删除
@@ -165,9 +139,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-    import Api from '@/api/Menu/api_menu.js'
-    import ApiMenuCategory from '@/api/Menu/api_menucategory.js'
-
+    import Api from '@/api/Menu/api_menucategory.js'
     import ItemDialog from './Item.vue'
     import { reactive, ref, defineProps, toRefs, onMounted} from 'vue'
     import Upload from "@/utils/oss/upload.vue";
@@ -180,31 +152,16 @@
 
     // Data
     const data = reactive({
-        context: { componentParent: this },// context: 父对象
         screenHeight: window.innerHeight,// screenHeight:控制高度自适应-页面高度
         otherHeight: 310,// otherHeight:控制高度自适应-表格外的高度
         isSearch: false, // isSearch:控制搜索状态
-        detailUrl: '/name/menu/item', // detailUrl:详情页面地址
         selectedRows: {}, // selectedRows:选中行对象
         // formList:搜索条件对象 分页控制对象
         formList: {
-            name: '',
-            description: '',
-            Ingredients: '',
-            steps: '',
-            likes: '',
-            image: '',
-            categoryId: ''
+            name: ''
         },
         // tableData:表格数据
         tableData: [],
-        // OperatorLogParam:用于记录日志
-        OperatorLogParam: {
-            operateContent: '',
-            operateFeatures: '',
-            operateState: '',
-            operateType: ''
-        },
         activeName: '1',
         // 分页配置
         pageConfig: {
@@ -214,12 +171,6 @@
         },
         // dialog
         type: '',
-        categoryData: [
-            {
-                id:'',
-                name:''
-            }
-        ]
     })
     // 解构抛出 直接使用
     // const { type} = toRefs(data)
@@ -227,65 +178,24 @@
     // Mounted
     onMounted(() => {
         getData();
-        getMenuCategoryData();
     })
 
     // Methods
-    const getMenuCategoryData = () => {
-        const params = {};
-        ApiMenuCategory.selpage4menucategory(params).then(res => {
-            console.log(res)
-            if (res.code === 200){
-                data.categoryData = res.data.records;
-            }
-        });
-    }
-
-    const tableRowClassName = ({row, rowIndex}) => {
-        if (rowIndex % 2 === 0) {
-            return 'warning-row'
-        } else if (rowIndex % 1 === 0) {
-            return 'success-row'
-        }
-        return ''
-    }
-
-    /**
-     * 修改枚举值到具体含义
-     * @param row
-     * @param column
-     */
-    const typeFormat = (row, column) => {
-
-        for (const i of data.categoryData) {
-            if (i.id === row.categoryId) {
-                return i.name
-            }
-        }
-    }
     const getData = () => {
         // 查询方法
         // 查询参数
         const params = {
             name : data.formList.name,
-            description : data.formList.description,
-            Ingredients : data.formList.Ingredients,
-            steps : data.formList.steps,
-            likes : data.formList.likes,
-            image : data.formList.image,
-            categoryId : data.formList.categoryId,
             pageIndex : data.pageConfig.currentPage,
             pageSize : data.pageConfig.pageSize
         }
         // 后台请求
-        Api.selpage4menu(params).then(res=> {
-            console.log(res)
+        Api.selpage4menucategory(params).then(res=> {
             if (res.code === 200){
                 data.tableData = res.data.records
                 data.pageConfig.total = res.data.total
                 data.isSearch = false
             }
-
         })
     }
     // 添加记录
@@ -303,7 +213,7 @@
             const blobUrl = URL.createObjectURL(blob)
             const a = document.createElement('a')
             a.href = blobUrl
-            a.download = '菜谱信息表.xls'
+            a.download = 'MenuCategory.xls'
             a.click()
             window.URL.revokeObjectURL(blobUrl)
         })
@@ -313,7 +223,7 @@
     const uploadExcelRef = ref();
     const uploadExcel = () => {
         // const uploadExcelUrl = Api.uploadExcelUrl();
-        uploadExcelRef.value.init(this.SHOP_SERVER + '/menu/uploadExcel');
+        uploadExcelRef.value.init(this.SHOP_SERVER + '/menucategory/uploadExcel');
     }
 
     const deleteDataMany = () => {
@@ -338,7 +248,7 @@
                         type: 'warning',
                     }
             ).then(() => {
-                Api.dels4menu(dataids).then(res => {
+                Api.dels4menucategory(dataids).then(res => {
                     if (res.code === 200){
                         ElMessage({
                             type: 'success',
@@ -351,13 +261,6 @@
                             message: '删除失败',
                         })
                     }
-
-                    // 日志记录
-                    // this.OperatorLogParam.operateContent = JSON.stringify(dataids)
-                    // this.OperatorLogParam.operateFeatures = '删除记录'
-                    // this.OperatorLogParam.operateType = LogType.Query
-                    // this.OperatorLogParam.operateState = '成功'
-                    // OperatorLog.setOperationLog(this.OperatorLogParam)
                 })
             }).catch(() => {
                 ElMessage({
@@ -384,12 +287,12 @@
 
     const excelData = () => {
         const params = {}
-        Api.excelData4menu(params).then(data => {
+        Api.excelData4menucategory(params).then(data => {
             const blob = new Blob([data], { type: 'application/vnd.ms-excel' })
             const blobUrl = URL.createObjectURL(blob)
             const a = document.createElement('a')
             a.href = blobUrl
-            a.download = '菜谱信息表.xls'
+            a.download = 'MenuCategory.xls'
             a.click()
             window.URL.revokeObjectURL(blobUrl)
         })
@@ -444,7 +347,7 @@
                 }
         ).then(() => {
             console.log(scope.row.id)
-            Api.del4menu(scope.row.id).then(res => {
+            Api.del4menucategory(scope.row.id).then(res => {
                 console.log(res)
                 if (res.code === 200){
                     ElMessage({
@@ -459,13 +362,6 @@
                     })
                 }
             })
-
-            // 日志记录
-            // this.OperatorLogParam.operateContent = JSON.stringify(dataids)
-            // this.OperatorLogParam.operateFeatures = '删除记录'
-            // this.OperatorLogParam.operateType = LogType.Query
-            // this.OperatorLogParam.operateState = '成功'
-            // OperatorLog.setOperationLog(this.OperatorLogParam)
         }).catch(() => {
             ElMessage({
                 type: 'info',
@@ -492,14 +388,8 @@
 
 </script>
 <style lang="css" scoped>
-    .el-table >>> .warning-row {
-        background: oldlace;
-    }
-    .el-table >>> .success-row {
-        background: #f0f9eb;
-    }
-    /* 单页面样式 */
-    >>>.el-table .cell {
-      white-space: nowrap
-    }
+/* 单页面样式 */
+>>>.el-table .cell {
+  white-space: nowrap
+}
 </style>

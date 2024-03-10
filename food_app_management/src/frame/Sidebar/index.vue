@@ -14,7 +14,7 @@
                 background-color="#545c64"
                 text-color="#fff"
             >
-			
+
             <sidebar-item v-for="route in data.indexDate" :key="route.funId.toString()" :item="route" :base-path="route.url"/>
             <sidebar-item v-for="route in data.menuData"
                           :key="route.funId.toString()"
@@ -71,6 +71,11 @@
                     'funName': '菜谱点赞管理',
                     'url': '/menulike/index',
                     'icon': 'Pointer'
+                },{
+                    'funId': '22',
+                    'funName': '菜谱分类',
+                    'url': '/menucategory/index',
+                    'icon': 'Document'
                 }]
             },
             {
@@ -125,6 +130,11 @@
                     'funId': '51',
                     'funName': '食物热量管理',
                     'url': '/dic/index',
+                    'icon': 'IceTea'
+                },{
+                    'funId': '52',
+                    'funName': '食物管理',
+                    'url': '/dict/index',
                     'icon': 'IceTea'
                 }]
             },

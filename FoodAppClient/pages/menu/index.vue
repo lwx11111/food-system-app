@@ -1,3 +1,4 @@
+<!-- tabbar栏页面，匹配菜谱 -->
 <template>
   <view>
   	<uni-search-bar  v-model="params.name" @confirm="search"></uni-search-bar>

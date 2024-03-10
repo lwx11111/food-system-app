@@ -19,6 +19,7 @@ const MenuCollectionIndex = () => import('@/views/Menu/MenuCollection/Index.vue'
 const MenuCommentIndex = () => import('@/views/Menu/MenuComment/Index.vue')
 // 菜谱-点赞
 const MenuLikeIndex = () => import('@/views/Menu/MenuLike/Index.vue')
+const MenuCategoryIndex = () => import('@/views/Menu/MenuCategory/Index.vue')
 
 /**
  * 菜品管理
@@ -45,6 +46,8 @@ const CategoryIndex = () => import('@/views/Community/Category/Index.vue')
  * 健康管理
  */
 const DicIndex = () => import('@/views/Health/Dic/Index.vue')
+
+const DictIndex = () => import('@/views/Health/Dict/Index.vue')
 
 // 模块化路由
 const routes = [
@@ -103,6 +106,11 @@ const routes = [
                         path: '/menulike/index',
                         component: MenuLikeIndex,
                         name: '菜谱点赞'
+                    },
+                    {
+                        path: '/menucategory/index',
+                        component: MenuCategoryIndex,
+                        name: '菜谱分类'
                     },
                 ]
             },
@@ -167,8 +175,14 @@ const routes = [
                         component: DicIndex,
                         name: '食物热量'
                     },
+                    {
+                        path: '/dict/index',
+                        component: DictIndex,
+                        name: '食物名管理'
+                    },
                 ]
             },
+
         ]
     }
 

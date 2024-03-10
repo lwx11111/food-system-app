@@ -1,3 +1,4 @@
+<!-- 匹配菜谱后的界面 -->
 <template>
 	<view>
 		<uni-card v-for="(item,index) in menuList"

@@ -59,7 +59,7 @@ public class MenuVO {
 
 //        this.userId = menu.getUserId();
         this.image = menu.getImage();
-        this.type = menu.getType();
+        this.categoryId = menu.getCategoryId();
         this.chats = menu.getChats();
         this.collections = menu.getCollections();
     }
@@ -94,7 +94,7 @@ public class MenuVO {
 
     private String image;
 
-    private String type;
+    private String categoryId;
 
     private Integer likes;
 
