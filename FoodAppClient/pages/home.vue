@@ -6,7 +6,13 @@
 		</view>
 
 		<!-- 应用列表 -->
-		<view style="display: flex; justify-content: space-between; margin: 0 -8px;">
+		<u-swiper
+		            :list="list1"
+		            @change="change"
+		            @click="click"
+					:height="250"
+		></u-swiper>
+		<!-- <view style="display: flex; justify-content: space-between; margin: 0 -8px;">
 			<uni-card style="border-radius: 10px;"> 
 					<u-col @click="toCommunity()">
 						<image style="width: 100px; height: 100px;" 
@@ -28,7 +34,7 @@
 						<view>健康管理</view>
 					</u-col>
 			</uni-card>
-		</view>
+		</view> -->
 		
 		<view>
 			<h1 style="margin-left: 30px;">每日推荐</h1>
@@ -56,6 +62,11 @@
 		  return {
 			  // 游客模式不展示
 			  isTourist: localStorage.getItem("isTourist"),
+			 list1: [
+					 '../static/images/民族美食banner.jpg',
+					 '../static/images/健康管理banner.jpg',
+					 '../static/images/社区交流banner.jpg',
+			        ],
 				// 每日推荐
 				dailyMenu : [
 					{
@@ -84,6 +95,12 @@
 			this.getDailyRecommendation();
 		},
 		methods: {
+			change(){
+				
+			},
+			click(){
+				
+			},
 			toMenuListNew(){
 				uni.navigateTo({
 				  url: '/pages/menu/menuListNew',
