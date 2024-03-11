@@ -6,7 +6,7 @@
 		<view style="align-items: center; text-align: center; margin-bottom: 20px;"><h2>已选食材</h2></view>
 		<view v-for="(item,index) in sysDictSelected" style="display: inline-block;">
 			<u-tag 
-				style="width: 50px; margin-right: 10px;" @click="deleteTag(index)"
+				style="width: 50px; margin-right: 10px;margin-top: 10px;" @click="deleteTag(index)"
 				:text="item.name + ' ' + '×'" 
 				shape="circle"
 				plain size="mini"></u-tag>
@@ -19,7 +19,7 @@
 		<view style="align-items: center; text-align: center; margin-bottom: 20px;"><h2>素菜</h2></view>
 		<view v-for="(item,index) in sysDict" style="display: inline-block;">
 			<u-tag 
-				style="width: 50px; margin-right: 10px;" @click="addTag(index)"
+				style="width: 50px; margin-right: 10px;margin-top: 10px;" @click="addTag(index)"
 				:text="item.name" 
 				shape="circle"
 				plain size="mini"></u-tag>
@@ -30,7 +30,7 @@
 	<uni-card>
 		<view style="align-items: center; text-align: center; margin-bottom: 20px;"><h2>肉菜</h2></view>
 		<view v-for="(item,index) in sysDict1" style="display: inline-block;">
-			<u-tag style="width: 50px; margin-right: 10px;" 
+			<u-tag style="width: 50px; margin-right: 10px; margin-top: 10px;" 
 				:text="item.name" 
 				plain
 				shape="circle"
