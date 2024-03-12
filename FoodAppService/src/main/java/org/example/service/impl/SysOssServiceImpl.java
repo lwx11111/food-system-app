@@ -43,7 +43,7 @@ import java.util.Map;
  *  服务实现类
  * </p>
  *
- * 
+ *
  * @since 2023-11-13
  */
 @Service
@@ -71,6 +71,8 @@ public class SysOssServiceImpl extends ServiceImpl<SysOssMapper, SysOss> impleme
 //        this.baseMapper.deleteByDate(id);
 //    }
 //
+
+
     public void test1() throws Exception {
         try {
             // 创建MinioClient对象

@@ -4,11 +4,11 @@
 	<uni-card v-for="(item,index) in carts" @click="toShopItemDetail(index)">
 		<view style="margin-bottom: 10px;"><h2>{{item.shopItem.name}}</h2></view>
 		<view>
-			<image style="width: 200px; height: 200px;" 
-					:src="item.image"></image>
+			<image style="width: 100%; height: 200px;" 
+					:src="item.shopItem.picture"></image>
 		</view>
-		<view>{{item.shopItem.price}}¥</view>
-		<view>{{item.amount}}</view>
+		<view style="color: red;">{{item.shopItem.price}}¥</view>
+		<view>数量:{{item.amount}}</view>
 	</uni-card>
   </view>
 </template>

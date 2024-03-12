@@ -51,6 +51,10 @@ public class Menu extends Model<Menu> implements Serializable {
         this.steps = jsonArray1.toString();
         this.categoryId = menuVO.getCategoryId();
         this.likes = 0;
+        this.collections = 0;
+        this.chats = 0;
+        this.image = menuVO.getImage();
+        this.userId = menuVO.getUserId();
     }
 
     public Menu(){

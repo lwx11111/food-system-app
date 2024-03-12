@@ -69,7 +69,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     public IPage<MenuVO> getDailyRecommendation(Map<String, String> params) {
         Dic dic = dicService.getDicByKeyy("每日推荐id");
         String randomId = dic.getValue();
-        if (dic.getValue() == null) {
+        if ("".equals(dic.getValue())) {
             List<String> randomIds = menuMapper.getRandomIds();
             String value = "(";
             for (int i = 0; i < randomIds.size(); i++) {

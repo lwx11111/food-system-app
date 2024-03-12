@@ -4,44 +4,34 @@
 		<uni-card>
 			<view style="margin-bottom: 10px;"><h2>{{menu.name}}</h2></view>
 			<view>
-				<image style="width: 200px; height: 200px;" :src="menu.image"></image>
+				<image style="width: 100%; height: 200px;" :src="menu.image"></image>
 			</view>
 		</uni-card>
 		
-		<!-- 评论 -->
-		<u-popup :show="show" mode="bottom" @close="close()" :closeable="true">
-			<view style="height:500px;">
-				<view style="text-align: center;"><h1>发布评论</h1></view>
-				<uni-section title="评论" type="line" padding>
-					<uni-easyinput type="textarea" autoHeight v-model="content" placeholder="请输入评论"></uni-easyinput>
-				</uni-section>
-				<button @click="submit()" >提交</button>
-			</view>
-			
-		</u-popup>
 		<!-- 描述 -->
 		<uni-card>
 			<h2>描述</h2>
 			<view>{{menu.description}}</view>
 		</uni-card>
+		
 		<!-- 原料 -->
 		<uni-card>
 			<h2>原料信息</h2>
 			<view v-for="(item,key) in menu.ingredients">
 				<view>{{item.name}}</view>
 				<view>{{item.amount}}</view>
-				<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+				<image style="width: 100%; height: 200px;" :src="item.img"></image>
 				<u-divider></u-divider>
 			</view>
-			
 		</uni-card>
+		
 		<!-- 步骤 -->
 		<uni-card>
 			<h2>步骤信息</h2>
 			<view v-for="(item,key) in menu.steps">
 				<view>步骤{{key + 1}}</view>
 				<view>{{item.description}}</view>
-				<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+				<image style="width: 100%; height: 200px;" :src="item.img"></image>
 				<u-divider></u-divider>
 			</view>
 		</uni-card>
@@ -88,6 +78,17 @@
 			<u-tabbar-item text="点赞" :badge="this.menu.likes" :icon="likeIcon" @click="menuLike()" ></u-tabbar-item>
 			<u-tabbar-item text="收藏" :badge="this.menu.collections" :icon="collectionIcon" @click="menuCollection()" ></u-tabbar-item>
 		</u-tabbar>
+		
+		<!-- 评论 -->
+		<u-popup :show="show" mode="bottom" @close="close()" :closeable="true">
+			<view style="height:500px;">
+				<view style="text-align: center;"><h1>发布评论</h1></view>
+				<uni-section title="评论" type="line" padding>
+					<uni-easyinput type="textarea" autoHeight v-model="content" placeholder="请输入评论"></uni-easyinput>
+				</uni-section>
+				<button @click="submit()" >提交</button>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
