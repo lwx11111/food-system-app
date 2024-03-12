@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view style="width: ;">
-			<uni-search-bar v-model="params.name" @confirm="search"></uni-search-bar>
+			<!-- <uni-search-bar v-model="params.name" @confirm="search"></uni-search-bar> -->
 			<!-- <u-search placeholder="请搜索" v-model="params.name" @search="search"></u-search> -->
 		</view>
 
@@ -9,7 +9,7 @@
 		<u-swiper
 		            :list="list1"
 		            @change="change"
-		            @click="click"
+		            @click="click(list1)"
 					:height="250"
 		></u-swiper>
 		<!-- <view style="display: flex; justify-content: space-between; margin: 0 -8px;">
@@ -62,6 +62,7 @@
 		  return {
 			  // 游客模式不展示
 			  isTourist: localStorage.getItem("isTourist"),
+			  linkIndex: 0,
 			 list1: [
 					 '../static/images/民族美食banner.jpg',
 					 '../static/images/健康管理banner.jpg',
@@ -95,10 +96,16 @@
 			this.getDailyRecommendation();
 		},
 		methods: {
-			change(){
-				
+			change(e){
+				// console.log(e);
+				this.linkIndex = e.current;
 			},
-			click(){
+			click(list){
+				switch (this.linkIndex){
+					case 0 : this.toMenuListNew(); break;
+					case 1 : this.toHealth(); break;
+					case 2 : this.toCommunity(); break;
+				}
 				
 			},
 			toMenuListNew(){

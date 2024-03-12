@@ -1,7 +1,6 @@
 <!-- tabbar栏页面，匹配菜谱 -->
 <template>
   <view>
-  	<uni-search-bar  v-model="params.name" @confirm="search"></uni-search-bar>
 	<uni-card>
 		<view style="align-items: center; text-align: center; margin-bottom: 20px;"><h2>已选食材</h2></view>
 		<view v-for="(item,index) in sysDictSelected" style="display: inline-block;">
@@ -142,13 +141,6 @@
 				uni.navigateTo({
 				  url: '/pages/menu/menuList?menuName=' + JSON.stringify(this.sysDictSelected)
 				})
-			},
-			search() {
-				this.getMeatMenu();
-				this.getVegetableMenu();
-				// uni.switchTab({
-				// 	url: '/pages/menu/index?name' + this.name
-				// });
 			},
 			toMenuDetail(index,type) {
 				console.log(index);

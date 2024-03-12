@@ -56,7 +56,7 @@ const data = reactive({
     },
     minioUrl: "http://localhost:8081/sysoss/uploadOSS",
     // minioServerUrl: "http://127.0.0.1:9000/",
-    minioServerUrl: "http://8.130.120.92:9000/",
+    minioServerUrl: "http://8.130.120.92:9000/47482d006e1b9fd688ff0e57bb9b38db_.jpg",
     fileList: [],
 })
 

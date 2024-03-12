@@ -21,7 +21,7 @@
 				<uni-card>
 					<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
 					<view>
-						<image style="width: 200px; height: 200px;" :src="item.image"></image>
+						<image style="width: 100%; height: 200px;" :src="item.image"></image>
 					</view>
 				</uni-card>
 			</u-col>
@@ -103,7 +103,8 @@
 			// 分类信息
 			getMenuCategoryData() {
 				let that = this;
-				ApiMenuCategory.selpage4menucategory(this.params).then(res => {
+				const params = {};
+				ApiMenuCategory.selpage4menucategory(params).then(res => {
 					console.log(res.data.records);
 					if(res.code === 200){
 						that.menuCategoryData = res.data.records;

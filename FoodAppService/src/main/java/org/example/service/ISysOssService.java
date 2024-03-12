@@ -15,7 +15,7 @@ import java.util.Map;
  *  服务类
  * </p>
  *
- * 
+ *
  * @since 2023-11-13
  */
 public interface ISysOssService extends IService<SysOss> {

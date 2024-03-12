@@ -1,5 +1,6 @@
 package org.example.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import org.example.domain.Cart;
 import org.example.dao.CartMapper;
 import org.example.service.ICartService;
@@ -33,7 +34,7 @@ import java.util.Map;
  *  服务实现类
  * </p>
  *
- * 
+ *
  * @since 2024-01-09
  */
 @Service
@@ -65,9 +66,24 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
 
     @Override
     public void saveByParam(Cart obj,Map<String, String> params){
-        this.save(obj);
+        if (this.isHave(obj)){
+            LambdaUpdateWrapper<Cart> updateWrapper = new LambdaUpdateWrapper<Cart>()
+                    .eq(Cart::getUserId, obj.getUserId())
+                    .eq(Cart::getShopItemId, obj.getShopItemId())
+                    .setSql("amount = amount + " + obj.getAmount());
+            this.update(updateWrapper);
+        } else {
+            this.save(obj);
+        }
     }
 
+    Boolean isHave(Cart obj){
+        QueryWrapper<Cart> query = new QueryWrapper<>();
+        query.eq("user_id", obj.getUserId());
+        query.eq("shop_item_id", obj.getShopItemId());
+        Cart cart = this.getOne(query);
+        return cart != null;
+    }
     @Override
     public void updateByParam(Cart obj,Map<String, String> params){
         this.updateById(obj);

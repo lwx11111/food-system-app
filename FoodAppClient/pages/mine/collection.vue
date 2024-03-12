@@ -1,26 +1,26 @@
 <template>
 	<view>
-		<u-tabs :list="list1" @click="click"></u-tabs>
-		
+		<!-- <u-tabs :list="list1" @click="click"></u-tabs> -->
+		<!-- v-if="showIndex === 0" -->
 		<uni-card v-for="(item,index) in menuCollection"
-				  v-if="showIndex === 0"
+				  
 				  @click="toMenuDetail(index)">
 			<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
 			<view>
-				<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+				<image style="width: 100% height: 200px;" :src="item.image"></image>
 			</view>
 		</uni-card>
 		
 		<!-- 物品数据 -->
-		<uni-card v-for="(item,index) in shopItems" 
+		<!-- <uni-card v-for="(item,index) in shopItems" 
 				v-if="showIndex === 1"
 				@click="toShopItemDetail(index)">
 			<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
 			<view>
-				<image style="width: 200px; height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+				<image style="width: 100% height: 200px;" src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
 			</view>
 			<view>{{item.price}}¥</view>
-		</uni-card>
+		</uni-card> -->
 	</view>
 </template>
 
@@ -106,7 +106,7 @@
 			},
 			toMenuDetail(index) {
 				uni.navigateTo({
-				  url: '/pages/menu/menuDetail?id=' + this.menu[index].id,
+				  url: '/pages/menu/menuDetail?id=' + this.menuCollection[index].id,
 				  events: {
 				    // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
 				    acceptDataFromOpenedPage: function(data) {

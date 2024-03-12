@@ -195,13 +195,16 @@
 			onClick(e) {
 				if(e.index === 0){
 					// 客服
-					this.toCustomerService();
-				} else if(e.index === 1) {
+					// this.toCustomerService();
 					// 店铺
 					this.toShop();
-				} else {
+				} else if(e.index === 1) {
 					// 购物车
 					this.toShoppingCart();
+					// 店铺
+					// this.toShop();
+				} else {
+					
 				}
 			},
 			// 商品导航-右侧点击事件

@@ -57,7 +57,7 @@ public class MenuVO {
             }
         }
 
-//        this.userId = menu.getUserId();
+        this.userId = menu.getUserId();
         this.image = menu.getImage();
         this.categoryId = menu.getCategoryId();
         this.chats = menu.getChats();
