@@ -1,22 +1,22 @@
 <!-- 匹配菜谱后的界面 -->
 <template>
 	<view>
-		<uni-card v-for="(item,index) in menuList"
-				  @click="toMenuDetail(index)">
-			<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
-			<view>
-				<image style="width: 100%; height: 200px;" :src="item.image"></image>
-			</view>
-		</uni-card>
+		<view v-for="(item,index) in menuList">
+			<MenuCard :menu="item"></MenuCard>
+		</view>
 	</view>
-
 </template>
 
 <script>
-import ApiMenu from '@/api/menu/menu.js'
+	import MenuCard from '@/pages/menu/components/menuCard.vue';
+	import ApiMenu from '@/api/menu/menu.js'
 	import ApiDict from '@/api/api_sysdict.js'
 	
 	export default {
+		components:{
+			MenuCard
+		},
+		
 		data() {
 		  return {
 			  menuName:[],

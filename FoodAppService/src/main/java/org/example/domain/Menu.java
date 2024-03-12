@@ -55,6 +55,7 @@ public class Menu extends Model<Menu> implements Serializable {
         this.chats = 0;
         this.image = menuVO.getImage();
         this.userId = menuVO.getUserId();
+        this.type = menuVO.getType();
     }
 
     public Menu(){
@@ -125,6 +126,11 @@ public class Menu extends Model<Menu> implements Serializable {
     @Excel(name = "用户ID")
     @TableField("user_id")
     private String userId;
+
+    @Schema(description = "类型")
+    @Excel(name = "类型")
+    @TableField("type")
+    private String type;
 
     @TableField(exist = false)
     private Map<String,String> params;

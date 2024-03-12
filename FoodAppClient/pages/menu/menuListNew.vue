@@ -18,36 +18,37 @@
 	  <view v-for="(item,index) in menus" v-if="index%2==0">
 		<u-row gutter="16">
 			<u-col span="6" @click="toMenuDetail(index)">
-				<uni-card>
-					<view style="margin-bottom: 10px;"><h2>{{item.name}}</h2></view>
-					<view>
-						<image style="width: 100%; height: 200px;" :src="item.image"></image>
-					</view>
-				</uni-card>
+				<MenuCard :menu="item"></MenuCard>
 			</u-col>
 			<u-col span="6" 
 					@click="toMenuDetail(index + 1)" 
 					v-if="index+1 < menus.length">
-				<uni-card>
+					<MenuCard :menu="menus[index + 1]"></MenuCard>
+				<!-- <uni-card>
 					<view style="margin-bottom: 10px;"><h2>{{menus[index + 1].name}}</h2></view>
 					<view>
 						<image style="width: 200px; height: 200px;" :src="menus[index + 1].image"></image>
 					</view>
-				</uni-card>
+				</uni-card> -->
 			</u-col>
 		</u-row>
 	  </view>
 	  
-	  <u-tabbar :fixed="true">
+	  <!-- <u-tabbar :fixed="true">
 	  	<u-tabbar-item text="去发布" icon="home" @click="toMenuPublish()" ></u-tabbar-item>
-	  </u-tabbar>
+	  </u-tabbar> -->
   </view>
 </template>
 
 <script>
 	import Api from '@/api/menu/menu.js'
 	import ApiMenuCategory from '@/api/menu/api_menucategory.js'
+	import MenuCard from '@/pages/menu/components/menuCard.vue';
+	
 	export default {
+		components:{
+			MenuCard
+		},
 		data() {
 		  return {
 			  value1: 0,
@@ -96,7 +97,7 @@
 					return;
 				}
 				uni.navigateTo({
-				  url: '/pages/Menu/MenuPublish',
+				  url: '/pages/menu/menuPublish',
 				})
 			},
 			
@@ -148,6 +149,12 @@
 				Api.selpage4menu(this.params).then(res => {
 					console.log(res)
 					if(res.code === 200){
+						// 剔除非民族
+						for(let i = 0; i < res.data.records.length; i++){
+							if( res.data.records[i].categoryId === null || res.data.records[i].categoryId === '' ){
+								res.data.records.splice(i, 1);
+							}
+						}
 						that.menus = res.data.records
 					}
 				})

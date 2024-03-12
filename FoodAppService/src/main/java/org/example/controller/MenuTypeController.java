@@ -1,40 +1,41 @@
 package org.example.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.example.domain.SysDict;
-import org.example.service.ISysDictService;
-import org.example.web.SimpleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.*;
+import org.example.web.SimpleResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.example.domain.MenuType;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.example.service.IMenuTypeService;
 
-import java.util.List;
-import java.util.Map;
+
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 字典表 前端控制器
+ *  前端控制器
  * </p>
  *
- *
- * @since 2023-12-12
+ * @author lwx20
+ * @since 2024-03-12
  */
 @RestController
-@Tag(name = "字典表服务")
-@RequestMapping("/sysdict")
+@Tag(name = "服务")
+@RequestMapping("/menutype")
 @CrossOrigin(origins = "*",maxAge = 3600)
-public class SysDictController {
+public class MenuTypeController {
     @Autowired
-    private ISysDictService service;
+    private IMenuTypeService service;
 
     @PostMapping
     @ResponseBody
-    @Operation(description = "创建字典表")
-    public SimpleResponse save(@RequestBody SysDict obj){
+    @Operation(description = "创建")
+    public SimpleResponse save(@RequestBody MenuType obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.saveByParam(obj,obj.getParams());
@@ -48,8 +49,8 @@ public class SysDictController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    @Operation(description = "更新字典表")
-    public SimpleResponse update(@PathVariable(name = "id") String id,@RequestBody SysDict obj){
+    @Operation(description = "更新")
+    public SimpleResponse update(@PathVariable(name = "id") String id,@RequestBody MenuType obj){
         SimpleResponse response = new SimpleResponse();
         try {
             service.updateByParam(obj,obj.getParams());
@@ -63,7 +64,7 @@ public class SysDictController {
 
     @DeleteMapping("/{id}")
     @ResponseBody
-    @Operation(description = "按ID删除字典表")
+    @Operation(description = "按ID删除")
     public SimpleResponse remove(@PathVariable(name = "id") String id){
         SimpleResponse response = new SimpleResponse();
         try {
@@ -77,7 +78,7 @@ public class SysDictController {
     }
 
     @GetMapping("/{id}")
-    @Operation(description = "按ID查询字典表")
+    @Operation(description = "按ID查询")
     @ResponseBody
     public SimpleResponse select(@PathVariable(name = "id") String id) {
         SimpleResponse response = new SimpleResponse();
@@ -93,7 +94,7 @@ public class SysDictController {
 
     @PostMapping("/dels")
     @ResponseBody
-    @Operation(description = "按ID删除多个字典表")
+    @Operation(description = "按ID删除多个")
     public SimpleResponse removes(@RequestBody List<String> ids){
         SimpleResponse response = new SimpleResponse();
         try {
@@ -108,24 +109,24 @@ public class SysDictController {
 
 
     @PostMapping("/delby")
-    @Operation(description = "条件删除字典表")
+    @Operation(description = "条件删除")
     public void deleteBy(@RequestBody(required = false) Map<String, String> params) {
         service.deleteBy(params);
     }
 
     @PostMapping("/selby")
     @ResponseBody
-    public List<SysDict> selectBy(@RequestBody(required = false) Map<String, String> params) {
+    public List<MenuType> selectBy(@RequestBody(required = false) Map<String, String> params) {
         return  service.selectBy(params);
     }
 
     @PostMapping("/selpage")
-    @Operation(description = "分页查询字典表")
+    @Operation(description = "分页查询")
     @ResponseBody
     public SimpleResponse selectPage(@RequestBody Map<String, String> params) {
         SimpleResponse response = new SimpleResponse();
         try {
-            IPage<SysDict> page = service.selectPage(params);
+            IPage<MenuType> page = service.selectPage(params);
             response.setData(page);
         } catch (Exception e) {
             response.setCode(500);
@@ -137,14 +138,14 @@ public class SysDictController {
 
     @PostMapping("/selpageCustomSqlByWrapper")
     @ResponseBody
-    public IPage<SysDict> selpageCustomSqlByWrapper(@RequestBody Map<String, String> params) {
+    public IPage<MenuType> selpageCustomSqlByWrapper(@RequestBody Map<String, String> params) {
         return service.selpageCustomSqlByWrapper(params);
     }
 
     @PostMapping("/selpageCustomSqlByMap")
-    @Operation(description = "分页查询-自定义sql-Map字典表")
+    @Operation(description = "分页查询-自定义sql-Map")
     @ResponseBody
-    public IPage<SysDict> selpageCustomSqlByMap(@RequestBody Map<String, String> params) {
+    public IPage<MenuType> selpageCustomSqlByMap(@RequestBody Map<String, String> params) {
         return service.selpageCustomSqlByMap(params);
     }
 

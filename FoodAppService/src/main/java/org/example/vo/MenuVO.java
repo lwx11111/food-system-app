@@ -102,4 +102,6 @@ public class MenuVO {
 
     private Integer collections;
 
+    private String type;
+
 }

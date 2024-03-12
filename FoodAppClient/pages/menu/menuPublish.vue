@@ -15,6 +15,18 @@
 				</uni-section>
 				<uni-section title="菜谱类型" type="line">
 				      <uni-data-select
+				        v-model="formData.type"
+				        :localdata="menuTypeData">
+					</uni-data-select>
+				</uni-section>
+				<uni-section title="是否是特色菜品" type="line">
+				      <uni-data-select
+				        v-model="isSpecial"
+				        :localdata="isSpecialData">
+					</uni-data-select>
+				</uni-section>
+				<uni-section v-if="isSpecial === 1" title="菜谱族别" type="line">
+				      <uni-data-select
 				        v-model="formData.categoryId"
 				        :localdata="menuCategoryData">
 					</uni-data-select>
@@ -75,7 +87,7 @@
 	import ApiMenu from '@/api/menu/menu.js'
 	import MinioUpload from '@/pages/common/minioUpload.vue'
 	import ApiMenuCategory from '@/api/menu/api_menucategory.js'
-	
+	import ApiMenuType from '@/api/menu/api_menutype.js'
 	export default {
 		components:{
 			MinioUpload
@@ -83,6 +95,12 @@
 		
 		data() {
 		  return {
+			  isSpecial: 0,
+			  isSpecialData:[
+				  { value: 1, text: "是" },
+				  { value: 0, text: "不是" },
+			  ],
+			  menuTypeData:[],
 			  menuCategoryData:[],
 			// 表单数据
 			formData: {
@@ -92,13 +110,9 @@
 				steps:[],
 				image: '',
 				userId: localStorage.getItem('userId'),
-				categoryId:''
+				categoryId:'',
+				type:''
 			},
-			// 菜谱类型 todo 配置字典
-			menuTypes: [
-			  { value: 0, text: "素菜" },
-			  { value: 1, text: "荤菜" },
-			],
 			// 菜谱原料
 			ingredients: [
 				{
@@ -129,12 +143,30 @@
 		},
 		onLoad() {
 			this.getMenuCategoryData();
+			this.getMenuTypeData();
 		},
 		onReady() {
 			// 需要在onReady中设置规则
 			this.$refs.form.setRules(this.formRules)
 		},
 		methods: {
+			getMenuTypeData(){
+				let that = this;
+				const params = {};
+				ApiMenuType.selpage4menutype(params).then(res => {
+					console.log(res.data.records);
+					if(res.code === 200){
+						for(let i = 0; i < res.data.records.length; i++){
+							let data = res.data.records[i]
+							let obj = {
+								value: data.id,
+								text: data.name
+							}
+							that.menuTypeData.push(obj);
+						}
+					}
+				})
+			},
 			// 分类信息
 			getMenuCategoryData() {
 				let that = this;
@@ -152,7 +184,6 @@
 						}
 					}
 				})
-				
 			},
 			getUrl(url, key1, key2) {
 				console.log(url);
@@ -220,6 +251,9 @@
 			myValidate(){
 				for(var key in this.formData){
 					console.log(key);
+					if(key === 'categoryId' && this.isSpecial === 0){
+						continue;
+					}
 					if(this.formData[key] === undefined || this.formData[key] === null || this.formData[key] === ''){
 						uni.showToast({
 							title: key + ' 不能为空',
