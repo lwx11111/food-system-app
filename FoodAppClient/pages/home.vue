@@ -37,7 +37,7 @@
 		</view> -->
 		
 		<view>
-			<h1 style="margin-left: 30px;">每日推荐</h1>
+			<h1 style="margin-left: 30px;margin-top: 10px;">每日推荐</h1>
 			<uni-card v-for="(item,index) in dailyMenu"
 					  @click="toMenuDetail(index)" style="border-radius: 10px;">
 				<view>
