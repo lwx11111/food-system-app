@@ -32,6 +32,58 @@
                             </el-input>
                         </el-form-item>
                     </el-col>
+
+                    <el-col :span="6">
+                        <el-form-item label="菜谱分类" prop="type">
+                            <el-select v-model="data.item.type">
+                                <el-option v-for="(item,index) in data.typeData"
+                                           :key="index"
+                                           :label="item.name"
+                                           :value="item.id">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="6">
+                        <el-form-item
+                            label="是否是特色菜">
+                            <el-select v-model="data.isSpecial"
+                                       :disabled="data.disabled">
+                                <el-option value="0" label="不是"></el-option>
+                                <el-option value="1" label="是"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6" v-if="data.isSpecial === '1' ">
+                        <el-form-item
+                            label="菜谱族别"
+                            prop="categoryId">
+                            <el-select v-model="data.item.categoryId"
+                                       :disabled="data.disabled">
+                                <el-option v-for="(item,index) in data.categoryData"
+                                           :key="index"
+                                           :label="item.name"
+                                           :value="item.id">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="6">
+                        <el-form-item
+                            label="菜谱首页图片"
+                            prop="image">
+                            <MinioUpload ref="minioTest"
+                                         :file-list="data.item.image"
+                                         @uploadCallback="uploadCallbackPicture">
+                            </MinioUpload>
+                        </el-form-item>
+                    </el-col>
                 </el-row>
 
                 <div v-for="(item,index) in data.ingredientsList">
@@ -52,10 +104,11 @@
                         <el-row>
                             <el-col :span="6">
                                 <el-form-item label="原料图片">
-                                    <MinioUpload :file-list="item.img"
-                                                 ref="uploadRef"
-                                                 @uploadCallback="uploadCallbackPicture"
-                                                 :limit="1">
+                                    <MinioUpload ref="minioTest"
+                                                 :file-list="item.img"
+                                        key1="ingredientsList"
+                                                 :key2="index"
+                                                 @uploadCallback="uploadCallbackPicture">
                                     </MinioUpload>
                                 </el-form-item>
                             </el-col>
@@ -92,10 +145,11 @@
                         <el-row>
                             <el-col :span="6">
                                 <el-form-item label="步骤图片">
-                                    <MinioUpload :file-list="item.img"
-                                                 ref="uploadRef"
-                                                 @uploadCallback="uploadCallbackPicture"
-                                                 :limit="1">
+                                    <MinioUpload ref="minioTest"
+                                                 :file-list="item.img"
+                                                key1="stepsList"
+                                                 :key2="index"
+                                                 @uploadCallback="uploadCallbackPicture">
                                     </MinioUpload>
                                 </el-form-item>
                             </el-col>
@@ -119,36 +173,7 @@
                     </el-card>
                 </div>
 
-                <el-row>
-                    <el-col :span="6">
-                        <el-form-item
-                            label="分类"
-                            prop="categoryId">
-                            <el-select v-model="data.item.categoryId"
-                                       :disabled="data.disabled">
-                                <el-option v-for="(item,index) in data.categoryData"
-                                           :key="index"
-                                           :label="item.name"
-                                           :value="item.id">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
 
-                <el-row>
-                    <el-col :span="6">
-                        <el-form-item
-                                label="菜谱首页图片"
-                                prop="image">
-                            <MinioUpload :file-list="data.item.image"
-                                         ref="uploadRef"
-                                         @uploadCallback="uploadCallbackPicture"
-                                         :limit="1">
-                            </MinioUpload>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
                 <el-form-item>
                     <el-button
                             v-show="data.showBtn"
@@ -173,6 +198,7 @@
     import MinioUpload from "@/views/common/MinioUpload.vue";
     import Api from '@/api/Menu/api_menu.js'
     import ApiMenuCategory from '@/api/Menu/api_menucategory.js'
+    import ApiMenuType from '@/api/Menu/api_menutype.js'
     import { reactive, ref, onMounted, toRefs } from 'vue'
     import { useStore } from "vuex";
     import { useRouter } from 'vue-router'
@@ -184,6 +210,13 @@
 
     // Data
     const data = reactive({
+        isSpecial: '0',
+        typeData:[
+            {
+                id:'',
+                name:''
+            }
+        ],
         categoryData: [
             {
                 id:'',
@@ -219,13 +252,8 @@
             steps: '',
             likes: '',
             image: '',
-            categoryId: ''
-        },
-        OperatorLogParam: {
-          operateContent: '',
-          operateFeatures: '',
-          operateState: '',
-          operateType: ''
+            categoryId: '',
+            type:''
         },
         showDialog: false,
         rules: {
@@ -235,24 +263,12 @@
           description: [
               { required: true, message: '描述不能为空', trigger: 'blur' }
           ],
-            categoryId: [
-                { required: true, message: '分类不能为空', trigger: 'blur' }
-            ],
-          // Ingredients: [
-          //     { required: true, message: '原料JSON不能为空', trigger: 'blur' }
-          // ],
-          // steps: [
-          //     { required: true, message: '步骤JSON不能为空', trigger: 'blur' }
-          // ],
-          // likes: [
-          //     { required: true, message: '点赞数不能为空', trigger: 'blur' }
-          // ],
-          // image: [
-          //     { required: true, message: '菜谱首页图片不能为空', trigger: 'blur' }
-          // ],
-          // type: [
-          //     { required: true, message: '分类 0素菜 1荤菜不能为空', trigger: 'blur' }
-          // ]
+          image: [
+              { required: true, message: '菜谱首页图片不能为空', trigger: 'blur' }
+          ],
+          type: [
+              { required: true, message: '分类不能为空', trigger: 'blur' }
+          ]
         },
     })
 
@@ -271,6 +287,15 @@
     })
 
     // Methods
+    const getMenuTypeData = () => {
+        const params = {};
+        ApiMenuType.selpage4menutype(params).then(res => {
+            console.log(res)
+            if (res.code === 200){
+                data.typeData = res.data.records;
+            }
+        });
+    }
     const getMenuCategoryData = () => {
         const params = {};
         ApiMenuCategory.selpage4menucategory(params).then(res => {
@@ -281,9 +306,17 @@
         });
     }
 
-    const uploadCallbackPicture = (response, url) => {
+    const uploadCallbackPicture = (response, url, key1, key2) => {
         console.log(url)
-        data.ingredientsList[0].img = url
+        console.log(key1)
+        console.log(key2)
+        if (key1 === undefined && key2 === undefined){
+            data.item.image = url
+        } else if (key1 === 'ingredientsList'){
+            data.ingredientsList[key2].img = url
+        } else if (key1 === 'stepsList'){
+            data.stepsList[key2].img = url
+        }
     }
 
     const addIngredientItem = (index) => {
@@ -295,13 +328,13 @@
                 })
                 return;
             }
-            // if (StringUtil.isEmpty(data.ingredientsList[i].img)){
-            //     ElMessage({
-            //         message: '原料图片不能为空',
-            //         type: 'warning',
-            //     })
-            //     return;
-            // }
+            if (StringUtil.isEmpty(data.ingredientsList[i].img)){
+                ElMessage({
+                    message: '原料图片不能为空',
+                    type: 'warning',
+                })
+                return;
+            }
             if (StringUtil.isEmpty(data.ingredientsList[i].amount)){
                 ElMessage({
                     message: '原料数量不能为空',
@@ -339,13 +372,13 @@
                 })
                 return;
             }
-            // if (StringUtil.isEmpty(data.stepsList[i].img)){
-            //     ElMessage({
-            //         message: '原料图片不能为空',
-            //         type: 'warning',
-            //     })
-            //     return;
-            // }
+            if (StringUtil.isEmpty(data.stepsList[i].img)){
+                ElMessage({
+                    message: '原料图片不能为空',
+                    type: 'warning',
+                })
+                return;
+            }
         }
         const item = {
             description: '',
@@ -388,7 +421,7 @@
         }
 
         getMenuCategoryData();
-
+        getMenuTypeData();
         // 获取数据
         if (data.type === 'detail' || data.type === 'update') {
             // ID校验
@@ -420,22 +453,11 @@
             // 界面显示
             data.showDialog = true;
         }
-
-        //菜单界面生成时日志记录
-        // const islog = Vue.prototype.$config.ISLOG;
-        // if (true==islog){
-        //     data.OperatorLogParam.operateFeatures = '详情表单'
-        //     data.OperatorLogParam.operateType = LogType.Query
-        //     data.OperatorLogParam.operateState = '成功'
-        //     OperatorLog.setOperationLog(data.OperatorLogParam)
-        // }
-
     }
     const back = () => {
         // 返回操作
         data.showDialog = false;
         location.reload()
-        // router.push("/logs/account-change-pass-log");
     }
 
     // 表单ref
@@ -477,6 +499,59 @@
                 }
             })
         } else if (data.type === 'add') {
+            if (StringUtil.isEmpty(data.item.categoryId) && data.isSpecial === '1'){
+                ElMessage({
+                    message: '菜谱族别不能为空',
+                    type: 'warning',
+                })
+                return;
+            }
+
+            for (let i = 0; i < data.ingredientsList.length; i++){
+                if (StringUtil.isEmpty(data.ingredientsList[i].name)){
+                    ElMessage({
+                        message: '原料名不能为空',
+                        type: 'warning',
+                    })
+                    return;
+                }
+                if (StringUtil.isEmpty(data.ingredientsList[i].img)){
+                    ElMessage({
+                        message: '原料图片不能为空',
+                        type: 'warning',
+                    })
+                    return;
+                }
+                if (StringUtil.isEmpty(data.ingredientsList[i].amount)){
+                    ElMessage({
+                        message: '原料数量不能为空',
+                        type: 'warning',
+                    })
+                    return;
+                }
+            }
+
+            for (let i = 0; i < data.stepsList.length; i++){
+                if (StringUtil.isEmpty(data.stepsList[i].description)){
+                    ElMessage({
+                        message: '原料名不能为空',
+                        type: 'warning',
+                    })
+                    return;
+                }
+                if (StringUtil.isEmpty(data.stepsList[i].img)){
+                    ElMessage({
+                        message: '原料图片不能为空',
+                        type: 'warning',
+                    })
+                    return;
+                }
+            }
+
+            data.item.ingredients = data.ingredientsList
+            data.item.steps = data.stepsList
+
+            console.log(data.item)
             Api.add4menu(data.item).then(res => {
                 console.log(res)
                 if (res.code === 200){

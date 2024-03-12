@@ -56,19 +56,28 @@ const data = reactive({
     },
     minioUrl: "http://localhost:8081/sysoss/uploadOSS",
     // minioServerUrl: "http://127.0.0.1:9000/",
-    minioServerUrl: "http://8.130.120.92:9000/47482d006e1b9fd688ff0e57bb9b38db_.jpg",
+    minioServerUrl: "http://8.130.120.92:9000/",
+    bucket: "appsys",
     fileList: [],
 })
 
 // Props
 const props = defineProps({
+    key1:{
+        type: String,
+        required: false
+    },
+    key2:{
+        type: Number,
+        required: false
+    },
     // 上传的url
     url: {
         type: String,
         default: '',
         required: false
     },
-    // 上传的文件列表
+    // 上传的文件列表 区分组件
     fileList: {
         type: Array,
         default: [],
@@ -79,25 +88,11 @@ const props = defineProps({
         default: false,
         required: false
     },
-    // 指定上传的文件列表下标
-    i: {
-        type: Number,
-        default: -1,
-        required: false
-    },
-    j: {
-        type: Number,
-        default: -1,
-        required: false
-    }
-
 })
 
 // Mounted
 onMounted(() => {
     data.fileList = props.fileList;
-    console.log(props.show)
-    console.log(data.fileList)
 })
 
 // Methods
@@ -181,14 +176,8 @@ const handleSuccess: UploadProps['onSuccess'] = (response, file, fileList) => {
         let item = {
             url: url
         }
-        data.fileList.push(item)
-        if (props.i !== -1 && props.j !== -1){
-            emits("uploadCallback", response, url,props.i,props.j);
-        } else {
-            emits("uploadCallback", response, url);
-        }
-
-
+        // data.fileList.push(item)
+        emits("uploadCallback", response, url, props.key1, props.key2);
     }
     // this.uploadStatus = false
     // if (response.data.result=='true') {

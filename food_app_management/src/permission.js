@@ -5,7 +5,7 @@ import { pagePermApi } from '@/api/function.js'
 
 const whiteList = ['/login','/register'] // no redirect whitelist
 
-const title = 'to do fix'
+const title = '好好吃管理平台'
 function getPageTitle(pageTitle) {
     if (pageTitle) {
         return title + pageTitle;
