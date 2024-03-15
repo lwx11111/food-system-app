@@ -101,17 +101,17 @@
                             </el-col>
                         </el-row>
 
-                        <el-row>
-                            <el-col :span="6">
-                                <el-form-item label="原料图片">
-                                    <MinioUpload key1="ingredientsList"
-                                                 :key2="index"
-                                                 :url="item.img"
-                                                 @getUrl="getUrl">
-                                    </MinioUpload>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
+<!--                        <el-row>-->
+<!--                            <el-col :span="6">-->
+<!--                                <el-form-item label="原料图片">-->
+<!--                                    <MinioUpload key1="ingredientsList"-->
+<!--                                                 :key2="index"-->
+<!--                                                 :url="item.img"-->
+<!--                                                 @getUrl="getUrl">-->
+<!--                                    </MinioUpload>-->
+<!--                                </el-form-item>-->
+<!--                            </el-col>-->
+<!--                        </el-row>-->
 
                         <el-row>
                             <el-col :span="18"></el-col>
@@ -225,7 +225,7 @@
         ingredientsList:[
             {
                 name:'',
-                img:'',
+                // img:'',
                 amount:'',
             }
         ],
@@ -326,13 +326,13 @@
                 })
                 return;
             }
-            if (StringUtil.isEmpty(data.ingredientsList[i].img)){
-                ElMessage({
-                    message: '原料图片不能为空',
-                    type: 'warning',
-                })
-                return;
-            }
+            // if (StringUtil.isEmpty(data.ingredientsList[i].img)){
+            //     ElMessage({
+            //         message: '原料图片不能为空',
+            //         type: 'warning',
+            //     })
+            //     return;
+            // }
             if (StringUtil.isEmpty(data.ingredientsList[i].amount)){
                 ElMessage({
                     message: '原料数量不能为空',
@@ -343,7 +343,7 @@
         }
         const item = {
             name:'',
-            img:'',
+            // img:'',
             amount:'',
         }
         data.ingredientsList.push(item)
@@ -370,13 +370,13 @@
                 })
                 return;
             }
-            if (StringUtil.isEmpty(data.stepsList[i].img)){
-                ElMessage({
-                    message: '原料图片不能为空',
-                    type: 'warning',
-                })
-                return;
-            }
+            // if (StringUtil.isEmpty(data.stepsList[i].img)){
+            //     ElMessage({
+            //         message: '原料图片不能为空',
+            //         type: 'warning',
+            //     })
+            //     return;
+            // }
         }
         const item = {
             description: '',
@@ -513,13 +513,13 @@
                     })
                     return;
                 }
-                if (StringUtil.isEmpty(data.ingredientsList[i].img)){
-                    ElMessage({
-                        message: '原料图片不能为空',
-                        type: 'warning',
-                    })
-                    return;
-                }
+                // if (StringUtil.isEmpty(data.ingredientsList[i].img)){
+                //     ElMessage({
+                //         message: '原料图片不能为空',
+                //         type: 'warning',
+                //     })
+                //     return;
+                // }
                 if (StringUtil.isEmpty(data.ingredientsList[i].amount)){
                     ElMessage({
                         message: '原料数量不能为空',
@@ -537,13 +537,13 @@
                     })
                     return;
                 }
-                if (StringUtil.isEmpty(data.stepsList[i].img)){
-                    ElMessage({
-                        message: '原料图片不能为空',
-                        type: 'warning',
-                    })
-                    return;
-                }
+                // if (StringUtil.isEmpty(data.stepsList[i].img)){
+                //     ElMessage({
+                //         message: '原料图片不能为空',
+                //         type: 'warning',
+                //     })
+                //     return;
+                // }
             }
 
             data.item.ingredients = data.ingredientsList

@@ -35,12 +35,12 @@
 				<uni-section title="菜谱原料" type="line"></uni-section>
 				<uni-card v-for="(item,key) in ingredients">
 					<view>
-						<view class="example-body">
+						<!-- <view class="example-body">
 							<MinioUpload key1="ingredient" 
 										 :key2="key" 
 										 @getUrl="getUrl">
 							 </MinioUpload>
-						</view>
+						</view> -->
 						<uni-easyinput style="margin-top: 10px; margin-bottom: 10px;" 
 									   type="text" 
 									   autoHeight 
@@ -118,7 +118,7 @@
 				{
 					name: '',
 					amount: '',
-					img: ''
+					// img: ''
 				}
 			],
 			// 菜谱步骤
@@ -206,7 +206,7 @@
 				const item = {
 					name: '',
 					amount: '',
-					img: ''
+					// img: ''
 				}
 				this.ingredients.push(item)
 			},

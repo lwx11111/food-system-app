@@ -45,7 +45,7 @@
 				</view>
 				<uni-card style="border-radius: 10px;">
 						<view>
-							<text>{{ item.name }}</text>
+							<text>{{ item.description }}</text>
 						</view>
 					</uni-card>
 			</uni-card>
