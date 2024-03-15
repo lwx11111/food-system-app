@@ -20,7 +20,7 @@
 			<view v-for="(item,key) in menu.ingredients">
 				<view>{{item.name}}</view>
 				<view>{{item.amount}}</view>
-				<image style="width: 100%; height: 200px;" :src="item.img"></image>
+				<!-- <image style="width: 100%; height: 200px;" :src="item.img"></image> -->
 				<u-divider></u-divider>
 			</view>
 		</uni-card>

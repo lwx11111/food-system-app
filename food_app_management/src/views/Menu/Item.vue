@@ -78,9 +78,9 @@
                         <el-form-item
                             label="菜谱首页图片"
                             prop="image">
-                            <MinioUpload ref="minioTest"
-                                         :file-list="data.item.image"
-                                         @uploadCallback="uploadCallbackPicture">
+                            <MinioUpload :disabled="type === 'detail'"
+                                         :url="data.item.image"
+                                         @getUrl="getUrl">
                             </MinioUpload>
                         </el-form-item>
                     </el-col>
@@ -104,11 +104,10 @@
                         <el-row>
                             <el-col :span="6">
                                 <el-form-item label="原料图片">
-                                    <MinioUpload ref="minioTest"
-                                                 :file-list="item.img"
-                                        key1="ingredientsList"
+                                    <MinioUpload key1="ingredientsList"
                                                  :key2="index"
-                                                 @uploadCallback="uploadCallbackPicture">
+                                                 :url="item.img"
+                                                 @getUrl="getUrl">
                                     </MinioUpload>
                                 </el-form-item>
                             </el-col>
@@ -145,11 +144,10 @@
                         <el-row>
                             <el-col :span="6">
                                 <el-form-item label="步骤图片">
-                                    <MinioUpload ref="minioTest"
-                                                 :file-list="item.img"
-                                                key1="stepsList"
+                                    <MinioUpload key1="stepsList"
                                                  :key2="index"
-                                                 @uploadCallback="uploadCallbackPicture">
+                                                 :url="item.img"
+                                                 @getUrl="getUrl">
                                     </MinioUpload>
                                 </el-form-item>
                             </el-col>
@@ -195,7 +193,7 @@
     </el-dialog>
 </template>
 <script lang="ts" setup>
-    import MinioUpload from "@/views/common/MinioUpload.vue";
+    import MinioUpload from "@/views/components/MinioUpload.vue";
     import Api from '@/api/Menu/api_menu.js'
     import ApiMenuCategory from '@/api/Menu/api_menucategory.js'
     import ApiMenuType from '@/api/Menu/api_menutype.js'

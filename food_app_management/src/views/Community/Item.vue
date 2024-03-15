@@ -40,10 +40,9 @@
                         <el-form-item
                             label="物品图片"
                             prop="picture">
-                            <MinioUpload :file-list="data.item.img"
-                                         ref="uploadRef"
-                                         @uploadCallback="uploadCallbackPicture"
-                                         :limit="1">
+                            <MinioUpload :disabled="type === 'detail'"
+                                         :url="data.item.img"
+                                         @getUrl="getUrl">
                             </MinioUpload>
                         </el-form-item>
                     </el-col>
@@ -74,7 +73,7 @@
     import { useStore } from "vuex";
     import { useRouter } from 'vue-router'
     import {ElMessage, ElMessageBox} from "element-plus";
-    import MinioUpload from "@/views/common/MinioUpload.vue";
+    import MinioUpload from "@/views/components/MinioUpload.vue";
 
     const store = useStore();
     const router = useRouter()
