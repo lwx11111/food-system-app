@@ -2,10 +2,15 @@
 <template>
 	<view>
 		<uni-card @click="toMenuDetail()">
-			<view style="margin-bottom: 10px;"><h2>{{menu.name}}</h2></view>
+			<!-- <view style="margin-bottom: 10px;"><h2>{{menu.name}}</h2></view> -->
 			<view>
 				<image style="width: 100%; height: 200px;" :src="menu.image"></image>
 			</view>
+			<uni-card style="border-radius: 10px;">
+				<view>
+					<text>{{ menu.description }}</text>
+				</view>
+			</uni-card>
 		</uni-card>
 	</view>
 </template>

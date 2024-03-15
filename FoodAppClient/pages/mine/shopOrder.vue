@@ -4,10 +4,9 @@
 	<uni-card v-for="(item,index) in carts" @click="toShopItemDetail(index)">
 		<view style="margin-bottom: 10px;"><h2>{{item.shopItem.name}}</h2></view>
 		<view>
-			<image style="width: 200px; height: 200px;" 
-					src="https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png"></image>
+			<image style="width: 100%; height: 200px;" 
+					:src="item.shopItem.picture"></image>
 		</view>
-		<!-- <view>{{item.shopItem.price}}¥</view> -->
 		<view>{{item.amount}}</view>
 		<view>总价：{{item.price}} ¥</view>
 	</uni-card>
@@ -40,10 +39,9 @@
 			
 			// 查询参数
 			params: {
-				userId: '1',
-				name:'',
+				userId: localStorage.getItem('userId'),
 				categoryId: '',
-				pageSize: '10'
+				pageSize: ''
 			}
 		  }
 		},

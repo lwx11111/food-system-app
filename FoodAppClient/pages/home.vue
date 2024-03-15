@@ -38,7 +38,10 @@
 		
 		<view>
 			<h1 style="margin-left: 30px;margin-top: 10px;">每日推荐</h1>
-			<uni-card v-for="(item,index) in dailyMenu"
+			<view v-for="(item,index) in menuList">
+				<MenuCard :menu="item"></MenuCard>
+			</view>
+<!-- 			<uni-card v-for="(item,index) in dailyMenu"
 					  @click="toMenuDetail(index)" style="border-radius: 10px;">
 				<view>
 					<image style="width: 400px; height: 200px;" :src="item.image"></image>
@@ -48,7 +51,7 @@
 							<text>{{ item.description }}</text>
 						</view>
 					</uni-card>
-			</uni-card>
+			</uni-card> -->
 		</view>
 				
 	</view>
@@ -56,10 +59,15 @@
 
 <script>
 	import ApiMenu from '@/api/menu/menu.js'
+	import MenuCard from '@/pages/menu/components/menuCard.vue';
 	
 	export default {
+		components:{
+			MenuCard
+		},
 		data() {
 		  return {
+			  menuList:[],
 			  // 游客模式不展示
 			  isTourist: localStorage.getItem("isTourist"),
 			  linkIndex: 0,
@@ -85,17 +93,22 @@
 				// 查询参数
 				params: {
 					name:'',
-					pageSize: '10'
+					pageSize: ''
 				},
 				globalConfig: getApp().globalData.config,
 			
 		  }
 		},
 		onLoad: function() {
-			// this.getMenuList();
+			this.getMenuList();
 			this.getDailyRecommendation();
 		},
 		methods: {
+			getMenuList(){
+				ApiMenu.selpage4menu(this.params).then(res => {
+					this.menuList = res.data.records
+				})
+			},
 			change(e){
 				// console.log(e);
 				this.linkIndex = e.current;

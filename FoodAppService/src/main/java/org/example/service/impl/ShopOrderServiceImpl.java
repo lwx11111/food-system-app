@@ -34,7 +34,7 @@ import java.util.Map;
  *  服务实现类
  * </p>
  *
- * 
+ *
  * @since 2024-01-09
  */
 @Service
@@ -50,7 +50,6 @@ public class ShopOrderServiceImpl extends ServiceImpl<ShopOrderMapper, ShopOrder
 
     @Override
     public List<ShopOrderVO> listShopOrderByUserId(Map<String, String> params) throws Exception {
-        System.out.println("12333333333333333333333333333333");
         Page<ShopOrder> page = PageUtils.pageHandler(params);
         QueryWrapper<ShopOrder> query = getQuery(params);
         IPage<ShopOrder> result = this.baseMapper.selpageCustomSqlByWrapper(page, query);

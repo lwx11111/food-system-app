@@ -1,9 +1,9 @@
 <template>
   <view>
 
-	  <uni-search-bar  v-model="params.title" @confirm="search"></uni-search-bar>
+<!-- 	  <uni-search-bar  v-model="params.title" @confirm="search"></uni-search-bar>-->
 	  <!-- 分类标签 -->
-	  <view>
+<!-- 	  <view>
 	  	<view>
 	  		<uni-tag v-for="(item,index) in categoryData" :circle="true" 
 	  				:inverted="item.inverted" 
@@ -12,34 +12,19 @@
 	  				@click="setInverted(index)">
 	  		</uni-tag>
 	  	</view>
+	  </view> -->
+	  
+	  <view v-for="(item,index) in communities">
+		<uni-card @click="toCommunityDetail(index)">
+			<view>
+				<image style="margin-left: 50px; width: 80%; height: 200px;" :src="item.img"></image>
+			</view>
+				<view style="margin-bottom: 10px;"><h2>{{ item.title }}</h2></view>
+		</uni-card>
 	  </view>
 	  
-	  <view v-for="(item,index) in communities" v-if="index%2==0">
-		<u-row gutter="16">
-			<u-col span="6" @click="toCommunityDetail(index)">
-				<uni-card>
-					<view>
-						<image style="width: 100px; height: 100px;" 
-							:src="item.img"></image>
-					</view>
-						<view style="margin-bottom: 10px;"><h2>{{item.title}}</h2></view>
-				</uni-card>
-			</u-col>
-			<u-col span="6" 
-					@click="toCommunityDetail(index + 1)" 
-					v-if="index+1 < communities.length">
-				<uni-card>
-					<view>
-						<image style="width: 100px; height: 100px;" :src="communities[index + 1].img"></image>
-					</view>
-						<view style="margin-bottom: 10px;"><h2>{{ communities[index+1].title }}</h2></view>
-				</uni-card>
-			</u-col>
-		</u-row>
-	  </view>
-	  
-	  <u-button type="primary" size="small" 
-		@click="toCommunityPublish()" style="width: 50px;margin-top: 200px;">去发布</u-button>
+	  <!-- <u-button type="primary" size="small" 
+		@click="toCommunityPublish()" style="width: 50px;margin-top: 200px;">去发布</u-button> -->
   </view>
 </template>
 

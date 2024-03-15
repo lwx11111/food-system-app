@@ -15,24 +15,37 @@
 	  	</view>
 	  </view>
 	  
-	  <view v-for="(item,index) in menus" v-if="index%2==0">
-		<u-row gutter="16">
-			<u-col span="6" @click="toMenuDetail(index)">
-				<MenuCard :menu="item"></MenuCard>
-			</u-col>
-			<u-col span="6" 
-					@click="toMenuDetail(index + 1)" 
-					v-if="index+1 < menus.length">
-					<MenuCard :menu="menus[index + 1]"></MenuCard>
-				<!-- <uni-card>
-					<view style="margin-bottom: 10px;"><h2>{{menus[index + 1].name}}</h2></view>
-					<view>
-						<image style="width: 200px; height: 200px;" :src="menus[index + 1].image"></image>
-					</view>
-				</uni-card> -->
-			</u-col>
-		</u-row>
-	  </view>
+			<view v-for="(item,index) in menus" v-if="index%2==0">
+		  		<u-row gutter="16">
+		  			<u-col span="6" @click="toMenuDetail(index)">
+		  				<uni-card style="width: 90%; height: 200px;">
+								<view>
+									<image style="width: 100%; height: 100px;" :src="item.image"></image>
+								</view>
+								<uni-card style="border-radius: 10px;">
+									<view>
+										<text>{{item.description }}</text>
+									</view>
+								</uni-card>
+							</uni-card>
+		  			</u-col>
+		  			<u-col span="6"
+		  					@click="toMenuDetail(index + 1)" 
+		  					v-if="index+1 < menus.length">
+							<uni-card style="width: 90%;">
+								<view>
+									<image style="width: 100%; height: 100px;" :src="menus[index + 1].image"></image>
+								</view>
+								<uni-card style="border-radius: 10px;">
+									<view>
+										<text>{{ menus[index + 1].description }}</text>
+									</view>
+								</uni-card>
+							</uni-card>
+		  			</u-col>
+		  		</u-row>
+		  </view>
+	  
 	  
 	  <!-- <u-tabbar :fixed="true">
 	  	<u-tabbar-item text="去发布" icon="home" @click="toMenuPublish()" ></u-tabbar-item>
@@ -64,14 +77,14 @@
 			  	}
 			  ],
 			menus:[
-				{
-				 description: "",
-				 id:'',
-				 ingredients:"",
-				 likes:"",
-				 name:"",
-				 steps:"" ,
-				}
+				// {
+				//  description: "",
+				//  id:'',
+				//  ingredients:"",
+				//  likes:"",
+				//  name:"",
+				//  steps:"" ,
+				// }
 			],
 			// 查询参数
 			params: {
@@ -146,17 +159,22 @@
 			},
 			listMenus() {
 				let that = this;
+				that.menus = [];
 				Api.selpage4menu(this.params).then(res => {
 					console.log(res)
 					if(res.code === 200){
 						// 剔除非民族
 						for(let i = 0; i < res.data.records.length; i++){
-							if( res.data.records[i].categoryId === null || res.data.records[i].categoryId === '' ){
-								res.data.records.splice(i, 1);
+							if( res.data.records[i].categoryId === undefined || res.data.records[i].categoryId === null || res.data.records[i].categoryId === '' ){
+								// console.log(i);
+								// res.data.records.splice(i, 1);
+							} else {
+								that.menus.push(res.data.records[i])
 							}
 						}
-						that.menus = res.data.records
+						// that.menus.push(res.data.records[i]) = res.data.records
 					}
+					console.log(that.menus);
 				})
 			},
 			toMenuDetail(index) {

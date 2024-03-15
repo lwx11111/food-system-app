@@ -39,8 +39,6 @@
 			<uni-popup-dialog mode="input":before-close="true" 
 							  @close="closeShopOrder" 
 							  @confirm="confirmShopOrder">
-							  
-				
 				<uni-section title="数量" type="line" padding>
 					<uni-number-box v-model="amount"></uni-number-box>
 				</uni-section>
@@ -145,6 +143,7 @@
 					userId: localStorage.getItem('userId'),
 					shopItemId: this.shopItem.id,
 					amount: this.amount,
+					price: this.amount * this.shopItem.price
 				}
 				console.log(obj)
 				ApiShopOrder.add4shoporder(obj).then(res => {
