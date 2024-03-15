@@ -169,6 +169,11 @@
 
     // Methods
 
+    const getUrl = (url, key1, key2) => {
+        console.log(url)
+        data.item.picture = url
+    }
+
     const uploadCallbackPicture = (response, url) => {
         console.log(url)
         data.item.picture = url

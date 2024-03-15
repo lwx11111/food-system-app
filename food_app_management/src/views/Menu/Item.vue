@@ -285,6 +285,15 @@
     })
 
     // Methods
+    const getUrl = (url, key1, key2) => {
+        console.log(url)
+        if (key1 === 'stepsList'){
+            data.stepsList[key2].img = url
+        } else {
+            data.item.image = url;
+        }
+    }
+
     const getMenuTypeData = () => {
         const params = {};
         ApiMenuType.selpage4menutype(params).then(res => {
