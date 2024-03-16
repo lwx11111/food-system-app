@@ -67,9 +67,9 @@
           </template>
 
           <div class="flex items-center justify-between mt-5">
-            <div class="text-lg text-right">
-             111
-            </div>
+<!--            <div class="text-lg text-right">-->
+<!--             {{data.visitMonthCount}}-->
+<!--            </div>-->
             <img src="../../assets/images/好友认证.png" style="height: 40px ;width: 40px; margin-left: 160px;" />
           </div>
 
@@ -77,7 +77,7 @@
             class="flex items-center justify-between mt-5 text-sm text-[var(--el-text-color-secondary)]"
           >
             <span> 总访客数 </span>
-            <span> 111 </span>
+            <span> {{data.visitCount}} </span>
           </div>
         </el-card>
       </el-col>
@@ -93,9 +93,9 @@
           </template>
 
           <div class="flex items-center justify-between mt-5">
-            <div class="text-lg text-right">
-              11
-            </div>
+<!--            <div class="text-lg text-right">-->
+<!--              {{data.collectionMonthCount}}-->
+<!--            </div>-->
              <img src="../../assets/images/收藏.png" style="height: 40px ;width: 40px; margin-left: 160px;" />
           </div>
 
@@ -103,7 +103,7 @@
             class="flex items-center justify-between mt-5 text-sm text-[var(--el-text-color-secondary)]"
           >
             <span> 总收藏数 </span>
-            <span> 11</span>
+            <span> {{data.collectionCount}} </span>
           </div>
         </el-card>
       </el-col>
@@ -119,9 +119,9 @@
           </template>
 
           <div class="flex items-center justify-between mt-5">
-            <div class="text-lg text-right">
-             1
-            </div>
+<!--            <div class="text-lg text-right">-->
+<!--             {{data.salesMonthCount}}-->
+<!--            </div>-->
              <img src="../../assets/images/余额.png" style="height: 40px ;width: 40px; margin-left: 160px;" />
           </div>
 
@@ -129,7 +129,7 @@
             class="flex items-center justify-between mt-5 text-sm text-[var(--el-text-color-secondary)]"
           >
             <span> 总销售额 </span>
-            <span> 1 </span>
+            <span> {{data.salesCount}} </span>
           </div>
         </el-card>
       </el-col>
@@ -145,9 +145,9 @@
           </template>
 
           <div class="flex items-center justify-between mt-5">
-            <div class="text-lg text-right">
-              1
-            </div>
+<!--            <div class="text-lg text-right">-->
+<!--              {{data.orderMonthCount}}-->
+<!--            </div>-->
             <img src="../../assets/images/商品.png" style="height: 40px ;width: 40px; margin-left: 160px;" />
           </div>
 
@@ -155,7 +155,7 @@
             class="flex items-center justify-between mt-5 text-sm text-[var(--el-text-color-secondary)]"
           >
             <span> 总订单量 </span>
-            <span> 1 </span>
+            <span> {{data.orderCount}} </span>
           </div>
         </el-card>
       </el-col>
@@ -198,66 +198,49 @@ import {reactive, ref, defineProps, toRefs, onMounted, onActivated, markRaw} fro
 import BarChart from "@/views/dashboard/components/BarChart.vue";
 import PieChart from "@/views/dashboard/components/PieChart.vue";
 import RadarChart from "@/views/dashboard/components/RadarChart.vue";
-import FunnelChart from "@/views/dashboard/components/FunnelChart.vue";
-// defineOptions({
-//   name: "Dashboard",
-//   inheritAttrs: false,
-// });
-//
-// import { useUserStore } from "@/store/modules/user";
-// import { useTransition, TransitionPresets } from "@vueuse/core";
-//
-// const userStore = useUserStore();
-// const date: Date = new Date();
-//
-// const greetings = computed(() => {
-//   const hours = date.getHours();
-//   if (hours >= 6 && hours < 8) {
-//     return "晨起披衣出草堂，轩窗已自喜微凉🌅！";
-//   } else if (hours >= 8 && hours < 12) {
-//     return "上午好，" + userStore.user.nickname + "！";
-//   } else if (hours >= 12 && hours < 18) {
-//     return "下午好，" + userStore.user.nickname + "！";
-//   } else if (hours >= 18 && hours < 24) {
-//     return "晚上好，" + userStore.user.nickname + "！";
-//   } else if (hours >= 0 && hours < 6) {
-//     return "偷偷向银河要了一把碎星，只等你闭上眼睛撒入你的梦中，晚安🌛！";
-//   }
-// });
-//
-// const duration = 5000;
-//
-// // 销售额
-// const amount = ref(0);
-// const amountOutput = useTransition(amount, {
-//   duration: duration,
-//   transition: TransitionPresets.easeOutExpo,
-// });
-// amount.value = 2000;
-//
-// // 访客数
-// const visitCount = ref(0);
-// const visitCountOutput = useTransition(visitCount, {
-//   duration: duration,
-//   transition: TransitionPresets.easeOutExpo,
-// });
-// visitCount.value = 2000;
-//
-// // IP数
-// const dauCount = ref(0);
-// const dauCountOutput = useTransition(dauCount, {
-//   duration: duration,
-//   transition: TransitionPresets.easeOutExpo,
-// });
-// dauCount.value = 2000;
-//
-// // 订单量
-// const orderCount = ref(0);
-// const orderCountOutput = useTransition(orderCount, {
-//   duration: duration,
-//   transition: TransitionPresets.easeOutExpo,
-// });
-// orderCount.value = 2000;
+import ApiOrder from '@/api/Shop/api_shoporder.js'
+import ApiMenuCollection from '@/api/Menu/api_menucollection.js'
+
+// Data
+const data = reactive({
+    orderCount: 0,
+    orderMonthCount: 0,
+    salesCount: 0,
+    salesMonthCount: 0,
+    collectionCount: 0,
+    collectionMonthCount: 0,
+    visitCount: 0,
+    visitMonthCount: 0,
+})
+
+// Mounted
+onMounted(() => {
+    const params = {
+
+    }
+    ApiOrder.selpage4shoporder(params).then(res => {
+        console.log(res)
+        data.orderCount = res.data.records.length;
+        data.orderMonthCount = res.data.records.length;
+        for (let i = 0; i < res.data.records.length; i++) {
+            data.salesCount += res.data.records[i].price;
+            data.salesMonthCount += res.data.records[i].price;
+        }
+    })
+
+    ApiMenuCollection.selpage4menucollection(params).then(res => {
+        console.log(res)
+        data.collectionCount = res.data.records.length;
+        data.collectionMonthCount = res.data.records.length;
+    })
+
+    data.visitCount = 5;
+    data.visitMonthCount = 5;
+
+})
+
+// Methods
+
 </script>
 
 <style lang="scss" scoped>
@@ -299,6 +282,6 @@ import FunnelChart from "@/views/dashboard/components/FunnelChart.vue";
     justify-content: space-around; /* 在容器中均匀分布子元素 */
     align-items: center; /* 在交叉轴上居中对齐子元素 */
   }
-  
+
 }
 </style>
