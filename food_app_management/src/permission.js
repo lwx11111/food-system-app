@@ -29,14 +29,14 @@ router.beforeEach(async (to, from, next) => {
         } else {
             //判断当前用户是否拥有此页面的访问权限
             const path = to.path;
-            // next();
-            await pagePermApi(path).then(response => {
-                if (response.data === true) {
-                    next();
-                } else {
-                    next(`/login?redirect=${to.path}`)
-                }
-            });
+            next();
+            // await pagePermApi(path).then(response => {
+            //     if (response.data === true) {
+            //         next();
+            //     } else {
+            //         next(`/login?redirect=${to.path}`)
+            //     }
+            // });
         }
     } else {
         // 白名单

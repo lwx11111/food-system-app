@@ -69,7 +69,7 @@
 		getCaptchaUrl(){
 			const uuid = commonUtil.createGuid()
 			this.uuid = uuid;
-			return this.globalConfig.authUrl + this.globalConfig.managerPrefix + 'v1/public/anon/verification-code/create?uuid=' + uuid;
+			return Api.getVerificationCode(uuid);
 		},
 		
 		/**
@@ -110,12 +110,12 @@
 			uuid: _this.uuid,
 			username: _this.form.username,
 			password: getEncryptPassword(_this.form.password, 'md5'),
-			appId: this.globalConfig.appInfo.appId,
-			type:'1'
+			phone: "123",
+			avatar:"123"
 		}
 		Api.register(data1).then(res => {
 			console.log(res);
-			if (res.code === '20000'){
+			if (res.code === 200){
 				uni.showToast({
 					title: `注册成功`,
 					icon: 'success'

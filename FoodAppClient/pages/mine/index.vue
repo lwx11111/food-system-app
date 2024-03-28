@@ -10,9 +10,9 @@
 					</view>
 					<image v-if="account.avatar" @click="handleToEditInfo" :src="avatar" class="cu-avatar xl round" mode="widthFix"></image>
 					<!-- 用户名展示 -->
-					<view v-if="account.accountName" @click="handleToEditInfo" class="user-info">
+					<view v-if="name" @click="handleToEditInfo" class="user-info">
 						<view class="u_title">
-						  用户名：{{ account.accountName }}
+						  用户名：{{ name }}
 						</view>
 					</view>
 				</view>
@@ -78,7 +78,7 @@
 			return {
 				// 游客模式不展示
 				isTourist: localStorage.getItem("isTourist"),
-				name: this.$store.state.user.name,
+				name: localStorage.getItem("userName"),
 				version: getApp().globalData.config.appInfo.version,
 				account: this.$store.state.account
 			}
@@ -92,8 +92,8 @@
 			}
 		},
 		mounted() {
-			console.log(this.$store.state.account);
-			if (this.$store.state.account.accountName === null || this.$store.state.account.accountName === undefined || this.$store.state.account.accountName === ""){
+			console.log(localStorage.getItem("userId"));
+			if (localStorage.getItem("userId") === null){
 				this.$tab.reLaunch('/pages/login')
 			}
 

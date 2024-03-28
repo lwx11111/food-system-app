@@ -68,7 +68,7 @@
 		getCaptchaUrl(){
 			const uuid = commonUtil.createGuid()
 			this.uuid = uuid;
-			return this.globalConfig.authUrl + this.globalConfig.managerPrefix + 'v1/public/anon/verification-code/create?uuid=' + uuid;
+			return Api.getVerificationCode(uuid);
 		},
 		
 		/**
@@ -95,24 +95,18 @@
 				uuid: this.uuid,
 				username: getEncryptPassword(this.form.username, 'aes'),
 				password: getEncryptPassword(this.form.password, 'aes'),
-				appId: this.globalConfig.appInfo.appId,
-				appName: this.globalConfig.appInfo.appName
 			}
 		
 			Api.loginWithCode(params).then(res => {
-				if (res.code === "20000"){
+				if (res.code === 200){
 					console.log(res);
-					let account = res.data.info.account
-					// store存储
-					this.$store.commit('setAccount',res.data.info.account);
-					this.$store.commit('setUser',res.data.info.user);
-					this.$store.commit('setSuperAdmin',res.data.info.superAdmin);
-					this.$store.commit('setToken',res.data.token);
+					let account = res.data;
+					
 					// 本地存储
 		            localStorage.setItem('userId', account.accountId)
 		            localStorage.setItem('userName', account.loginName)
 					
-					setToken(res.data.token.accessToken);
+					setToken("123");
 					this.$tab.reLaunch('/pages/home')
 				} else {
 					uni.showToast({

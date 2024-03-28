@@ -58,7 +58,7 @@ const options = {
   legend: {
     x: "center",
     y: "bottom",
-    data: ["收入", "毛利润", "收入增长率", "利润增长率"],
+    data: ["收入", "销售量"],
     textStyle: {
       color: "#999",
     },
@@ -76,19 +76,19 @@ const options = {
     {
       type: "value",
       min: 0,
-      max: 10000,
-      interval: 2000,
+      max: 300,
+      interval: 50,
       axisLabel: {
-        formatter: "{value} ",
+        formatter: "{value} 元",
       },
     },
     {
       type: "value",
       min: 0,
-      max: 100,
-      interval: 20,
+      max: 30,
+      interval: 5,
       axisLabel: {
-        formatter: "{value}%",
+        formatter: "{value} 单",
       },
     },
   ],
@@ -107,9 +107,10 @@ const options = {
       },
     },
     {
-      name: "毛利润",
+      name: "销售量",
       type: "bar",
-      data: [8000, 8200, 8400, 8600, 8800],
+      data: [20, 10, 8400, 8600, 8800],
+      yAxisIndex:1,
       barWidth: 20,
       itemStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -117,24 +118,6 @@ const options = {
           { offset: 0.5, color: "#1bc23d" },
           { offset: 1, color: "#179e61" },
         ]),
-      },
-    },
-    {
-      name: "收入增长率",
-      type: "line",
-      yAxisIndex: 1,
-      data: [60, 65, 70, 75, 80],
-      itemStyle: {
-        color: "#67C23A",
-      },
-    },
-    {
-      name: "利润增长率",
-      type: "line",
-      yAxisIndex: 1,
-      data: [70, 75, 80, 85, 90],
-      itemStyle: {
-        color: "#409EFF",
       },
     },
   ],
@@ -168,6 +151,9 @@ const downloadEchart = () => {
 
 const chart = ref<any>("");
 onMounted(() => {
+
+
+
   // 图表初始化
   chart.value = markRaw(
     echarts.init(document.getElementById(props.id) as HTMLDivElement)

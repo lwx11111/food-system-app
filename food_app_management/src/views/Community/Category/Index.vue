@@ -281,13 +281,6 @@
                             message: '删除失败',
                         })
                     }
-
-                    // 日志记录
-                    // this.OperatorLogParam.operateContent = JSON.stringify(dataids)
-                    // this.OperatorLogParam.operateFeatures = '删除记录'
-                    // this.OperatorLogParam.operateType = LogType.Query
-                    // this.OperatorLogParam.operateState = '成功'
-                    // OperatorLog.setOperationLog(this.OperatorLogParam)
                 })
             }).catch(() => {
                 ElMessage({

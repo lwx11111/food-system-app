@@ -21,9 +21,9 @@ axios.defaults.transformRequest = function(data) {
 axios.interceptors.request.use(
     config => {
         // 权限系统适配网关
-        if (config.url.indexOf('/manager') !== -1) {
-            config.baseURL = 'http://43.138.149.121:8921';
-        }
+        // if (config.url.indexOf('/manager') !== -1) {
+        //     config.baseURL = 'http://43.138.149.121:8921';
+        // }
 
         if (getToken()) {
             config.headers['Authorization'] = getToken()

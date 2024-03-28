@@ -90,9 +90,7 @@ const currentInstance = getCurrentInstance();
 const getCaptchaUrl = () => {
     const uuid = commonUtil.createGuid()
     data.uuid = uuid;
-    // 使用getCurrentInstanceAPI获取全局对象方法 从globalProperties中可以获取到所有的全局变量
-    const globalProperties = currentInstance?.appContext.config.globalProperties
-    return globalProperties.GATEWAY_URL + "/" + globalProperties.AUTH_NAME + "/" + globalProperties.CAPTCHA_URL + uuid;
+    return Api.getVerificationCode(uuid);
 }
 
 /**
@@ -125,37 +123,33 @@ const loginWithCode = () => {
         uuid: data.uuid,
         username: getEncryptPassword(form.username, 'aes'),
         password: getEncryptPassword(form.password, 'aes'),
-        appId: globalProperties.APP_ID,
-        appName: 'dw'
     };
 
     Api.loginWithCode(params).then(res => {
-        console.log(res);
-        if (res.code === "20000"){
-            let account = res.data.info.account
-            // store存储
-            store.commit('setAccount',res.data.info.account);
-            store.commit('setUser',res.data.info.user);
-            store.commit('setSuperAdmin',res.data.info.superAdmin);
-            store.commit('setToken',res.data.token);
+        console.log(res)
+        if (res.code === 200){
+            let account = res.data;
             // 本地存储
             localStorage.setItem('userId', account.accountId)
             localStorage.setItem('userName', account.loginName)
-            setToken(res.data.token.accessToken);
+
+            setToken("123")
             // 跳转
             router.push({
                 path: '/homepage',
             })
-
         } else {
-            ElMessage.error(res.message)
+            ElMessage.error({
+                message: res.message,
+                type: 'error'
+            })
         }
     });
 }
 </script>
 
 <style scoped>
-	
+
 
 @media screen and (max-width: 1500px){
     /* 当屏幕小于1500px的时候 id为bg的元素 进行改变 */
@@ -179,7 +173,7 @@ const loginWithCode = () => {
     padding: 0;
     /* border: 1px red solid; */
 	font-weight: bold;
-	
+
 }
 h2{
 	font-size: 35px;
@@ -189,7 +183,7 @@ h2{
     height:500px;
     MARGIN-RIGHT: auto;
     MARGIN-LEFT: auto;
-	
+
 }
 
 .login-form-content {
@@ -210,6 +204,6 @@ h2{
         height: 38px;
         float: right;
     }
-	
+
 }
 </style>

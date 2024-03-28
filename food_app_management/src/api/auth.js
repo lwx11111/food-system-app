@@ -1,11 +1,15 @@
 // 权限管理API  【菜单、角色、权限】
 import request from '@/utils/request'
 
-const managerUriPrefix = '/manager/';
 export default {
+    getVerificationCode(data) {
+        return 'http://localhost:8081/account/anon/verification-code/create?uuid=' + data;
+
+    },
+
     loginWithCode(data) {
         return request({
-            url: managerUriPrefix + 'v1/account/anon/loginwithcode',
+            url: '/account/login',
             method: 'post',
             type: 'form',
             data: data
@@ -14,7 +18,7 @@ export default {
 
     register(data) {
         return request({
-            url: managerUriPrefix + 'v1/account/anon/save',
+            url: '/account/save',
             method: 'post',
             type: 'form',
             data: data
@@ -23,7 +27,7 @@ export default {
 
     modifyPass(data) {
         return request({
-            url: managerUriPrefix + 'v1/account/modify-password',
+            url: '/account/modify-password',
             method: 'post',
             type: 'form',
             data: data
@@ -32,7 +36,7 @@ export default {
 
     logout() {
         return request({
-            url: managerUriPrefix + 'v1/account/logout',
+            url: 'v1/account/logout',
             method: 'post'
         })
     },

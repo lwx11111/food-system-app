@@ -14,13 +14,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 import java.util.Map;
 /**
  * <p>
  *
  * </p>
  *
- * 
+ *
  * @since 2024-01-09
  */
 @Data
@@ -51,6 +53,11 @@ public class ShopOrder extends Model<ShopOrder> {
     @Excel(name = "数量")
     @TableField("amount")
     private Integer amount;
+
+    @Schema(description = "时间")
+    @Excel(name = "时间")
+    @TableField("time")
+    private LocalDateTime time;
 
     private double price;
 

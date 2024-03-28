@@ -3,5 +3,5 @@
   "APP_ID": "1",
   "GATEWAY_URL": "http://43.138.149.121:8921",
   "AUTH_NAME": "manager",
-  "CAPTCHA_URL": "v1/public/anon/verification-code/create?uuid="
+  "CAPTCHA_URL": "account/anon/verification-code/create?uuid="
 }

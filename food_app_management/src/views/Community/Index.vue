@@ -281,12 +281,6 @@
                 data.isSearch = false
             }
 
-            // 日志记录
-            // data.OperatorLogParam.operateContent = JSON.stringify(params)
-            // data.OperatorLogParam.operateFeatures = '查询列表'
-            // data.OperatorLogParam.operateType = LogType.Query
-            // data.OperatorLogParam.operateState = '成功'
-            // OperatorLog.setOperationLog(this.OperatorLogParam)
 
         })
     }

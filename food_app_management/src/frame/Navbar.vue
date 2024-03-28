@@ -175,7 +175,7 @@ const handleSavePass = () => {
             data.form.oldPass = getEncryptPassword(data.form.oldPass, 'aes');
             Api.modifyPass(data.form).then(res => {
                 console.log(res)
-                if (res.code === '20000'){
+                if (res.code === 200){
                     ElMessage.success('修改成功');
                     logout();
                 } else {
@@ -192,12 +192,13 @@ const handleSavePass = () => {
  * 退出系统
  */
 const logout = () => {
-    Api.logout().then(res => {
-        removeToken();
-        router.push({
-            path: '/login',
-        })
+    removeToken();
+    router.push({
+        path: '/login',
     })
+    // Api.logout().then(res => {
+    //
+    // })
 }
 </script>
 
