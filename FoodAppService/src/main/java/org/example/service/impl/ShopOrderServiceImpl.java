@@ -7,8 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.example.vo.ShopOrderStatisticalDataVo;
-import org.example.vo.ShopOrderVO;
+import org.example.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.StringUtils;
@@ -41,6 +40,21 @@ import java.util.Map;
 public class ShopOrderServiceImpl extends ServiceImpl<ShopOrderMapper, ShopOrder> implements IShopOrderService {
     @Autowired
     ShopItemServiceImpl shopItemService;
+
+    @Override
+    public List<getRadarDataVo> getRadarData() throws Exception {
+        return baseMapper.getRadarData();
+    }
+
+    @Override
+    public List<getHotItemDataVo> getHotItemData() throws Exception {
+        return baseMapper.getHotItemData();
+    }
+
+    @Override
+    public List<getDataNearlySixMonthsVo> getDataNearlySixMonths() throws Exception {
+        return baseMapper.getDataNearlySixMonths();
+    }
 
     @Override
     public List<ShopOrderStatisticalDataVo> getStatisticalData() throws Exception {

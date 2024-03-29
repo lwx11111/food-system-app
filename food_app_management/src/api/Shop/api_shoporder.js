@@ -1,6 +1,26 @@
 import request from '@/utils/request.js'
 
 export default {
+  getRadarData() {
+    return request({
+      url: '/shoporder/getRadarData',
+      method: 'post',
+    })
+  },
+
+  getHotItemData() {
+    return request({
+      url: '/shoporder/getHotItemData',
+      method: 'post',
+    })
+  },
+
+  getDataNearlySixMonths() {
+    return request({
+      url: '/shoporder/getDataNearlySixMonths',
+      method: 'post',
+    })
+  },
 
   /**
    * 获取统计数据

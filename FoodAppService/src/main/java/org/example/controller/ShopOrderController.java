@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  *  前端控制器
  * </p>
  *
- * 
+ *
  * @since 2024-01-09
  */
 @RestController
@@ -31,6 +31,49 @@ import org.springframework.web.bind.annotation.RestController;
 public class ShopOrderController {
     @Autowired
     private IShopOrderService service;
+
+    @PostMapping("/getRadarData")
+    @ResponseBody
+    public SimpleResponse getRadarData(){
+        SimpleResponse response = new SimpleResponse();
+        try {
+            response.setData(service.getRadarData());
+        } catch (Exception e) {
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    @PostMapping("/getHotItemData")
+    @ResponseBody
+    public SimpleResponse getHotItemData(){
+        SimpleResponse response = new SimpleResponse();
+        try {
+            response.setData(service.getHotItemData());
+        } catch (Exception e) {
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+
+    @PostMapping("/getDataNearlySixMonths")
+    @ResponseBody
+    public SimpleResponse getDataNearlySixMonths(){
+        SimpleResponse response = new SimpleResponse();
+        try {
+            response.setData(service.getDataNearlySixMonths());
+        } catch (Exception e) {
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        return response;
+    }
 
     @GetMapping("/getStatisticalData")
     @ResponseBody

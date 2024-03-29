@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import * as echarts from "echarts";
 import {reactive, ref, defineProps, toRefs, onMounted, onActivated, markRaw} from 'vue'
+import ApiShopOrder from "@/api/Shop/api_shoporder";
 
 const props = defineProps({
   id: {
@@ -151,20 +152,36 @@ const downloadEchart = () => {
 
 const chart = ref<any>("");
 onMounted(() => {
+    ApiShopOrder.getDataNearlySixMonths().then((res) => {
+      console.log(res);
+      if (res.code === 200){
+          // 获取月份
+          let monthValue = res.data.map((item: any) => item.monthValue);
+          // 获取收入
+          let total = res.data.map((item: any) => item.total);
+          // 获取销售量
+          let num = res.data.map((item: any) => item.num);
+          // 赋值
+          options.xAxis[0].data = monthValue;
+          options.series[0].data = total;
+          options.series[1].data = num;
+
+          // 图表初始化
+          chart.value = markRaw(
+              echarts.init(document.getElementById(props.id) as HTMLDivElement)
+          );
+
+          chart.value.setOption(options);
+
+          // 大小自适应
+          window.addEventListener("resize", () => {
+              chart.value.resize();
+          });
+      }
+    });
 
 
 
-  // 图表初始化
-  chart.value = markRaw(
-    echarts.init(document.getElementById(props.id) as HTMLDivElement)
-  );
-
-  chart.value.setOption(options);
-
-  // 大小自适应
-  window.addEventListener("resize", () => {
-    chart.value.resize();
-  });
 });
 
 onActivated(() => {

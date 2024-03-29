@@ -4,7 +4,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.Data;
 
 /**
- * @Author 刘文轩
+ * 
  * @Date 2024/2/22 10:56
  */
 @Data

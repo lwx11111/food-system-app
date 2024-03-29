@@ -13,6 +13,31 @@
         select * from shop_order t where id=#{params.id} and name=#{params.name}
     </select>
 
+    <select id="getRadarData" resultType="org.example.vo.getRadarDataVo">
+        SELECT c.name, sum(total) as total, sum(num) as num
+        from
+            (
+             SELECT shop_item_id, sum(price) as total, count(*) as num
+             FROM shop_order o
+             GROUP BY shop_item_id
+            ) t
+             LEFT JOIN shop_item i on i.id = t.shop_item_id
+             left join shop_item_category c on i.category_id = c.id
+        group by c.id
+    </select>
+
+    <select id="getHotItemData" resultType="org.example.vo.getHotItemDataVo">
+        SELECT name ,total as value
+        from shop_item si
+            right JOIN (
+            SELECT shop_item_id, sum(price) as total
+            FROM shop_order o
+            GROUP BY shop_item_id
+            ORDER BY total desc
+            LIMIT 5
+            ) t on t.shop_item_id = si.id
+    </select>
+
     <select id="getStatisticalData" resultType="org.example.vo.ShopOrderStatisticalDataVo">
         select id,name as shopItemName,amount,t.price
         from shop_item si JOIN (SELECT shop_item_id,sum(amount) as amount,sum(price) as price
@@ -21,5 +46,22 @@
         on si.id = t.shop_item_id
         ORDER BY t.price DESC
         limit 8
+    </select>
+
+    <select id="getDataNearlySixMonths" resultType="org.example.vo.getDataNearlySixMonthsVo">
+        select date_table.lastDays as monthValue,IFNULL(temp.num, 0 ) as num, IFNULL(temp.total, 0 ) as total
+        from
+            (
+                -- 6个月日期
+                SELECT date_format(@lastDay := last_day( date_add(@lastDay,interval 1 month ) ) ,'%Y-%m' ) lastDays
+                from (SELECT @lastDay := date_add(curdate(),interval -3 month) from mysql.help_topic limit 3) a
+            ) date_table
+                left join
+            (
+                select DATE_FORMAT(o.time,'%Y-%m') as monthValue, SUM(price) as total, count(*) as num
+                from shop_order o
+                GROUP BY DATE_FORMAT(o.time,'%Y-%m')
+            )temp
+            on temp.monthValue = date_table.lastDays
     </select>
 </mapper>

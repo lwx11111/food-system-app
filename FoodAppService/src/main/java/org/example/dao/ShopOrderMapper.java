@@ -9,6 +9,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.example.vo.ShopOrderStatisticalDataVo;
+import org.example.vo.getDataNearlySixMonthsVo;
+import org.example.vo.getHotItemDataVo;
+import org.example.vo.getRadarDataVo;
 
 import java.util.List;
 import java.util.Map;
@@ -18,11 +21,17 @@ import java.util.Map;
  *  Mapper 接口
  * </p>
  *
- * 
+ *
  * @since 2024-01-09
  */
 @Mapper
 public interface ShopOrderMapper extends BaseMapper<ShopOrder> {
+
+    List<getRadarDataVo> getRadarData();
+
+    List<getHotItemDataVo> getHotItemData();
+
+    List<getDataNearlySixMonthsVo> getDataNearlySixMonths();
 
     /**
      * 分页查询-自定义sql-Wrapper

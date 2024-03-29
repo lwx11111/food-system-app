@@ -9,6 +9,8 @@
 <script setup lang="ts">
 import * as echarts from "echarts";
 import {reactive, ref, defineProps, toRefs, onMounted, onActivated, markRaw} from 'vue'
+import ApiShopOrder from "@/api/Shop/api_shoporder";
+
 const props = defineProps({
   id: {
     type: String,
@@ -40,7 +42,7 @@ const options = {
   legend: {
     x: "center",
     y: "bottom",
-    data: ["预定数量", "下单数量", "发货数量"],
+    data: ["数量", "总价"],
     textStyle: {
       color: "#999",
     },
@@ -53,8 +55,7 @@ const options = {
       { name: "服装箱包" },
       { name: "运动户外" },
       { name: "手机数码" },
-      { name: "汽车用品" },
-      { name: "家具厨具" },
+
     ],
   },
   series: [
@@ -72,15 +73,11 @@ const options = {
       data: [
         {
           value: [400, 400, 400, 400, 400, 400],
-          name: "预定数量",
+          name: "数量",
         },
         {
           value: [300, 300, 300, 300, 300, 300],
-          name: "下单数量",
-        },
-        {
-          value: [200, 200, 200, 200, 200, 200],
-          name: "发货数量",
+          name: "总价",
         },
       ],
     },
@@ -90,15 +87,37 @@ const options = {
 const chart = ref<any>("");
 
 onMounted(() => {
-  chart.value = markRaw(
-    echarts.init(document.getElementById(props.id) as HTMLDivElement)
-  );
+    ApiShopOrder.getRadarData().then((res) => {
+        console.log(res);
+        if (res.code === 200){
+            // 获取分类名
+            let name = res.data.map((item: any) => {
+                return {name: item.name};
+            });
+            
+            // 获取数量
+            let num = res.data.map((item: any) => item.num);
+            // 获取销售量
+            let total = res.data.map((item: any) => item.total);
+            // 赋值
+            options.radar.indicator = name;
+            options.series[0].data[0].value = num;
+            options.series[0].data[1].value = total;
 
-  chart.value.setOption(options);
+            chart.value = markRaw(
+                echarts.init(document.getElementById(props.id) as HTMLDivElement)
+            );
 
-  window.addEventListener("resize", () => {
-    chart.value.resize();
-  });
+            chart.value.setOption(options);
+
+            window.addEventListener("resize", () => {
+                chart.value.resize();
+            });
+        }
+
+    });
+
+
 });
 
 onActivated(() => {

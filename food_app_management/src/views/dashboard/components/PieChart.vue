@@ -9,6 +9,7 @@
 <script setup lang="ts">
 import * as echarts from "echarts";
 import {reactive, ref, defineProps, toRefs, onMounted, onActivated, markRaw} from 'vue'
+import ApiShopOrder from "@/api/Shop/api_shoporder";
 
 const props = defineProps({
   id: {
@@ -54,7 +55,7 @@ const options = {
         borderRadius: 1,
         color: function (params: any) {
           //自定义颜色
-          const colorList = ["#409EFF", "#67C23A", "#E6A23C", "#F56C6C"];
+          const colorList = ["#409EFF", "#67C23A", "#E6A23C", "#F56C6C","#909399"];
           return colorList[params.dataIndex];
         },
       },
@@ -71,15 +72,24 @@ const options = {
 const chart = ref<any>("");
 
 onMounted(() => {
-  chart.value = markRaw(
-    echarts.init(document.getElementById(props.id) as HTMLDivElement)
-  );
+    ApiShopOrder.getHotItemData().then((res) => {
+        console.log(res);
+        if (res.code === 200){
+            options.series[0].data = res.data;
 
-  chart.value.setOption(options);
+            chart.value = markRaw(
+                echarts.init(document.getElementById(props.id) as HTMLDivElement)
+            );
 
-  window.addEventListener("resize", () => {
-    chart.value.resize();
-  });
+            chart.value.setOption(options);
+
+            window.addEventListener("resize", () => {
+                chart.value.resize();
+            });
+        }
+
+    });
+
 });
 
 onActivated(() => {

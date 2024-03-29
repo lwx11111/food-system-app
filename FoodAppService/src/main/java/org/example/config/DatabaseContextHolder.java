@@ -1,7 +1,7 @@
 package org.example.config;
 
 /**
- * @Author 刘文轩
+ * 
  * @Date 2024/1/30 16:13
  */
 public class DatabaseContextHolder {

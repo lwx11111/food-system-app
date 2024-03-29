@@ -5,9 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.vo.CartVO;
-import org.example.vo.ShopOrderStatisticalDataVo;
-import org.example.vo.ShopOrderVO;
+import org.example.vo.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -18,10 +16,16 @@ import java.util.Map;
  *  服务类
  * </p>
  *
- * 
+ *
  * @since 2024-01-09
  */
 public interface IShopOrderService extends IService<ShopOrder> {
+
+    List<getRadarDataVo> getRadarData() throws Exception;
+
+    List<getHotItemDataVo> getHotItemData() throws Exception;
+
+    List<getDataNearlySixMonthsVo> getDataNearlySixMonths() throws Exception;
 
     List<ShopOrderStatisticalDataVo> getStatisticalData() throws Exception;
 
