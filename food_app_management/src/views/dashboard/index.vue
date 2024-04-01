@@ -161,35 +161,44 @@
       </el-col>
     </el-row>
 
+      <el-row>
+          <el-col :span="12">
+              <BarChart
+                      id="barChart"
+                      height="400px"
+                      width="100%"
+                      class="bg-[var(--el-bg-color-overlay)]"
+              />
+          </el-col>
+          <el-col :span="12">
+              <PieChart
+                      id="pieChart"
+                      height="400px"
+                      width="100%"
+                      class="bg-[var(--el-bg-color-overlay)]"
+              />
+          </el-col>
+      </el-row>
+
     <!-- Echarts 图表 -->
-    <el-row :gutter="10" style="margin-top: 10px">
-      <el-col :sm="24" :lg="8" class="mb-2">
-        <BarChart
-          id="barChart"
-          height="400px"
-          width="100%"
-          class="bg-[var(--el-bg-color-overlay)]"
-        />
-      </el-col>
+<!--    <el-row :gutter="10" style="margin-top: 10px">-->
+<!--      <el-col :sm="24" :lg="8" class="mb-2">-->
 
-      <el-col :xs="24" :sm="12" :lg="8" class="mb-2">
-        <PieChart
-          id="pieChart"
-          height="400px"
-          width="100%"
-          class="bg-[var(--el-bg-color-overlay)]"
-        />
-      </el-col>
+<!--      </el-col>-->
 
-      <el-col :xs="24" :sm="12" :lg="8" class="mb-2">
-        <RadarChart
-          id="radarChart"
-          height="400px"
-          width="100%"
-          class="bg-[var(--el-bg-color-overlay)]"
-        />
-      </el-col>
-    </el-row>
+<!--      <el-col :xs="24" :sm="12" :lg="8" class="mb-2">-->
+
+<!--      </el-col>-->
+
+<!--      <el-col :xs="24" :sm="12" :lg="8" class="mb-2">-->
+<!--        <RadarChart-->
+<!--          id="radarChart"-->
+<!--          height="400px"-->
+<!--          width="100%"-->
+<!--          class="bg-[var(&#45;&#45;el-bg-color-overlay)]"-->
+<!--        />-->
+<!--      </el-col>-->
+<!--    </el-row>-->
   </div>
 </template>
 

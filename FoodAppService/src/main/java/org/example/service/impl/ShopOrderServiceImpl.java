@@ -24,6 +24,7 @@ import cn.afterturn.easypoi.excel.imports.ExcelImportService;
 import java.io.InputStream;
 import org.example.utils.PageUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +85,7 @@ public class ShopOrderServiceImpl extends ServiceImpl<ShopOrderMapper, ShopOrder
     }
     @Override
     public String saveByParam(ShopOrder obj,Map<String, String> params){
+        obj.setTime(LocalDateTime.now());
         this.save(obj);
         return obj.getId();
     }
