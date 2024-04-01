@@ -150,11 +150,11 @@
 					console.log(res)
 					if(res.code === 200){
 						uni.showToast({
-							title: `下单成功`,
+							title: `创建订单成功，去支付`,
 							icon: 'success'
 						})
 						uni.navigateTo({
-						  url: '/pages/mine/shopOrder'
+						  url: '/pages/shop/orderConfirm?id=' + res.data
 						})
 					}
 				})

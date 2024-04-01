@@ -94,7 +94,7 @@ onMounted(() => {
             let name = res.data.map((item: any) => {
                 return {name: item.name};
             });
-            
+
             // 获取数量
             let num = res.data.map((item: any) => item.num);
             // 获取销售量

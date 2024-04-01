@@ -107,7 +107,7 @@
 		            localStorage.setItem('userName', account.loginName)
 					
 					setToken("123");
-					this.$tab.reLaunch('/pages/home')
+					this.$tab.reLaunch('/pages/homeNew')
 				} else {
 					uni.showToast({
 						title: res.message,

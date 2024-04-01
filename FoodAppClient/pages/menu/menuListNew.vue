@@ -180,7 +180,7 @@
 			toMenuDetail(index) {
 				let id = this.menus[index].id
 				uni.navigateTo({
-				  url: '/pages/Menu/MenuDetail?id=' + id
+				  url: '/pages/menu/menuDetail?id=' + id
 				})
 			}
 		 

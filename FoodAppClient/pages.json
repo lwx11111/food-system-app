@@ -18,7 +18,7 @@
 	  
     }
   }, {
-    "path": "pages/home",
+    "path": "pages/homeNew",
     "style": {
       "navigationBarTitleText": "首页",
       "navigationStyle": "custom"
@@ -124,6 +124,12 @@
     }
   }, 
   {
+    "path": "pages/shop/orderConfirm",
+    "style": {
+      "navigationBarTitleText": "订单确认"
+    }
+  },
+  {
     "path": "pages/health/index",
     "style": {
       "navigationBarTitleText": "卡路里"
@@ -188,7 +194,7 @@
     "borderStyle": "white",
     "backgroundColor": "#ffffff",
     "list": [{
-        "pagePath": "pages/home",
+        "pagePath": "pages/homeNew",
         "iconPath": "static/images/tabbar/home.png",
         "selectedIconPath": "static/images/tabbar/home-s.png",
         "text": "首页"

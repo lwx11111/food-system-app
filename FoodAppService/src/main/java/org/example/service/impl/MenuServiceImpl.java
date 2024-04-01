@@ -68,20 +68,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public IPage<MenuVO> getDailyRecommendation(Map<String, String> params) {
         Dic dic = dicService.getDicByKeyy("每日推荐id");
-        String randomId = dic.getValue();
-        if ("".equals(dic.getValue())) {
-            List<String> randomIds = menuMapper.getRandomIds();
-            String value = "(";
-            for (int i = 0; i < randomIds.size(); i++) {
-                if (i == randomIds.size() - 1) {
-                    value += "'" + randomIds.get(i) + "')";
-                } else {
-                    value += "'" + randomIds.get(i) + "',";
-                }
-            }
-            dic.setValue(value);
-            dicService.updateValueById(dic.getId(), value);
-        }
         String value = dic.getValue();
         Page<Menu> page = PageUtils.pageHandler(params);
         IPage<Menu> result = menuMapper.getDailyRecommendation(page, value);

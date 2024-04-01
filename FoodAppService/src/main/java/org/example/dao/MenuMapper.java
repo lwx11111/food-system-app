@@ -17,13 +17,15 @@ import java.util.Map;
  * 菜谱信息表 Mapper 接口
  * </p>
  *
- * 
+ *
  * @since 2023-10-27
  */
 @Mapper
 public interface MenuMapper extends BaseMapper<Menu> {
     IPage<Menu> getDailyRecommendation(Page<Menu> page, @Param("value") String value);
+
     List<String> getRandomIds();
+
     IPage<Menu> getMenuCollectionByUserId(Page<Menu> page, @Param("userId") String userId);
     /**
      * 分页查询-自定义sql-Wrapper

@@ -36,7 +36,7 @@ public interface IShopOrderService extends IService<ShopOrder> {
      * @param params
      * @return: void
      */
-    void saveByParam(ShopOrder obj,Map<String, String> params);
+    String saveByParam(ShopOrder obj,Map<String, String> params);
 
     /**
      * 根据参数更新

@@ -8,7 +8,8 @@
     </select>
 
     <select id="getRandomIds" resultType="String">
-        SELECT id FROM menu  ORDER BY  RAND() LIMIT 10
+        SELECT id FROM menu WHERE id >=
+          ((SELECT MAX(id) FROM menu)-(SELECT MIN(id) FROM menu)) * RAND() + (SELECT MIN(id) FROM menu) LIMIT 10
     </select>
 
     <select id="getMenuCollectionByUserId" resultType="org.example.domain.Menu">

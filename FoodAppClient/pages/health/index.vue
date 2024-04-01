@@ -70,13 +70,13 @@
 		您今天可以摄取的卡路里数：{{bmr}}
 	</uni-card>
 	
-	<uni-card>
+<!-- 	<uni-card>
 		<view v-for="(item,index) in text">
 			<text>{{item.keyy}}</text>
 		</view>
 		
 		这些食物的卡路里数：{{foodNum}}
-	</uni-card>
+	</uni-card> -->
 	
 <!-- 	
 	废弃效果
@@ -93,8 +93,11 @@
 
 	<uni-card v-for="(item, key) in categoryNames">
 		<h3>{{item.keyy}}</h3>
-	
-			<u-tag v-for="(i, k) in foods[key]" style="width: 80px;" plain size="mini" :text="i.keyy + ' ' + i.value"></u-tag>					
+			<u-tag v-for="(i, k) in foods[key]" 
+				style="width: 80px; display: inline-block; margin-left: 10px;" 
+				plain size="mini" 
+				:text="i.keyy + ' ' + i.value">
+			</u-tag>					
 	</uni-card>
 	
   </view>

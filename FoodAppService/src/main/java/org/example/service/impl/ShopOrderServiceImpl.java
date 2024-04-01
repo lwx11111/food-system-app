@@ -83,8 +83,9 @@ public class ShopOrderServiceImpl extends ServiceImpl<ShopOrderMapper, ShopOrder
         return list;
     }
     @Override
-    public void saveByParam(ShopOrder obj,Map<String, String> params){
+    public String saveByParam(ShopOrder obj,Map<String, String> params){
         this.save(obj);
+        return obj.getId();
     }
 
     @Override

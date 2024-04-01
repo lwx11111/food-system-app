@@ -1,6 +1,4 @@
 import request from '@/utils/request'
-const serverName = '/shop'
-
 
 export default {
 
@@ -14,7 +12,7 @@ export default {
   // 分页查询
   selpage4shoporder(data) {
     return request({
-      url: serverName + '//shoporder/selpage',
+      url: '/shoporder/selpage',
       method: 'post',
       data: data
     })
@@ -32,7 +30,7 @@ export default {
   // 修改
   update4shoporder(id, obj) {
     return request({
-      url: serverName + '//shoporder/' + id,
+      url: '/shoporder/' + id,
       method: 'put',
       data: obj
     })
@@ -41,7 +39,7 @@ export default {
   // 删除单条
   del4shoporder(id) {
     return request({
-      url: serverName + '//shoporder/' + id,
+      url: '/shoporder/' + id,
       method: 'delete',
     })
   },
@@ -50,7 +48,7 @@ export default {
   // 删除多条
   dels4shoporder(ids) {
     return request({
-      url: serverName + '//shoporder/dels',
+      url: '/shoporder/dels',
       method: 'post',
       data: ids
     })
@@ -59,7 +57,7 @@ export default {
   // 查询单条
   sel4shoporder(id) {
     return request({
-      url: serverName + '//shoporder/' + id,
+      url: '/shoporder/' + id,
       method: 'get',
     })
 
@@ -68,7 +66,7 @@ export default {
   // 下载Excel模板
   downloadExcelTemplate(params) {
     return request({
-      url: serverName + '//shoporder/downloadExcelTemplate',
+      url: '/shoporder/downloadExcelTemplate',
       method: 'post',
       data: params,
       responseType: 'arraybuffer'
@@ -78,7 +76,7 @@ export default {
   // 导入Excel接口URL
   uploadExcelUrl() {
     return request({
-      url: serverName + '//shoporder/uploadExcel',
+      url: '/shoporder/uploadExcel',
       type: 'form',
       method: 'post',
     })
@@ -87,7 +85,7 @@ export default {
   // 导出Excel
   excelData4shoporder(params) {
     return request({
-      url: serverName + '//shoporder/excel',
+      url: '/shoporder/excel',
       method: 'post',
       data: params,
       responseType: 'arraybuffer'

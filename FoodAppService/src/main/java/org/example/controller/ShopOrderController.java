@@ -111,7 +111,7 @@ public class ShopOrderController {
     public SimpleResponse save(@RequestBody ShopOrder obj){
         SimpleResponse response = new SimpleResponse();
         try {
-            service.saveByParam(obj,obj.getParams());
+            response.setData(service.saveByParam(obj,obj.getParams()));
         } catch (Exception e) {
             response.setCode(500);
             response.setMessage(e.getMessage());
