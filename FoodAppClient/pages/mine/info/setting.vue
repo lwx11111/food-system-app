@@ -1,3 +1,4 @@
+<!-- 设置首页 -->
 <template>
   <view class="setting-container" :style="{height: `${windowHeight}px`}">
     <view class="menu-list">

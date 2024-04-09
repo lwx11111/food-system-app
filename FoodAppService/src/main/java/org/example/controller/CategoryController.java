@@ -17,11 +17,7 @@ import org.example.service.ICategoryService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- * 
+ * 社区分类
  * @since 2024-01-20
  */
 @RestController

@@ -16,11 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- *
+ * 菜谱分类
  * @since 2024-01-20
  */
 @RestController

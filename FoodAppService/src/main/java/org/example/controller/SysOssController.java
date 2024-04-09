@@ -16,11 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- *
+ * 图片上传表
  * @since 2023-11-13
  */
 @RestController

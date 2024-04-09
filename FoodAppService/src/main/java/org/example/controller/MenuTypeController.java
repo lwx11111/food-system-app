@@ -17,10 +17,7 @@ import org.example.service.IMenuTypeService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
+ * 菜谱分类
  * @author lwx20
  * @since 2024-03-12
  */

@@ -1,3 +1,4 @@
+<!-- 图片上传 -->
 <template>
 	<u-upload
 		:fileList="fileList1"

@@ -1,3 +1,4 @@
+<!-- 菜谱发布 -->
 <template>
 	<view>
 		<uni-card>

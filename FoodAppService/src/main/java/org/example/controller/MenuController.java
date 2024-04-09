@@ -20,11 +20,7 @@ import org.example.service.IMenuService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- * 菜谱信息表 前端控制器
- * </p>
- *
- * 
+ * 菜谱信息
  * @since 2023-10-27
  */
 @RestController

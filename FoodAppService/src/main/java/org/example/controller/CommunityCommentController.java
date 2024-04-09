@@ -17,11 +17,7 @@ import org.example.service.ICommunityCommentService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- * 社区帖子评论表 前端控制器
- * </p>
- *
- * 
+ * 社区帖子评论表
  * @since 2023-10-27
  */
 @RestController

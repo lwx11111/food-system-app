@@ -17,11 +17,7 @@ import org.example.service.ICommunityService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- * 社区帖子表 前端控制器
- * </p>
- *
- * 
+ * 社区基本信息
  * @since 2023-10-27
  */
 @RestController

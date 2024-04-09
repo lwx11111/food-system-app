@@ -1,3 +1,4 @@
+<!-- 我的首页 -->
 <template>
 	<view class="mine-container" :style="{height: `${windowHeight}px`}">
 		<!--顶部个人信息栏-->

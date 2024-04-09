@@ -1,3 +1,4 @@
+<!-- 社区详情页 -->
 <template>
   <view>
 	  <uni-card>

@@ -17,11 +17,7 @@ import org.example.service.IDicService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- * 
+ * 健康里各种食物热量
  * @since 2024-01-22
  */
 @RestController

@@ -1,3 +1,4 @@
+<!-- 收藏 -->
 <template>
 	<view>
 		<!-- <u-tabs :list="list1" @click="click"></u-tabs> -->

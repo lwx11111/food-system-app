@@ -17,11 +17,7 @@ import org.example.service.IMenuLikeService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- * 用户点赞表 前端控制器
- * </p>
- *
- * 
+ * 菜谱点赞
  * @since 2023-10-27
  */
 @RestController

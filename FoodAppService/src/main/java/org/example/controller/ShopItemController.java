@@ -17,11 +17,7 @@ import org.example.service.IShopItemService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- * 店铺物品表（只有官方一家店） 前端控制器
- * </p>
- *
- * 
+ * 店铺物品
  * @since 2023-11-12
  */
 @RestController

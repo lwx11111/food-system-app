@@ -1,3 +1,4 @@
+<!-- 私信详情 -->
 <template>
 	<view>
 		<uni-card v-for="(item, index) in message">

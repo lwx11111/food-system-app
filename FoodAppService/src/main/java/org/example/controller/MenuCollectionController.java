@@ -18,11 +18,7 @@ import org.example.service.IMenuCollectionService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- * 用户点赞表 前端控制器
- * </p>
- *
- * 
+ * 菜谱收藏
  * @since 2024-01-08
  */
 @RestController

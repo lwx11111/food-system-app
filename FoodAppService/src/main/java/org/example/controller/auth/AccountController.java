@@ -24,6 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * 用户相关
+ */
 @RestController
 @RequestMapping("/account")
 @Slf4j

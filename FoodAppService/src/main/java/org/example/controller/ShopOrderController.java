@@ -17,11 +17,7 @@ import org.example.service.IShopOrderService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- *
+ * 订单
  * @since 2024-01-09
  */
 @RestController
