@@ -10,5 +10,5 @@ public class MenuCommentVo {
 
     private MenuComment menuComment;
 
-    private User user;
+//    private User user;
 }

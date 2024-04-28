@@ -84,7 +84,7 @@
 		 */
 		touristMode() {
 			 localStorage.setItem('isTourist', true);
-			 this.$tab.reLaunch('/pages/home')
+			 this.$tab.reLaunch('/pages/homeNew')
 		},
 		/**
 		 * 登录

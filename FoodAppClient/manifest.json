@@ -36,7 +36,9 @@
                 ]
             },
             "ios" : {},
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "ad" : {}
+            }
         }
     },
     "quickapp" : {},
@@ -59,7 +61,7 @@
         "devServer" : {
             "port" : 9091,
             "https" : false,
-			"disableHostCheck": true
+            "disableHostCheck" : true
         },
         "title" : "RuoYi-App",
         "router" : {

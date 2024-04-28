@@ -23,12 +23,13 @@
       "navigationBarTitleText": "首页",
       "navigationStyle": "custom"
     }
-  }, {
-    "path": "pages/work/index",
-    "style": {
-      "navigationBarTitleText": "工作台"
-    }
-  },
+  }, 
+  // {
+  //   "path": "pages/work/index",
+  //   "style": {
+  //     "navigationBarTitleText": "工作台"
+  //   }
+  // },
   // 社区
   {
     "path": "pages/community/index",
@@ -104,12 +105,12 @@
     }
   }, 
   // 发布
-  {
-    "path": "pages/publish/index",
-    "style": {
-      "navigationBarTitleText": "发布页"
-    }
-  }, 
+  // {
+  //   "path": "pages/publish/index",
+  //   "style": {
+  //     "navigationBarTitleText": "发布页"
+  //   }
+  // }, 
   // 商城
   {
     "path": "pages/shop/index",
